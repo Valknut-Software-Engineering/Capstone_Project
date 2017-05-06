@@ -1,6 +1,6 @@
 # <center> Valknut Software Engineering </center> #
 
-<center><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Valknut.svg/1200px-Valknut.svg.png" width = "750"/></center>
+<center><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Valknut.svg/1200px-Valknut.svg.png" width = "500"/></center>
 
 ## <center> Who Are We? </center> ##
 
