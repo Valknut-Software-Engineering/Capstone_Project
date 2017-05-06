@@ -6,10 +6,6 @@
 
 <center> An enthusiastic group of individuals who bring their own skillsets, passions and interests from the diverse field of computer science together to deliver nothing but the best. We love a challenge and we do not plan on going down without a fight. </center>  
 
-## <center> Our Weapons Arsenal, I Mean Code Repository of Course </center> ##
-
-<center><a href="https://github.com/Valknut-Software-Engineering"><img src="https://assets-cdn.github.com/images/modules/open_graph/github-mark.png" width = "600"/></a></center>
-
 ## <center> Meet The Team </center> ##
 
 <center>
