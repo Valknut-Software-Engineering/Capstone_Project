@@ -10,7 +10,7 @@
 
 <h2 align="center"> Meet The Team </h2>
 
-| Members  | Contact Details  | Guthub Profiles | Description | 
+| Members  | Contact Details  | Github Profiles | Description | 
 | :-:      |:-:               | :-:             | :-:         | 
 | Peter Boxall | u14056136@tuks.co.za | <a href="https://github.com/PeteElite"><img src="http://cameronmcefee.com/img/work/the-octocat/ironcat.jpg" width="100"/></a> | An unhealthy obsession with drones | 
 | Claude Greef | greeff.claude@gmail.com | <a href="https://github.com/MasterJetson"><img src="https://tctechcrunch2011.files.wordpress.com/2012/02/coderdojo-octocat3.jpg" width="100" /></a> | Silent but deadly | 
