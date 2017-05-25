@@ -8,11 +8,13 @@
 
 	\subsubsection{Scope}
 
-	Blah blah
+	The overall objective of this project is to provide a user with a toolkit with which the individual is able to create a 3D virtual reality presentation. Our goal is to make it simple to use, enabling any type of user to make use of it. The user would custom build an 3D environment built upon a variety of available templates offered, taking user experience to the next level.
 
 	\subsubsection{Definitions, Acronyms, and Abbreviations}
 			\paragraph{MEAN}	MongoDB, Express.js, AngularJS (or Angular), and Node.js
 			\paragraph{VR}	Virtual Reality
+			\paragraph{MVP} Minimum Viable Product
+			\paragraph{MTBF} Mean Time Between Failures
 		% \section{References}
 
 \subsection{Design}
@@ -38,41 +40,49 @@ Due to frequent meetings with the client we are preparing for numerous requireme
 For these reasons we specifically chose agile software development as it is well-known and the most applicable.
 \end{flushleft}
 
-	\begin{figure}[H]
-			\centering
-			\includegraphics[width=200px,height=150px]{agile.JPG}
-	\end{figure}
+	\subsubsection{Development Technique}
+	During our first meeting with EPI-USE they had mentioned that we should make use of a development technique called MVP. A MVP is the most basic version of a product that can still be released. The point of this technique would be that early adopters would see the potential that the final product could offer, and give developers valuable feedback needed to guide them forward.
 
 \subsection{System Requirements}
 
 	\subsubsection{Functional Requirements}
-
+	
 	The following functional requirements will be met:
-
-	\begin{enumerate}
-			\item blah blah
-	\end{enumerate}
+  	
+  		\begin{enumerate}
+			\item The toolkit will allow users to create 3D environments.
+			\item Users will be able to add objects to the environment.
+			\item The toolkit will allow users to select pre-built environments.
+		\end{enumerate}
 
 	\subsubsection{Non-Functional Requirements}
 
 	The following non-functional requirements will be met:
 
-	\begin{enumerate}
-			\item blah blah
-	\end{enumerate}
+		\begin{enumerate}
+  			\item Usability - key concern is to make this system easy to use.
+  			\item Reliability - the system should not fail, aiming for a high MTBF. A strategy will be in place for error detection.
+  			\item Portability - making use of Unity3D allows our software to be compatible with a large variety of VR devices. A simple installation is all that is required.
+  			\item Modifiability - aiming for a community driven approach we will ensure that software is easily upgraded.
+  			\item Platform constraints - developing in Unity3D caters for the widest VR devices.  			
+		\end{enumerate}
 
 \subsection{Target Audience Characteristics}
 
-	blah blah education blah
+	Our first focused audience would be targeted at the educational sector. Our initial goal would be to provide a toolkit for an individual to build a basic educational scene.
 
 \subsection{Technologies}
-	\begin{enumerate}
-		\item Creating a 3D environment to create a presentation.
+	In our first meeting with EPI-USE we had discussed the use of various technologies. They had given us "free will" with regards to what technologies to use. After we had committed ourselves to extensive research we had selected the following, but did not limit ourselves to them.
+	\begin{itemize}		
+		\item Creating a 3D environment to create a presentation.		
 		\item Unity 3D virtual reality system tool kit library.
 		\item HTC Vive virtual reality gear (already available).
 		\item Import external models.
+		\item Using plug and play libraries.
+		\item Possibly include library templates for uses to build on.
+		\item Community driven approach.
 		\item Windows 10 environment.
 		\item Docker.
 		\item TravisCI.
-	\end{enumerate}
+	\end{itemize}
 
