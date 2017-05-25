@@ -1,7 +1,7 @@
 <h1 align="center"> Valknut Software Engineering </h1>
 
 <p align="center">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Valknut.svg/1200px-Valknut.svg.png" width = "500"/>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Valknut.svg/1200px-Valknut.svg.png" width = "350"/>
 </p>
 
 <h2 align="center"> Capstone Project: EPI-USE VR Presentation </h2>
