@@ -4,6 +4,10 @@
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Valknut.svg/1200px-Valknut.svg.png" width = "500"/>
 </p>
 
+<h2 align="center"> Capstone Project: EPI-USE VR Presentation </h2>
+
+<p align="center"> For this project our team has to develop a software which allows any individual to be able to create their very own presentation in a virtual reality environment. It needs to provide a user with a tool set to be able to achieve this goal as well as, export a presentation that will be viewable through a VR device. </p>
+
 <h2 align="center"> Who Are We? </h2>
 
 <p align="center"> An enthusiastic group of individuals who bring their own skillsets, passions and interests from the diverse field of computer science together to deliver nothing but the best. We love a challenge and we do not plan on going down without a fight. </p>
