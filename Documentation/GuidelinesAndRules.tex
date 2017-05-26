@@ -1,0 +1,135 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{float}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+ \geometry{
+ a4paper,
+ left=30mm,
+ right=30mm,
+ top=30mm,
+ }
+ 
+ \graphicspath{ {Images/} }
+ 
+\begin{document}
+
+	{\begingroup
+		\begin{figure}[t]
+			\centering
+			\includegraphics[width=350px]{vseLogo.png}
+		\end{figure}
+		\centering
+
+		{\Large COS 301 Capstone Project 2017}
+
+		\vspace*{\baselineskip}
+
+		\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt}
+		\rule{\textwidth}{0.4pt}\\[\baselineskip]
+
+		{\Huge Vulknut Software Engineering } \\ [0.2\baselineskip]
+
+		\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace*{2pt}
+		\rule{\textwidth}{0.4pt}\\[\baselineskip]
+
+		{\Large Guidelines and Rules } \\ [0.2\baselineskip]
+
+		\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt}
+		\rule{\textwidth}{1.6pt}\\[\baselineskip] %
+
+		% \scshape %
+		% A concise specification on the functional requirements  \\
+		% and use cases of NavUP \\[\baselineskip]
+
+		% \vspace*{2\baselineskip}
+
+		\bigskip
+
+		Compiled By \\[\baselineskip]
+
+		\bigskip
+
+		{\Large Bernhard Schuld - u10297902 \\\par}
+
+		\bigskip
+		\bigskip
+
+\endgroup}
+
+\newpage
+\tableofcontents
+\newpage
+	
+	\section{General}
+		\begin{itemize}
+			\item Don't be a cunt
+			\item ALWAYS push your code to your own branch before leaving your workstation for an extended period of time (yes, even in case of fire)
+			\item Remember: Real devs use a Unix system
+			\item Discord has a 500ms delay, which makes it kak for gaming
+			\item CS > Overwatch
+		\end{itemize}
+		
+	\section{Git Issues}
+		\subsection{General Rules}
+			\begin{itemize}
+				\item You do not start coding without assigning yourself to the relevant Issue.
+				\item If an Issue does not exist, you create it.
+				\item You do not start coding without moving the Issue to the relevant column in Zenhub
+			\end{itemize}
+			
+		\subsection{Creating an Issue}
+			\begin{enumerate}
+				\item Go to Issues on the Github Repo
+				\item Click on "New issue"
+				\item Enter Title (see syntax below)
+				\item Enter Description
+				\item Assign person to issue somebody specific needs to do it, otherwise leave blank if issue is going to be done in future.
+				\item Add relevant labels (If no label matches, create a new one)
+				\item Add the relevant milestone
+				\item Add the estimated hours for completetion
+			\end{enumerate}
+		\subsection{Syntax}
+			\begin{itemize}
+				\item Title syntax: type/very-short-description
+				\item type: type of issue, usually same as label, upper- or lowercase depends on the label
+				\item description: VERY short description of the issue, spaces replaced by dashes (-)
+				\item label: custom labels: uppercase
+				\item label: default labels: lowercase
+			\end{itemize}
+			
+	\section{ZenHub Board}
+		\subsection{General Rules}
+			\begin{itemize}
+				\item Issues that have not been started yet should remain in Idle
+				\item Issues that have been finished for the current sprint but that will need revision/updating in future sprint should also remain in Idle
+				\item Not all phases are relevant to all types of issues, use own discretion to move cards/issues to relevant phases
+				\item HOWEVER: all issues must start in Idle enter Implementation, wait in Done while the pull request is awaiting review, and finally end in Closed
+				\item Issues regarding code must always enter Testing
+			\end{itemize}
+			
+	\section{Using Git}
+		\subsection{Branching}
+			\begin{enumerate}
+				\item git checkout dev
+				\item git fetch && git pull
+				\item git checkout dev -b type/issue-you-are-working-on
+				\item git push -u origin type/issue-you-are-working-on
+			\end{enumerate}
+		\subsection{Merging}
+			\begin{enumerate}
+				\item git add -A
+				\item git commit -as
+				\item Enter git message (syntax below)
+				
+			\end{enumerate}
+\end{document}
