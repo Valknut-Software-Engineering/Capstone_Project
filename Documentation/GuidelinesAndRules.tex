@@ -70,6 +70,7 @@
 \tableofcontents
 \newpage
 	
+	This is a first draft of the document and it is subject to change - Bernhard
 	\section{General}
 		\begin{itemize}
 			\item Don't be a cunt
@@ -139,6 +140,24 @@
 				\item git pull origin dev
 				\item At this point, the terminal will indicate if there are merge conflicts. If there are, skip to Merge Conflicts subsection
 				\item git push
+			\end{enumerate}
+		\subsection{Pull Requests}
+			\begin{enumerate}
+				\item Navigate to the github repo using your browser
+				\item Since you recently pushed to your own branch, there should be a "Compare \& Pull request" button. Click on it
+				\item Make sure you select the correct base, should be "dev" in most instances.
+				\item Git should say that the branches are "able to merge". If it doesn't then you fucked up with an earlier step as there are merge conflicts.
+				\item Assign one or more reviewers to your pull request
+				\item Add the "Review" label to your pull request.
+				\item Add a comment if you wish, and click on "Create pull request"
+			\end{enumerate}
+		\subsection{Reviewing Pull Requests}
+			\begin{enumerate}
+				\item Double check that the branches are able to automatically merge
+				\item Wait for all TravisCI tests to pass (if they have not completed already)
+				\item If you want to be completely sure that the code works (because you will sign off on it, you will share responsiblity) checkout the branch that was worked on and manually test the work.
+				\item Leave a comment that explains what needs to change if needed or approve the pull request
+				\item You can either merge the branches yourself then, or the original pull requestee can merge the branches.
 			\end{enumerate}
 		\subsection{Merge Conflicts}
 			\begin{enumerate}
