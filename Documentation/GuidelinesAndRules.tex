@@ -74,9 +74,10 @@
 		\begin{itemize}
 			\item Don't be a cunt
 			\item ALWAYS push your code to your own branch before leaving your workstation for an extended period of time (yes, even in case of fire)
+			\item Once a branch has been merged, please delete it from the repo (you will see a "merged" icon next to the branch)
 			\item Remember: Real devs use a Unix system
 			\item Discord has a 500ms delay, which makes it kak for gaming
-			\item CS > Overwatch
+			\item CS $>$ Overwatch
 		\end{itemize}
 		
 	\section{Git Issues}
@@ -93,7 +94,7 @@
 				\item Click on "New issue"
 				\item Enter Title (see syntax below)
 				\item Enter Description
-				\item Assign person to issue somebody specific needs to do it, otherwise leave blank if issue is going to be done in future.
+				\item Assign person to issue if somebody specific needs to do it, otherwise leave blank if issue is going to be done in future.
 				\item Add relevant labels (If no label matches, create a new one)
 				\item Add the relevant milestone
 				\item Add the estimated hours for completetion
@@ -111,9 +112,9 @@
 		\subsection{General Rules}
 			\begin{itemize}
 				\item Issues that have not been started yet should remain in Idle
-				\item Issues that have been finished for the current sprint but that will need revision/updating in future sprint should also remain in Idle
+				\item Issues that have been finished for the current sprint but that will need revision/updating in a future sprint should also remain in Idle
 				\item Not all phases are relevant to all types of issues, use own discretion to move cards/issues to relevant phases
-				\item HOWEVER: all issues must start in Idle enter Implementation, wait in Done while the pull request is awaiting review, and finally end in Closed
+				\item HOWEVER: all issues must start in Idle, enter Implementation, wait in Done while the pull request is awaiting review, and finally end in Closed
 				\item Issues regarding code must always enter Testing
 			\end{itemize}
 			
@@ -121,7 +122,7 @@
 		\subsection{Branching}
 			\begin{enumerate}
 				\item git checkout dev
-				\item git fetch && git pull
+				\item git fetch \&\& git pull
 				\item git checkout dev -b type/issue-you-are-working-on
 				\item git push -u origin type/issue-you-are-working-on
 			\end{enumerate}
@@ -130,6 +131,28 @@
 				\item git add -A
 				\item git commit -as
 				\item Enter git message (syntax below)
-				
+				\item crl + x (terminal will ask for confirmation)
+				\item Y or N
+				\item git checkout dev
+				\item git fetch \&\& git pull
+				\item git checkout type/issue-you-are-working-on
+				\item git pull origin dev
+				\item At this point, the terminal will indicate if there are merge conflicts. If there are, skip to Merge Conflicts subsection
+				\item git push
 			\end{enumerate}
+		\subsection{Merge Conflicts}
+			\begin{enumerate}
+				\item If there are any merge conflicts, your chosen editor should indicate where the coflicts are. If your editor doesnt show it, get a better editor.
+				\item Resolve said merge conflicts
+				\item Return to Merging subsection and repeat steps.
+			\end{enumerate}
+		\subsection{Syntax}
+			\begin{itemize}
+				\item git message sytnax:
+				 
+				type(issue-you-are-working-on): Short description of changes
+				
+				Detailed description of changes
+				\item type(issue-you-are-working-on) all lowercase
+			\end{itemize}
 \end{document}
