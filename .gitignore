@@ -1,0 +1,8 @@
+#Texmaker Output
+Documentation/*.aux
+Documentation/*.lof
+Documentation/*.log
+Documentation/*.out
+Documentation/*.pdf
+Documentation/*.toc
+Documentation/*.synctex.gz
