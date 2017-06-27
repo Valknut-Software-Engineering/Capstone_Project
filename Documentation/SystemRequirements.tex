@@ -36,7 +36,7 @@
 
 The Agile development approach allows for frequent opportunities for clients to be involved in. Requirements are then reprioritized according to client specifications and they are elaborated on. The process of Agile development is based on the following actions:
 
-        \begin{itemize}       
+    \begin{itemize}
 			\item Short timeboxes of iterative development.
 			\item Early and repeated client/user feedback.
 			\item Reprioritization of work based on the client/user so that emergent requirements can be handled.
@@ -52,40 +52,93 @@ For the above-mentioned reasons, we had chosen to utilize the Agile Software Met
 
 \subsection{System Requirements}
 
+The Virtual Reality presentation software will have various requirements that will need to be fulfilled in order to deliver a viable product.
+
 	\subsubsection{Functional Requirements}
-	
+
 	The following functional requirements will be met:
-  	
-  		\begin{enumerate}
-			\item The toolkit will allow users to create 3D environments.
-			\item Users will be able to add objects to the environment.
-			\item The toolkit will allow users to select pre-built environments.
-			\item Users will be able to share content they have created, or integrate content that is publically available, making the project evolve even further through the comunity.
-		\end{enumerate}
+
+		\subsubsubsection{360 video export}
+
+		The software must be able to export a presentation as a 360 degree video.
+		The reason for this exporting format is to allow for a viewable format that will be as universal as possible to all VR capable devices ranging from mobile phones to VR headsets.
+
+		\subsubsubsection{VR Device Viewable}
+
+		The software must be able to be viewable and intractable with the use of a Virtual Reality headset such as the Oculus Rift and HTC Vive.
+		A user must be able to preview his or her virtual reality presentation within a virtual reality environment if they own the appropriate hardware as well as edit the environment in virtual reality space.
+
+		\subsubsubsection{Selectable Skyboxes}
+
+		There needs to be a variety of skyboxes that a user can select from in order to match the theme of the environment.
+		The skyboxes also need to be compatible with the Unity engine in order to be incorporated into the scene properly.
+
+		\subsubsubsection{Template Environments}
+
+		Template environments must be available to the user.
+		These environments will vary to allow for a range of scenes to be catered for.
+		A small set of template environments will be created by the development team and the rest by the community (community driven software approach).
+
+		\subsubsubsection{Various Object Imports Into Scene}
+
+		A variety of objects will need to be available for placement in the scene.
+		These objects will need to be compatible with the Unity engine as well as relate to some possible environment.
+	  Users should be allowed to import their own objects as well as objects created by the community.
+
+		\subsubsubsection{Editor Pont of View}
+
+		The placement and control of the point of view of the user who is currently editing the scene (whether using a VR device or not) is vital.
+		The user will need to be able to either walk on the terrain of the environment or be able to fly in the environment for better perspective of the presentation.
+
+		\subsubsubsection{Native Interface Design}
+
+		The interface for the software will need to run in the Windows environment as the application is being developed for the Windows operating system.
+		It will also need to be easy to use and navigate.
 
 	\subsubsection{Non-Functional Requirements}
 
 	The following non-functional requirements will be met:
 
-		\begin{enumerate}
-  			\item Usability - key concern is to make this system easy to use.
-  			\item Reliability - the system should not fail, aiming for a high MTBF. A strategy will be in place for error detection.
-  			\item Portability - making use of Unity3D allows our software to be compatible with a large variety of VR devices. A simple installation is all that is required.
-  			\item Modifiability - aiming for a community driven approach we will ensure that software is easily upgraded.
-  			\item Platform constraints - developing in Unity3D caters for the widest VR devices.  			
-		\end{enumerate}
+		\subsubsubsection{Image Importing}
+
+		Images the creator wants to display in the scene will need to be able to be imported into it.
+		Various image formats such as .jpg's, .png's and bit map images will need to be catered for, eliminating a formatting issue.
+
+		\subsubsubsection{Slideshows}
+
+		Imported images must be able to be incorporated into a slideshow or multiple slideshows.
+		These will allow the creator to describe a topic in detail through various images that relate to the subject matter.
+
+		\subsubsubsection{Video Importing}
+
+		Videos allow for a rich and detailed explanation of the topics the user is trying to cover.
+		The software must be able to incorporate .mp4 video formats into the presentation that can be viewable in the virtual reality space.
+
+		\subsubsubsection{Audio Importing}
+
+		The software will need to be able to incorporate audio snippets or songs into the scene.
+		The required format type that needs to be catered for will be an .mp3 file.
+		Voice recordings will also fall part of the audio file requirement as they are an important asset that can be incorporated into the presentation.
+		This will allow the creator to direct a user’s attention to a certain part of the scene.
+		It will also allow the creator to describe parts of the presentation to the viewer.
+		The software must be able to import voice recordings users make and save with third party applications.
+
+		\subsubsubsection{Community Driven Content}
+
+		The software will need to be able to allow users to create their own content and upload it to a central server which can then be viewed and downloaded by any user who wishes to use the created content.
+		This will cover environmental scenes, 3D objects, presentation templates, skyboxes and other Unity based assets that are supported by the software.
 
 \subsection{Target Audience Characteristics}
 
 	Our first focused audience would be targeted at the educational sector. Our initial goal would be to provide a toolkit for an individual to build a basic educational scene.
-	
+
 \subsection{Constraints}
 There are several constraints needed to be taken into consideration.
 \bigskip
 \begin{flushleft}
 \textsl{Platform constraints:}
 \end{flushleft}
-	\begin{itemize}		
+	\begin{itemize}
 		\item Mono, an open source development platform based on the .NET Framework. Mono’s implementation is based on the ECMA standards for C\# and the Common Language Infrastructure.
 		\item For development:
 			\begin{itemize}
@@ -96,23 +149,23 @@ There are several constraints needed to be taken into consideration.
 				\item Windows XP SP2+, Mac OS X 10.8+, Ubuntu 12.04+, SteamOS+.
 			\end{itemize}
 	\end{itemize}
-\medskip		
+\medskip
 \textsl{Device hardware constraints:}
 	\begin{itemize}
 		\item Graphics card: DX9 (shader model 3.0) or DX11 with feature level 9.3 capabilities.
 		\item CPU: SSE2 instruction set support.
 	\end{itemize}
-\medskip		
+\medskip
 \textsl{Video size:}
 	\begin{itemize}
 		\item The exported video should be a realistic size, taking bandwidth and cap into consideration.
 	\end{itemize}
-\medskip	
+\medskip
 \textsl{Community content needs to be a reasonable size (in community guidelines):}
 	\begin{itemize}
 		\item Contributing to the complexity of a project will increase exported video size.
 	\end{itemize}
-\medskip	
+\medskip
 \textsl{Community content needs to be relatively optimized (in community guidelines):}
 	\begin{itemize}
 		\item Again, contributing to the complexity of a project will increase exported video size.
@@ -127,8 +180,8 @@ There are several constraints needed to be taken into consideration.
 
 \subsection{Technologies}
 	In our first meeting with EPI-USE we had discussed the use of various technologies. They had given us "free will" with regards to what technologies to use. After we had committed ourselves to extensive research we had selected the following, but did not limit ourselves to:
-	\begin{itemize}		
-		\item Creating a 3D environment to design and bring to life a 3D presentation.		
+	\begin{itemize}
+		\item Creating a 3D environment to design and bring to life a 3D presentation.
 		\item Unity 3D virtual reality system tool kit library.
 		\item HTC Vive virtual reality gear (already available).
 		\item Import external models.
@@ -139,4 +192,3 @@ There are several constraints needed to be taken into consideration.
 		\item Docker.
 		\item TravisCI.
 	\end{itemize}
-
