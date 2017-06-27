@@ -36,7 +36,7 @@
 
 The Agile development approach allows for frequent opportunities for clients to be involved in. Requirements are then reprioritized according to client specifications and they are elaborated on. The process of Agile development is based on the following actions:
 
-        \begin{itemize}       
+        \begin{itemize}
 			\item Short timeboxes of iterative development.
 			\item Early and repeated client/user feedback.
 			\item Reprioritization of work based on the client/user so that emergent requirements can be handled.
@@ -53,9 +53,9 @@ For the above-mentioned reasons, we had chosen to utilize the Agile Software Met
 \subsection{System Requirements}
 
 	\subsubsection{Functional Requirements}
-	
+
 	The following functional requirements will be met:
-  	
+
   		\begin{enumerate}
 			\item The toolkit will allow users to create 3D environments.
 			\item Users will be able to add objects to the environment.
@@ -72,20 +72,20 @@ For the above-mentioned reasons, we had chosen to utilize the Agile Software Met
   			\item Reliability - the system should not fail, aiming for a high MTBF. A strategy will be in place for error detection.
   			\item Portability - making use of Unity3D allows our software to be compatible with a large variety of VR devices. A simple installation is all that is required.
   			\item Modifiability - aiming for a community driven approach we will ensure that software is easily upgraded.
-  			\item Platform constraints - developing in Unity3D caters for the widest VR devices.  			
+  			\item Platform constraints - developing in Unity3D caters for the widest VR devices.
 		\end{enumerate}
 
 \subsection{Target Audience Characteristics}
 
 	Our first focused audience would be targeted at the educational sector. Our initial goal would be to provide a toolkit for an individual to build a basic educational scene.
-	
+
 \subsection{Constraints}
 There are several constraints needed to be taken into consideration.
 \bigskip
 \begin{flushleft}
 \textsl{Platform constraints:}
 \end{flushleft}
-	\begin{itemize}		
+	\begin{itemize}
 		\item Mono, an open source development platform based on the .NET Framework. Mono’s implementation is based on the ECMA standards for C\# and the Common Language Infrastructure.
 		\item For development:
 			\begin{itemize}
@@ -96,23 +96,23 @@ There are several constraints needed to be taken into consideration.
 				\item Windows XP SP2+, Mac OS X 10.8+, Ubuntu 12.04+, SteamOS+.
 			\end{itemize}
 	\end{itemize}
-\medskip		
+\medskip
 \textsl{Device hardware constraints:}
 	\begin{itemize}
 		\item Graphics card: DX9 (shader model 3.0) or DX11 with feature level 9.3 capabilities.
 		\item CPU: SSE2 instruction set support.
 	\end{itemize}
-\medskip		
+\medskip
 \textsl{Video size:}
 	\begin{itemize}
 		\item The exported video should be a realistic size, taking bandwidth and cap into consideration.
 	\end{itemize}
-\medskip	
+\medskip
 \textsl{Community content needs to be a reasonable size (in community guidelines):}
 	\begin{itemize}
 		\item Contributing to the complexity of a project will increase exported video size.
 	\end{itemize}
-\medskip	
+\medskip
 \textsl{Community content needs to be relatively optimized (in community guidelines):}
 	\begin{itemize}
 		\item Again, contributing to the complexity of a project will increase exported video size.
@@ -125,18 +125,53 @@ There are several constraints needed to be taken into consideration.
 		\item Unity assets only for community driven content.
 	\end{itemize}
 
+\newpage
 \subsection{Technologies}
-	In our first meeting with EPI-USE we had discussed the use of various technologies. They had given us "free will" with regards to what technologies to use. After we had committed ourselves to extensive research we had selected the following, but did not limit ourselves to:
-	\begin{itemize}		
-		\item Creating a 3D environment to design and bring to life a 3D presentation.		
-		\item Unity 3D virtual reality system tool kit library.
-		\item HTC Vive virtual reality gear (already available).
-		\item Import external models.
-		\item Using plug and play libraries.
-		\item Possibly include library templates for uses to build on.
-		\item Community driven approach.
-		\item Windows 10 environment.
-		\item Docker.
-		\item TravisCI.
-	\end{itemize}
+	\subsubsection{Initial Technologies}
+		In our first meeting with EPI-USE we had discussed the use of various technologies. They had given us "free will" with regards to what technologies to use. We are considering the following technolgies:
+		\begin{itemize}
+			\item Creating a 3D environment to design and bring to life a 3D presentation.
+			\item Unity 3D virtual reality system tool kit library.
+			\item HTC Vive virtual reality gear (already available).
+			\item Import external models.
+			\item Using plug and play libraries.
+			\item Possibly include library templates for uses to build on.
+			\item Community driven approach.
+			\item Windows 10 environment.
+			\item Docker
+			\item TravisCI.
+		\end{itemize}
 
+	\subsubsection{Technologies to be used}
+		After looking into the above technologies as well as other technologies that are not listed, we have narrowed our choices down to the following:
+		\begin{itemize}
+			\item Unity Game Engine \\
+			We decided to utitlize the Unity Game Engine because of the massive amount of documentation and support that it has. We also received a lot of recommendations from people who work in the industry to use Unity.\\
+
+			\item Unity open-source plugins \\
+			Unity has a lot of community-created plugins that might be useful with our project. Which plugins will be used will be determined as we delve deeper into the project. \\
+
+			\item Unity VR library \\
+			Unity has support for both the Oculus Rift and the HTC Vive. This will help should we run into issues with the specific hardware. \\
+
+			\item Visual Studio \\
+			We will be using Visual Studio in order to create the interface as it is quite easy to use, and because Unity comes bundled with it. \\
+
+			\item Github \\
+			We already have a repository on Github that we are using to collaborate on the project. Github is very user friendly and has a lot of tools that make project management easier.
+		\end{itemize}
+
+		The following technologies still have to be properly researched before we can commit to using them:
+		\begin{itemize}
+			\item JsonAPI \\
+			We are possibly looking at JSON as a standard to notate the objects that will be created by our interface. This will allow us to handle objects that have completely different characteristics but are similar in notation structure.\\
+
+			\item MongoDB \\
+			We are looking at MongoDB as a way to store the objects it doesn't have a fixed structure. So we dont have to create an entire table and/or column for every type of possible object. \\
+		\end{itemize}
+
+
+	The following technologies were scrapped:
+	\begin{itemize}
+		\item Docker: Docker does not yet have a proper Windows image and the Unity engine does not support Linux
+	\end{itemize}
