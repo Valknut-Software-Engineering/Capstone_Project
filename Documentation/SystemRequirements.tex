@@ -15,6 +15,9 @@
 			\paragraph{VR}	Virtual Reality
 			\paragraph{MVP} Minimum Viable Product
 			\paragraph{MTBF} Mean Time Between Failures
+			\paragraph{e2e} End-To-End
+
+
 		% \section{References}
 
 \subsection{Design}
@@ -36,7 +39,7 @@
 
 The Agile development approach allows for frequent opportunities for clients to be involved in. Requirements are then reprioritized according to client specifications and they are elaborated on. The process of Agile development is based on the following actions:
 
-        \begin{itemize}       
+        \begin{itemize}
 			\item Short timeboxes of iterative development.
 			\item Early and repeated client/user feedback.
 			\item Reprioritization of work based on the client/user so that emergent requirements can be handled.
@@ -53,9 +56,9 @@ For the above-mentioned reasons, we had chosen to utilize the Agile Software Met
 \subsection{System Requirements}
 
 	\subsubsection{Functional Requirements}
-	
+
 	The following functional requirements will be met:
-  	
+
   		\begin{enumerate}
 			\item The toolkit will allow users to create 3D environments.
 			\item Users will be able to add objects to the environment.
@@ -72,20 +75,20 @@ For the above-mentioned reasons, we had chosen to utilize the Agile Software Met
   			\item Reliability - the system should not fail, aiming for a high MTBF. A strategy will be in place for error detection.
   			\item Portability - making use of Unity3D allows our software to be compatible with a large variety of VR devices. A simple installation is all that is required.
   			\item Modifiability - aiming for a community driven approach we will ensure that software is easily upgraded.
-  			\item Platform constraints - developing in Unity3D caters for the widest VR devices.  			
+  			\item Platform constraints - developing in Unity3D caters for the widest VR devices.
 		\end{enumerate}
 
 \subsection{Target Audience Characteristics}
 
 	Our first focused audience would be targeted at the educational sector. Our initial goal would be to provide a toolkit for an individual to build a basic educational scene.
-	
+
 \subsection{Constraints}
 There are several constraints needed to be taken into consideration.
 \bigskip
 \begin{flushleft}
 \textsl{Platform constraints:}
 \end{flushleft}
-	\begin{itemize}		
+	\begin{itemize}
 		\item Mono, an open source development platform based on the .NET Framework. Mono’s implementation is based on the ECMA standards for C\# and the Common Language Infrastructure.
 		\item For development:
 			\begin{itemize}
@@ -96,23 +99,23 @@ There are several constraints needed to be taken into consideration.
 				\item Windows XP SP2+, Mac OS X 10.8+, Ubuntu 12.04+, SteamOS+.
 			\end{itemize}
 	\end{itemize}
-\medskip		
+\medskip
 \textsl{Device hardware constraints:}
 	\begin{itemize}
 		\item Graphics card: DX9 (shader model 3.0) or DX11 with feature level 9.3 capabilities.
 		\item CPU: SSE2 instruction set support.
 	\end{itemize}
-\medskip		
+\medskip
 \textsl{Video size:}
 	\begin{itemize}
 		\item The exported video should be a realistic size, taking bandwidth and cap into consideration.
 	\end{itemize}
-\medskip	
+\medskip
 \textsl{Community content needs to be a reasonable size (in community guidelines):}
 	\begin{itemize}
 		\item Contributing to the complexity of a project will increase exported video size.
 	\end{itemize}
-\medskip	
+\medskip
 \textsl{Community content needs to be relatively optimized (in community guidelines):}
 	\begin{itemize}
 		\item Again, contributing to the complexity of a project will increase exported video size.
@@ -125,10 +128,30 @@ There are several constraints needed to be taken into consideration.
 		\item Unity assets only for community driven content.
 	\end{itemize}
 
+\newpage
+\subsection{Testing Framework}
+	\subsubsection{Introduction}
+		The 3D VR Presentations project presents a unique problem when it comes to testing.\\
+		Because the primary goals of the project is to create an intuitive and easy to use interface to create presentations,
+		the assessment will be qualitative in nature.\\
+		Thus traditional methods of testing such as unit tests and e2e tests will not be useful to determine if we are creating a viable and working product.\\
+		However some parts should still be able to be tested in that way. Further research is needed in order to determine a way of implementing unit and e2e tests and which framework will be used for them.\\
+		We are planning on utilizing usability testing at the end of each phase in order to determine how viable our current product is at that stage.\\
+		We are also looking into Agile UX Design Principles.
+
+	\subsubsection{Usability Testing}
+		In short, Usability Testing is a way to see how easy to use something is by testing it with real users.\\
+		At the end of each sprint we will test our product in its current state with real users and based on their feedback we will plan adjustments to our development.
+		We will be using knowledge that we have gained from IMY310 to that end.
+
+	\subsubsection{Agile UX Principles}
+		I have absolutely no idea what to say here. I can't find concensus on any online sources except for what I have already described above.\\
+		Could whomever reviews this please assist?
+
 \subsection{Technologies}
 	In our first meeting with EPI-USE we had discussed the use of various technologies. They had given us "free will" with regards to what technologies to use. After we had committed ourselves to extensive research we had selected the following, but did not limit ourselves to:
-	\begin{itemize}		
-		\item Creating a 3D environment to design and bring to life a 3D presentation.		
+	\begin{itemize}
+		\item Creating a 3D environment to design and bring to life a 3D presentation.
 		\item Unity 3D virtual reality system tool kit library.
 		\item HTC Vive virtual reality gear (already available).
 		\item Import external models.
@@ -139,4 +162,3 @@ There are several constraints needed to be taken into consideration.
 		\item Docker.
 		\item TravisCI.
 	\end{itemize}
-
