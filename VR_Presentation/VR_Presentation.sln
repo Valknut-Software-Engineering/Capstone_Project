@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VR_Presentation", "VR_Prese
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VR_Presentation.Editor.Plugins", "VR_Presentation.Editor.Plugins.csproj", "{7DE7D577-06E1-CCE4-B88E-96D0D2CE07E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VR_Presentation.Editor", "VR_Presentation.Editor.csproj", "{92A36BD9-D669-A0FD-00A0-399D01E52584}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{7DE7D577-06E1-CCE4-B88E-96D0D2CE07E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DE7D577-06E1-CCE4-B88E-96D0D2CE07E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DE7D577-06E1-CCE4-B88E-96D0D2CE07E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92A36BD9-D669-A0FD-00A0-399D01E52584}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92A36BD9-D669-A0FD-00A0-399D01E52584}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92A36BD9-D669-A0FD-00A0-399D01E52584}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92A36BD9-D669-A0FD-00A0-399D01E52584}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
