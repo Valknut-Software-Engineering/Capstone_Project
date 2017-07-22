@@ -4,23 +4,29 @@ using UnityEngine;
 
 public class PickUpObject : MonoBehaviour
 {
-
+    public GameObject thecamera;
     public GameObject mainCam;
     public GameObject pickedUpObject;
     public bool isCarrying = false;
     public float distance;
     public float smooth;
-
-    // Use this for initialization
+   
+ 
+      
+        // Use this for initialization
     void Start()
     {
         mainCam = GameObject.FindWithTag("MainCamera");
+        thecamera = GameObject.Find("recordCam");
     }
 
     // Update is called once per frame
     void Update()
     {
-
+       
+       
+        thecamera.transform.position = mainCam.transform.position;
+       
         //Spawn new object and place in hand
         if (Input.GetKeyDown(KeyCode.Keypad0))
         {

@@ -214,6 +214,7 @@
     <None Include="Assets\NatureStarterKit2\Standard Assets\Effects\ToonShading\Shaders\ToonLit.shader" />
     <None Include="Assets\NatureStarterKit2\Standard Assets\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
     <None Include="Assets\NatureStarterKit2\info.txt" />
+    <None Include="Assets\RockVR\Video\Shaders\Cubemap2Equirectangular.shader" />
     <None Include="Assets\Scripts\Shaders\WallShader.shader" />
     <None Include="Assets\Scripts\Shaders\WindowShader.shader" />
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />

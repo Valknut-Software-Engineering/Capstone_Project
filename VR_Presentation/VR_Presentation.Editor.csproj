@@ -151,6 +151,8 @@
     <Compile Include="Assets\NatureStarterKit2\Editor\ImageEffects\SunShaftsEditor.cs" />
     <Compile Include="Assets\NatureStarterKit2\Editor\ImageEffects\TonemappingEditor.cs" />
     <Compile Include="Assets\NatureStarterKit2\Editor\ImageEffects\VignetteAndChromaticAberrationEditor.cs" />
+    <Compile Include="Assets\RockVR\Video\Editor\VideoCaptureEditor.cs" />
+    <Compile Include="Assets\RockVR\Video\Editor\VideoCaptureMenuEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Laptop\StandardColorMask.shader" />
@@ -231,6 +233,7 @@
     <None Include="Assets\NatureStarterKit2\Standard Assets\Effects\ToonShading\Shaders\ToonLit.shader" />
     <None Include="Assets\NatureStarterKit2\Standard Assets\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
     <None Include="Assets\NatureStarterKit2\info.txt" />
+    <None Include="Assets\RockVR\Video\Shaders\Cubemap2Equirectangular.shader" />
     <None Include="Assets\Scripts\Shaders\WallShader.shader" />
     <None Include="Assets\Scripts\Shaders\WindowShader.shader" />
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
