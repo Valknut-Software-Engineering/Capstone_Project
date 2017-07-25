@@ -7,13 +7,16 @@ public class PickUpObject : MonoBehaviour
     public GameObject thecamera;
     public GameObject mainCam;
     public GameObject pickedUpObject;
-    public bool isCarrying = false;
+    
+	public bool isCarrying = false;
+	public bool snapToGrid = false;
+	public bool useRotationOffset = false;
+	
     public float distance;
     public float smooth;
-   
- 
-      
-        // Use this for initialization
+	
+	
+	// Use this for initialization
     void Start()
     {
         mainCam = GameObject.FindWithTag("MainCamera");
@@ -23,10 +26,9 @@ public class PickUpObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-       
-        thecamera.transform.position = mainCam.transform.position;
-       
+		
+		thecamera.transform.position = mainCam.transform.position;
+		
         //Spawn new object and place in hand
         if (Input.GetKeyDown(KeyCode.Keypad0))
         {
@@ -36,24 +38,58 @@ public class PickUpObject : MonoBehaviour
             Ray myRay = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
             RaycastHit hit;
             spawnCube();
-
         }
-
+		
+		//Toggle snap to grid
+		if(Input.GetKeyDown(KeyCode.G)) {
+			if(snapToGrid)
+				snapToGrid = false;
+			else
+				snapToGrid = true;
+		}
+		
+		//Toggle player rotation offset
+		if(Input.GetKeyDown(KeyCode.Q))
+		{
+			if(useRotationOffset)
+				useRotationOffset = false;
+			else
+				useRotationOffset = true;
+		}
+		
+		
         if (isCarrying)
         {
             carry(pickedUpObject);
             checkDrop();
-            
         }
         else
         {
-            pickUp();
+            interact();
         }
     }
 
     void carry(GameObject obj)
     {
-        obj.transform.position = Vector3.Lerp(obj.transform.position, mainCam.transform.position + mainCam.transform.forward * distance, Time.deltaTime * smooth);
+        if(!snapToGrid) {
+			obj.transform.position = Vector3.Lerp(obj.transform.position, mainCam.transform.position + mainCam.transform.forward * distance, Time.deltaTime * smooth);
+		}
+		else //snap object to grid when moving
+		{
+			Vector3 curPosInGrid = mainCam.transform.position + mainCam.transform.forward * distance;
+			Vector3 newPosInGrid = new Vector3(Mathf.Round(curPosInGrid.x), Mathf.Round(curPosInGrid.y), Mathf.Round(curPosInGrid.z));
+			
+			//obj.transform.position = Vector3.Lerp(obj.transform.position, newPosInGrid, Time.deltaTime * smooth);
+			obj.transform.position = newPosInGrid;
+		}
+		
+		//Rotate object as player rotates
+		obj.transform.parent = this.transform; // Make the object that collided with the player a child of the player
+		if(useRotationOffset) {
+			obj.transform.localRotation = Quaternion.Euler(Vector3.forward); // Not exactly sure what this does but if I leave it out it becomes random
+			obj.transform.localRotation = Quaternion.Euler(90,0,90); // offset the rotation to stay in relation to player
+		}
+		
 
         //ALL AXIS MAKE LARGER
         if (Input.GetKey(KeyCode.KeypadPlus))
@@ -137,8 +173,14 @@ public class PickUpObject : MonoBehaviour
                     cloneObj = Instantiate(sourceObj, new Vector3(2 * 2.0F, 0, 0), Quaternion.identity);
 
                     isCarrying = true;
-                    isPickUpable.gameObject.GetComponent<Rigidbody>().useGravity = false;
-                    pickedUpObject.GetComponent<Rigidbody>().useGravity = true;
+                    if(cloneObj.gameObject.GetComponent<Rigidbody>() == null)
+						cloneObj.gameObject.AddComponent<Rigidbody>();
+					
+					//isPickUpable.gameObject.GetComponent<Rigidbody>().useGravity = false;
+                    cloneObj.gameObject.GetComponent<Rigidbody>().useGravity = false;
+					cloneObj.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+					
+					pickedUpObject.GetComponent<Rigidbody>().useGravity = true;
                     pickedUpObject = cloneObj;
                 }
             }
@@ -152,43 +194,65 @@ public class PickUpObject : MonoBehaviour
 
         cube.AddComponent<Rigidbody>(); // Add the rigidbody.
         cube.AddComponent<Pickupable>(); // Add the canPickup script.
-
+		
+        if (pickedUpObject) { dropObject(); }
+        
         isCarrying = true;
         cube.GetComponent<Rigidbody>().useGravity = false;
-        if (pickedUpObject) { pickedUpObject.GetComponent<Rigidbody>().useGravity = true; }
-        pickedUpObject = cube;
+        cube.GetComponent<Rigidbody>().isKinematic = true;
+		pickedUpObject = cube;
     }
-
-
+	
 
     //// Spawn other primitive objects \\\\
 
     void spawnSphere()
     {
-
-        GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        sphere.transform.position = new Vector3(0, 1.5F, 0);
-
+		GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        
+		sphere.AddComponent<Rigidbody>(); // Add the rigidbody.
+        sphere.AddComponent<Pickupable>(); // Add the canPickup script.
+		
+        if (pickedUpObject) { dropObject(); }
+        
+        isCarrying = true;
+        sphere.GetComponent<Rigidbody>().useGravity = false;
+        sphere.GetComponent<Rigidbody>().isKinematic = true;
+		pickedUpObject = sphere;
     }
 
     void spawnCapsule()
     {
-
-        GameObject capsule = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-        capsule.transform.position = new Vector3(2, 1, 0);
-
+		GameObject capsule = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+        
+		capsule.AddComponent<Rigidbody>(); // Add the rigidbody.
+        capsule.AddComponent<Pickupable>(); // Add the canPickup script.
+		
+        if (pickedUpObject) { dropObject(); }
+        
+		isCarrying = true;
+        capsule.GetComponent<Rigidbody>().useGravity = false;
+		capsule.GetComponent<Rigidbody>().isKinematic = true;
+        pickedUpObject = capsule;
     }
 
     void spawnCylinder()
     {
+		GameObject cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+        
+		cylinder.AddComponent<Rigidbody>(); // Add the rigidbody.
+        cylinder.AddComponent<Pickupable>(); // Add the canPickup script.
 
-        GameObject cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        cylinder.transform.position = new Vector3(-2, 1, 0);
-
+        if (pickedUpObject) { dropObject(); }
+        
+		isCarrying = true;
+        cylinder.GetComponent<Rigidbody>().useGravity = false;
+        cylinder.GetComponent<Rigidbody>().isKinematic = true;
+		pickedUpObject = cylinder;
     }
 
 
-    void pickUp()
+    void interact()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -206,28 +270,64 @@ public class PickUpObject : MonoBehaviour
                 if (isPickUpable != null)
                 {
                     isCarrying = true;
-                    isPickUpable.gameObject.GetComponent<Rigidbody>().useGravity = false;
-                    pickedUpObject = isPickUpable.gameObject;
+					if(isPickUpable.gameObject.GetComponent<Rigidbody>() == null)
+						isPickUpable.gameObject.AddComponent<Rigidbody>();
+					
+					isPickUpable.gameObject.GetComponent<Rigidbody>().useGravity = false;
+					isPickUpable.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+					pickedUpObject = isPickUpable.gameObject;
                 }
             }
         }
+		
+		//Delete object
+		if(Input.GetKeyDown(KeyCode.Delete)) {
+			int x = Screen.width /2;
+			int y = Screen.height /2;
+			
+			Ray myRay = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
+			RaycastHit hit;
+			
+			if(Physics.Raycast(myRay, out hit)) {
+				Pickupable isPickUpable = hit.collider.GetComponent<Pickupable>();
+				
+				//if the object the RayCast hit has the canPickup script:
+				if(isPickUpable != null) {
+					Destroy(isPickUpable.gameObject);
+				}
+			}
+		}
     }
 
    
     void checkDrop()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            dropObject();
-        }
+        if (Input.GetKeyDown(KeyCode.E)) {
+			dropObject();
+		}
+		if (Input.GetKeyDown(KeyCode.F)) {
+			floatObject();
+		}
+		
     }
 
-    void dropObject()
-    {
-        isCarrying = false;
-        pickedUpObject.gameObject.GetComponent<Rigidbody>().useGravity = true;
-        pickedUpObject = null;
-    }
+    //Drop the object being held by the user
+	void dropObject() {
+		isCarrying = false;
+		pickedUpObject.transform.parent = null;
+		pickedUpObject.gameObject.GetComponent<Rigidbody>().useGravity = true;
+		pickedUpObject.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+		pickedUpObject = null;
+	}
+	void floatObject() {
+		isCarrying = false;
+		pickedUpObject.transform.parent = null;
+		
+		Destroy(pickedUpObject.gameObject.GetComponent<Rigidbody>());
+		pickedUpObject = null;
+	}
+	
+	
 }
 
 
