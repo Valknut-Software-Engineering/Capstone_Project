@@ -14,16 +14,15 @@ namespace RockVR.Video.Demo
         {
             if (VideoCaptureCtrl.instance.status == VideoCaptureCtrl.StatusType.NOT_START)
             {
-            	 if (Input.GetKey(KeyCode.I))
-			     {
-			         VideoCaptureCtrl.instance.StartCapture();
-			     }
-
+                if (Input.GetKeyDown(KeyCode.I))
+                {
+                    VideoCaptureCtrl.instance.StartCapture();
+                }
             }
             else if (VideoCaptureCtrl.instance.status == VideoCaptureCtrl.StatusType.STARTED)
             {
-                 if (Input.GetKey(KeyCode.O))
-			     {
+                if (Input.GetKeyDown(KeyCode.O))
+                {
                     VideoCaptureCtrl.instance.StopCapture();
                 }
             }
@@ -36,8 +35,8 @@ namespace RockVR.Video.Demo
             }
             else if (VideoCaptureCtrl.instance.status == VideoCaptureCtrl.StatusType.FINISH)
             {
-                 if (Input.GetKey(KeyCode.P))
-			     {
+                if (Input.GetKeyDown(KeyCode.P))
+                {
                     // Open video save directory.
                     Process.Start(PathConfig.saveFolder);
                 }

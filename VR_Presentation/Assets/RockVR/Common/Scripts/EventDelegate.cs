@@ -1,5 +1,4 @@
-﻿
-namespace RockVR.Common
+﻿namespace RockVR.Common
 {
     public class EventDelegate
     {

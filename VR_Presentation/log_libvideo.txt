@@ -1,7 +1,7 @@
-[LOG]: LibVideoCaptureAPI() - Frame width: 1920
-[LOG]: LibVideoCaptureAPI() - Frame height: 1080
-[LOG]: LibVideoCaptureAPI() - Frame rate: 60
+[LOG]: LibVideoCaptureAPI() - Frame width: 3840
+[LOG]: LibVideoCaptureAPI() - Frame height: 2160
+[LOG]: LibVideoCaptureAPI() - Frame rate: 30
 [LOG]: LibVideoCaptureAPI() - Projection: 1
-[LOG]: LibVideoCaptureAPI() - File path: C:\Users\Peter-PC\Documents/RockVR/Video/2017-07-22-09-41-53-XCSE7.mp4
-[LOG]: LibVideoCaptureAPI() - FFmpeg path: C:/Users/Peter-PC/Documents/COS301/Github/Capstone_Project/VR_Presentation/Assets/StreamingAssets/RockVR/FFmpeg/Windows/ffmpeg.exe
+[LOG]: LibVideoCaptureAPI() - File path: C:\Users\Peter-PC\Documents/RockVR/Video/2017-07-26-18-36-20-7Y79R.mp4
+[LOG]: LibVideoCaptureAPI() - FFmpeg path: C:/Users/Peter-PC/Documents/COS301/Github/Capstone_Project/VR_Presentation/test_Data/StreamingAssets/RockVR/FFmpeg/Windows/ffmpeg.exe
 [LOG]: Close() - Success: Ture

@@ -33,12 +33,16 @@ namespace RockVR.Video.Editor
                     videoCapture.cubemap2Equirectangular = (Material)EditorGUILayout.ObjectField("Cubemap to Equirectangular Material", videoCapture.cubemap2Equirectangular, typeof(Material));
                 }
                 videoCapture._cubemapSize = (VideoCapture.CubemapSizeType)EditorGUILayout.EnumPopup("Cubemap Size", videoCapture._cubemapSize);
-                videoCapture.offlineRender = EditorGUILayout.Toggle("Offline Render", videoCapture.offlineRender);
             }
+            videoCapture.offlineRender = EditorGUILayout.Toggle("Offline Render", videoCapture.offlineRender);
             videoCapture.encodeQuality = (VideoCapture.EncodeQualityType)EditorGUILayout.EnumPopup("Encode Quality", videoCapture.encodeQuality);
             videoCapture._antiAliasing = (VideoCapture.AntiAliasingType)EditorGUILayout.EnumPopup("Anti Aliasing", videoCapture._antiAliasing);
             videoCapture._targetFramerate = (VideoCapture.TargetFramerateType)EditorGUILayout.EnumPopup("Target FrameRate", videoCapture._targetFramerate);
             videoCapture.isDedicated = EditorGUILayout.Toggle("Dedicated Camera", videoCapture.isDedicated);
+            if (GUI.changed)
+            {
+                EditorUtility.SetDirty(target);
+            }
         }
     }
 }

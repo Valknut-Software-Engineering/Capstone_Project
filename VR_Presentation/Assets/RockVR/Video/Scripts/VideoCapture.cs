@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using System.Runtime.InteropServices;
-using RockVR.Common;
 
 namespace RockVR.Video
 {
@@ -44,7 +43,7 @@ namespace RockVR.Video
         /// </summary>
         private float capturingTime;
         /// <summary>
-        /// Frame statistics.
+        /// Frame statistics info.
         /// </summary>
         private int capturedFrameCount;
         private int encodedFrameCount;
@@ -56,10 +55,6 @@ namespace RockVR.Video
         /// The original maximum delta time.
         /// </summary>
         private float originalMaximumDeltaTime;
-        /// <summary>
-        /// The original color space.
-        /// </summary>
-        private ColorSpace originalColorSpace;
         /// <summary>
         /// Frame data will be sent to frame encode queue.
         /// </summary>
@@ -121,14 +116,6 @@ namespace RockVR.Video
                                  " capture not finish yet!");
                 return;
             }
-            if (format == FormatType.PANORAMA && !isDedicated)
-            {
-                Debug.LogWarning(
-                    "[VideoCapture::StartCapture] Capture equirectangular " +
-                    "video require dedicated camera!"
-                );
-                return;
-            }
             if (mode == ModeType.LIVE_STREAMING)
             {
                 if (!StringUtils.IsRtmpAddress(streamingAddress))
@@ -139,6 +126,14 @@ namespace RockVR.Video
                     );
                     return;
                 }
+            }
+            if (format == FormatType.PANORAMA && !isDedicated)
+            {
+                Debug.LogWarning(
+                    "[VideoCapture::StartCapture] Capture equirectangular " +
+                    "video always require dedicated camera!"
+                );
+                isDedicated = true;
             }
             if (mode == ModeType.LOCAL)
             {
@@ -185,8 +180,6 @@ namespace RockVR.Video
             // EQUIRECTANGULAR: use frameCubemap(Cubemap) for intermediate cpu
             // saving.
             // CUBEMAP: use frameTexture(Texture2D) for intermediate cpu saving.
-            // TODO, panorama capture current always use dedicated camera,
-            // improve to use only one camera.
             else if (format == FormatType.PANORAMA)
             {
                 // Create render cubemap.
@@ -196,10 +189,13 @@ namespace RockVR.Video
                 captureCamera.fieldOfView = 90;
             }
             // Pixels stored in frameRenderTexture(RenderTexture) always read by frameTexture(Texture2D).
-            // NORMAL: camera render -> frameRenderTexture -> frameTexture -> frameQueue
-            // CUBEMAP: 6 cameras render -> 6 faceRenderTexture -> frameTexture -> frameQueue
-            // EQUIRECTANGULAR: 6 camera render -> 6 faceRenderTexture-> frameCubemap ->
-            //                  Cubemap2Equirect -> frameRenderTexture -> frameTexture -> frameQueue
+            // NORMAL:
+            // camera render -> frameRenderTexture -> frameTexture -> frameQueue
+            // CUBEMAP:
+            // 6 cameras render -> 6 faceRenderTexture -> frameTexture -> frameQueue
+            // EQUIRECTANGULAR:
+            // 6 camera render -> 6 faceRenderTexture-> frameCubemap -> Cubemap2Equirect -> 
+            // frameRenderTexture -> frameTexture -> frameQueue
             frameTexture = new Texture2D(frameWidth, frameHeight, TextureFormat.RGB24, false);
             frameTexture.hideFlags = HideFlags.HideAndDontSave;
             frameTexture.wrapMode = TextureWrapMode.Clamp;
@@ -345,7 +341,7 @@ namespace RockVR.Video
                 StopCapture();
             }
         }
-        #endregion
+        #endregion // Unity Lifecycle
 
         #region Video Capture Core
         /// <summary>
@@ -550,8 +546,6 @@ namespace RockVR.Video
             {
                 LibVideoCaptureAPI_Close(libAPI);
             }
-            // Update current status.
-            status = VideoCaptureCtrl.StatusType.FINISH;
             // Notify caller video capture complete.
             if (eventDelegate.OnComplete != null)
             {
@@ -562,8 +556,10 @@ namespace RockVR.Video
                 Debug.Log("[VideoCapture::FrameEncodeThreadFunction] Encode " +
                           "process finish!");
             }
+            // Update current status.
+            status = VideoCaptureCtrl.StatusType.FINISH;
         }
-        #endregion
+        #endregion // Video Capture Core
 
         #region Dll Import
         [DllImport("VideoCaptureLib")]
@@ -589,6 +585,87 @@ namespace RockVR.Video
 
         [DllImport("VideoCaptureLib")]
         static extern void LibVideoStreamingAPI_Clean(System.IntPtr api);
-        #endregion
+        #endregion // Dll Import
+    }
+
+    /// <summary>
+    /// <c>VideoMerger</c> is processed after temp video captured, with or without
+    /// temp audio captured. If audio captured, it will merge the video and audio
+    /// within same file.
+    /// </summary>
+    public class VideoMerger
+    {
+        /// <summary>
+        /// The merged video file path.
+        /// </summary>
+        public string path;
+        /// <summary>
+        /// The capture video instance.
+        /// </summary>
+        private VideoCapture videoCapture;
+        /// <summary>
+        /// The capture audio instance.
+        /// </summary>
+        private AudioCapture audioCapture;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:RockVR.Video.VideoMerger"/> class.
+        /// </summary>
+        /// <param name="videoCapture">Video capture.</param>
+        /// <param name="audioCapture">Audio capture.</param>
+        public VideoMerger(VideoCapture videoCapture, AudioCapture audioCapture)
+        {
+            this.videoCapture = videoCapture;
+            this.audioCapture = audioCapture;
+        }
+        /// <summary>
+        /// Video/Audio merge function impl.
+        /// Blocking function.
+        /// </summary>
+        public bool Merge()
+        {
+            path = PathConfig.saveFolder + StringUtils.GetMp4FileName(StringUtils.GetRandomString(5));
+            System.IntPtr libAPI = LibVideoMergeAPI_Get(
+                videoCapture.bitrate,
+                path,
+                videoCapture.path,
+                audioCapture.path,
+                PathConfig.ffmpegPath);
+            if (libAPI == System.IntPtr.Zero)
+            {
+                Debug.LogWarning("[VideoMerger::Merge] Get native LibVideoMergeAPI failed!");
+                return false;
+            }
+            LibVideoMergeAPI_Merge(libAPI);
+            // Make sure generated the merge file.
+            int waitCount = 0;
+            while (!File.Exists(path))
+            {
+                if (waitCount++ < 100)
+                    Thread.Sleep(500);
+                else
+                {
+                    Debug.LogWarning("[VideoMerger::Merge] Merge process failed!");
+                    LibVideoMergeAPI_Clean(libAPI);
+                    return false;
+                }
+            }
+            LibVideoMergeAPI_Clean(libAPI);
+            if (VideoCaptureCtrl.instance.debug)
+            {
+                Debug.Log("[VideoMerger::Merge] Merge process finish!");
+            }
+            return true;
+        }
+
+        #region Dll Import
+        [DllImport("VideoCaptureLib")]
+        static extern System.IntPtr LibVideoMergeAPI_Get(int rate, string path, string vpath, string apath, string ffpath);
+
+        [DllImport("VideoCaptureLib")]
+        static extern void LibVideoMergeAPI_Merge(System.IntPtr api);
+
+        [DllImport("VideoCaptureLib")]
+        static extern void LibVideoMergeAPI_Clean(System.IntPtr api);
+        #endregion // Dll Import
     }
 }

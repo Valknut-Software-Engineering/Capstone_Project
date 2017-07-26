@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class PickUpObject : MonoBehaviour
@@ -20,15 +21,17 @@ public class PickUpObject : MonoBehaviour
     void Start()
     {
         mainCam = GameObject.FindWithTag("MainCamera");
-        thecamera = GameObject.Find("recordCam");
+        thecamera = GameObject.Find("360Capture");
     }
 
     // Update is called once per frame
     void Update()
     {
-		
-		thecamera.transform.position = mainCam.transform.position;
-		
+        thecamera.transform.position = mainCam.transform.position;
+       
+      
+        //Check for Escape and change back to menu
+      
         //Spawn new object and place in hand
         if (Input.GetKeyDown(KeyCode.Keypad0))
         {
@@ -84,6 +87,7 @@ public class PickUpObject : MonoBehaviour
 		}
 		
 		//Rotate object as player rotates
+
 		obj.transform.parent = this.transform; // Make the object that collided with the player a child of the player
 		if(useRotationOffset) {
 			obj.transform.localRotation = Quaternion.Euler(Vector3.forward); // Not exactly sure what this does but if I leave it out it becomes random
@@ -147,6 +151,7 @@ public class PickUpObject : MonoBehaviour
         //RESET Rotation
         if (Input.GetKey(KeyCode.R))
         {
+            useRotationOffset = false;
             obj.transform.rotation = Quaternion.Euler(0, 0, 0);
             Rigidbody rb = obj.GetComponent<Rigidbody>();
             rb.angularVelocity = Vector3.zero;
@@ -168,19 +173,25 @@ public class PickUpObject : MonoBehaviour
                 //if the object the RayCast hit has the canPickup script:
                 if (isPickUpable != null)
                 {
+                  
                     GameObject sourceObj = isPickUpable.gameObject;
                     GameObject cloneObj;
-                    cloneObj = Instantiate(sourceObj, new Vector3(2 * 2.0F, 0, 0), Quaternion.identity);
-
+                  
+                    cloneObj = Instantiate(sourceObj, new Vector3(1F, 1F, 1F), Quaternion.identity);
+                    cloneObj.transform.localScale = sourceObj.transform.localScale*3;
                     isCarrying = true;
-                    if(cloneObj.gameObject.GetComponent<Rigidbody>() == null)
-						cloneObj.gameObject.AddComponent<Rigidbody>();
-					
-					//isPickUpable.gameObject.GetComponent<Rigidbody>().useGravity = false;
+                    if (cloneObj.gameObject.GetComponent<Rigidbody>() == null)
+                        cloneObj.gameObject.AddComponent<Rigidbody>();
+
+                    //isPickUpable.gameObject.GetComponent<Rigidbody>().useGravity = false;
                     cloneObj.gameObject.GetComponent<Rigidbody>().useGravity = false;
-					cloneObj.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-					
-					pickedUpObject.GetComponent<Rigidbody>().useGravity = true;
+                    cloneObj.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+
+                    pickedUpObject.GetComponent<Rigidbody>().useGravity = true;
+                    pickedUpObject.GetComponent<Rigidbody>().isKinematic = false;
+
+                    pickedUpObject.transform.parent = null;
+
                     pickedUpObject = cloneObj;
                 }
             }
@@ -281,7 +292,7 @@ public class PickUpObject : MonoBehaviour
         }
 		
 		//Delete object
-		if(Input.GetKeyDown(KeyCode.Delete)) {
+		if(Input.GetKey(KeyCode.Delete)) {
 			int x = Screen.width /2;
 			int y = Screen.height /2;
 			
@@ -297,6 +308,8 @@ public class PickUpObject : MonoBehaviour
 				}
 			}
 		}
+
+    
     }
 
    
