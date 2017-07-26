@@ -137,13 +137,14 @@
     <Compile Include="Assets\RockVR\Video\Demo\Scripts\AutoRotate.cs" />
     <Compile Include="Assets\RockVR\Video\Demo\Scripts\VideoCaptureUI.cs" />
     <Compile Include="Assets\RockVR\Video\Scripts\AudioCapture.cs" />
+    <Compile Include="Assets\RockVR\Video\Scripts\Base\VideoCaptureBase.cs" />
+    <Compile Include="Assets\RockVR\Video\Scripts\Base\VideoCaptureCtrlBase.cs" />
     <Compile Include="Assets\RockVR\Video\Scripts\Config.cs" />
     <Compile Include="Assets\RockVR\Video\Scripts\Screenshot.cs" />
-    <Compile Include="Assets\RockVR\Video\Scripts\Utils.cs" />
+    <Compile Include="Assets\RockVR\Video\Scripts\Utils\Utils.cs" />
     <Compile Include="Assets\RockVR\Video\Scripts\VideoCapture.cs" />
-    <Compile Include="Assets\RockVR\Video\Scripts\VideoCaptureBase.cs" />
     <Compile Include="Assets\RockVR\Video\Scripts\VideoCaptureCtrl.cs" />
-    <Compile Include="Assets\RockVR\Video\Scripts\VideoMerger.cs" />
+    <Compile Include="Assets\Scripts\EscapeMenu.cs" />
     <Compile Include="Assets\Scripts\PickUpObject.cs" />
     <Compile Include="Assets\Scripts\Pickupable.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\ChangeColor.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="Assets\Scripts\UI Scripts\PanelManager.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\QuitOnClick.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\SelectOnInput.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\ShowCursor.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\ShowSliderValue.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\TiltWindow.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples\Scripts\Benchmark01.cs" />
