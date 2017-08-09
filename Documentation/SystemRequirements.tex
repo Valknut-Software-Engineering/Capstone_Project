@@ -142,6 +142,181 @@ The Virtual Reality presentation software will have various requirements that wi
 
 		The software will need to be able to allow users to create their own content and upload it to a central server which can then be viewed and downloaded by any user who wishes to use the created content.
 		This will cover environmental scenes, 3D objects, presentation templates, skyboxes and other Unity based assets that are supported by the software.
+		
+		\subsection{Application Design}
+	\subsubsection{Use Cases}
+	
+	\begin{flushleft}
+	The following services are provided for the presentation creator.
+	
+	\begin{itemize}
+		\item Scene Selection:					
+	\end{itemize}
+	
+	
+	\begin{center}
+	\includegraphics[width=250px,height=150px]{SceneSelection.png}
+	\end{center}
+	
+	\textbf{Precondition:} The user has the "Office" and "Forest" scene in their asset project folder.
+	
+	\textbf{Postcondition:} The user is spawned within the selected environment.
+	
+	\newpage
+	
+	\begin{itemize}
+		\item Object Creation:					
+	\end{itemize}
+	
+	
+	\begin{center}
+	\includegraphics[width=250px,height=150px]{ObjectCreation.png}
+	\end{center}
+	
+	\textbf{Precondition:} The user is inside an environment.
+	
+	\textbf{Postcondition:} The selected object is spawned in front of them.
+	
+	\begin{itemize}
+		\item Object Cloning:					
+	\end{itemize}
+	
+	\begin{center}
+	\includegraphics[width=250px,height=150px]{ObjectCloning.png}
+	\end{center}
+	
+	\textbf{Precondition:} The user selectes the specific object to clone.
+	
+	\textbf{Postcondition:} A duplicate of the selected object is spawned.
+	
+	\begin{itemize}
+		\item Object Deletion:					
+	\end{itemize}
+	
+	\begin{center}
+	\includegraphics[width=250px,height=150px]{ObjectDeletion.png}
+	\end{center}
+	
+	\textbf{Precondition:} The user selects the specific object to delete.
+	
+	\textbf{Postcondition:} The object is removed from the environment.
+	
+	\newpage
+	
+	\begin{itemize}
+		\item Object Scaling:					
+	\end{itemize}
+	
+	\begin{center}
+	\includegraphics[width=250px,height=150px]{ObjectScaling.png}
+	\end{center}
+	
+	\textbf{Precondition:} The user selects the specific object to scale.
+	
+	\textbf{Postcondition:} The object is scaled up or down.
+	
+	\begin{itemize}
+		\item Object Interaction:					
+	\end{itemize}
+	
+	\begin{center}
+	\includegraphics[width=250px,height=150px]{ObjectInteraction.png}
+	\end{center}
+	
+	\textbf{Precondition:} The user selects the specific object.
+	
+	\textbf{Postcondition:} The object is picked up.
+	
+	\textbf{Postcondition:} The object is frozen in it's current position.
+	
+	\textbf{Postcondition:} The object is moved using the snap to grid movement.
+	
+	\begin{itemize}
+		\item Object Rotation:					
+	\end{itemize}
+	
+	\begin{center}
+	\includegraphics[width=250px,height=150px]{ObjectRotation.png}
+	\end{center}
+	
+	\textbf{Precondition:} The user selects the specific object.
+	
+	\textbf{Postcondition:} The object is rotated accordingly.
+	
+	\newpage
+	
+	\begin{itemize}
+		\item Audio Attachment:					
+	\end{itemize}
+	
+	\begin{center}
+	\includegraphics[width=250px,height=150px]{AudioAttachment.png}
+	\end{center}
+	
+	\textbf{Precondition:} The user selects the specific object to whom the user wishes to attach the audio clip to.
+	
+	\textbf{Postcondition:} The audio clip is attached to that specific object.
+	
+	\begin{itemize}
+		\item Image Attachment:					
+	\end{itemize}
+	
+	\begin{center}
+	\includegraphics[width=250px,height=150px]{ImageAttachment.png}
+	\end{center}
+	
+	\textbf{Precondition:} The user selects the specific object to whom the user wishes to attach the image to.
+	
+	\textbf{Postcondition:} The image is attached to that specific object.
+	
+	\begin{itemize}
+		\item Text Attachment:					
+	\end{itemize}
+	
+	\begin{center}
+	\includegraphics[width=250px,height=150px]{TextAttachment.png}
+	\end{center}
+	
+	\textbf{Precondition:} The user selects the specific object to whom the user wishes to attach the text to.
+	
+	\textbf{Postcondition:} The text is attached to that specific object.
+	
+	\begin{itemize}
+		\item Video Attachment:					
+	\end{itemize}
+	
+	\begin{center}
+	\includegraphics[width=250px,height=150px]{VideoAttachment.png}
+	\end{center}
+	
+	\textbf{Precondition:} The user selects the specific object to whom the user wishes to attach the text to.
+	
+	\textbf{Postcondition:} The text is attached to that specific object.
+	
+	\begin{itemize}
+		\item Skybox Customization:					
+	\end{itemize}
+	
+	\begin{center}
+	\includegraphics[width=250px,height=150px]{SkyboxCustomization.png}
+	\end{center}
+	
+	\textbf{Precondition:} The user is inside an environment with a skybox.
+	
+	\textbf{Postcondition:} The skybox texture is changed.
+	
+	\begin{itemize}
+		\item Video Recording:					
+	\end{itemize}
+	
+	\begin{center}
+	\includegraphics[width=250px,height=150px]{VideoExport.png}
+	\end{center}
+	
+	\textbf{Precondition:} The user is inside an environment.
+	
+	\textbf{Postcondition:} A 360 degree video is recorded and saved within the asset folder.
+	\end{flushleft}
 
 \subsection{Target Audience Characteristics}
 
