@@ -1,12 +1,37 @@
 
 \section{Test Reports}
 
+This project posed a few challenges with regards to a suitable testing environment. The best methodology that we found in order to properly test everything
+we were working on was to use the standard white box and black box approach, while maintaining Unity as the software that will house all of the testing. Usability
+testing is also another method that will be employed in the project as development progresses. Unit testing will be incorporated where possible.
+
 	\subsection{Internal: Testing With Team Members}
 
+	\subsubsection{White Box Testing}
+
+	When testing occurred with members the black box and white box methods were employed at this stage. Team members would first white box test their own work in the
+	Unity engine in order to determine if everything was running as expected. Considering that the majority of the projects code has some form of visual impact,
+	the team member testing their own work will first have to set an outcome that they would expect once their code has been implemented into the project. They would
+	then run the Unity engine and test whether their code behaves the way that they expected or intended. The code produced by each team member was uploaded to their
+	GitHub branch only if it was working in their environment.
+
+	\subsubsection{Black Box Testing}
+
+	Once the team member's code is uploaded, they would inform the rest of the team and at least one other member would perform a pull request from their branch. That
+	member will be told what the expected outcome is, thus they would test their code without knowing the inner workings of it. That individual will then run the Unity
+	engine on their local machine in order to test the code thoroughly. After all checks have been passed (does it work as intended, is the functionality indeed
+	correct and does the program behave as expected) they would approve the pull request to master.
+
 	\subsection{Usibility Testing}
-	
-	\subsection{Examples of Target Audiences}
-	
-		\subsubsection{Educational: Eg School Teachers}
-		
-		\subsubsection{Corporate: Eg Board Members at a Project Proposal }
+
+	Usability testing will involve gathering members with various backgrounds with regards to their computer knowledge. This will allow for a thoroughly test that both
+	advanced and simple features are adequately covered. The testing pool of users will range from roughly five to ten users. They will be asked to perform a set amount of
+	tasks and the time taken for each individual to complete their task will be recorded. They will also be allowed to ask questions if they get stuck. These questions will
+	also get recorded in order to help improve the software’s usability (with the individuals consent). After they have completed their task we will ask them for their
+	feedback and how they felt about the software experience overall. All of these results will be taken into consideration.
+
+	\subsection{Unit Testing}
+
+	Unit testing will be employed where possible, although this testing will be the least recurring one due to the nature of the project. It will be employed in code
+	where checks need to be, for example. where object checks need to occur (if the object is NULL or not); if the object has certain properties such as an audio
+	component attached to it; if images, audio, video, textures and materials are indeed detected and do fill up their corresponding data structures.
