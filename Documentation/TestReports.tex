@@ -1,4 +1,3 @@
-
 \section{Test Reports}
 
 This project posed a few challenges with regards to a suitable testing environment. The best methodology that we found in order to properly test everything
@@ -6,6 +5,8 @@ we were working on was to use the standard white box and black box approach, whi
 testing is also another method that will be employed in the project as development progresses. Unit testing will be incorporated where possible.
 
 	\subsection{Internal: Testing With Team Members}
+
+	The following describes the various methods employed in order to thoroughly test the virtual presentation software.
 
 	\subsubsection{White Box Testing}
 
@@ -35,3 +36,31 @@ testing is also another method that will be employed in the project as developme
 	Unit testing will be employed where possible, although this testing will be the least recurring one due to the nature of the project. It will be employed in code
 	where checks need to be, for example. where object checks need to occur (if the object is NULL or not); if the object has certain properties such as an audio
 	component attached to it; if images, audio, video, textures and materials are indeed detected and do fill up their corresponding data structures.
+
+	\subsection{Functionality Tested}
+
+	\begin{flushleft}
+		The list below specifies each feature that was tested up until the current development point.
+		\begin{enumerate}
+			\item Object manipulation: this entails all interaction that can occur with an object such as picking it up and moving to around. The issues encountered here
+			dealt with the way the object handled in the users hands. At first it rotated freely and it collided with other objects. These abnormalities were taken care of.
+			\item Object scaling: this code was implemented without any problem. The objects scaled correctly.
+			\item Object rotation: this code was implemented without any problem. The objects rotated correctly. The addition of axis resetting was added to make it easier
+			to return the object back to its original form.
+			\item Object creation: the objects had to be spawned from a central point on the map. The first problem encountered was that the objects would spawn into a stationary
+			point and remain there. Code was added to ensure that they were moved to the user's hands in their current position.
+			\item Object deletion: this code worked correctly on implementation
+		 	\item Image importing: this code was first implemented in a primitive form by being assigned to an object. This was then changed for versatile application by using the Unity
+			ray cast feature (line of sight) in order to apply the image to an object.
+			\item Audio importing: this code was first implemented in a primitive form by being assigned to an object. This was then changed for versatile application by using the Unity
+			ray cast feature (line of sight) in order to apply the audio to an object. This caused a problem at first as multiple audio components could be created and assigned to an
+			object, thus a check was made to ensure that only one would be created.
+			\item Video importing: this code was first implemented in a primitive form by being assigned to an object. This was then changed for versatile application by using the Unity
+			ray cast feature (line of sight) in order to apply the video and audio to an object. The same checks were made to the audio here as stated above. The video caused a few issues
+			as only the .ogv format could be used. Conversions had to be made first and then assigned as a texture to the object.
+			\item 360 video exporting: a Unity asset was taken to perform the recording for us however, it currently runs at a low framerate when recording takes place. The exported product
+			is of high quality and framerate. Tinkering with the default script may need to occur in order to optimise the recorder.
+			\item Skybox importing: the skyboxes needed to be placed into the resources folder first so that they could be loaded into the scene live. Once that was resolved they were working
+			properly.
+		\end{enumerate}
+	\end{flushleft}
