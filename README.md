@@ -26,4 +26,5 @@
 <ul>
   <li> A single download <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project/raw/master/Documentation/Main.pdf"> link </a> for all our documentation that contains the Application designs, Architectural designs, Testing and Reporting, User Manual, and Project Management </li>
   <li> Our <a href="https://valknut-software-eng.slack.com"> Slack </a> </li>
+  <li> Our <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project#boards?repos=90487979">Scrum Board</a>. Requires the <a href="https://www.zenhub.com">ZenHub</a> Chrome plugin to view.
 </ul>
