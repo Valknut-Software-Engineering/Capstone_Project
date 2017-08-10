@@ -20,4 +20,10 @@
 | Claude Greeff | greeff.claude@gmail.com | <a href="https://github.com/MasterJetson"><img src="https://tctechcrunch2011.files.wordpress.com/2012/02/coderdojo-octocat3.jpg" width="100" /></a> | Silent but deadly | 
 | Marin Peroski | mperoski@outlook.com | <a href="https://github.com/Mazzl3s"><img src="https://octodex.github.com/images/daftpunktocat-thomas.gif" width="100"/></a> | They call him the "tin man" | 
 | Johan du Plooy | sjohandup@gmail.com | <a href="https://github.com/sjohandup"><img src="https://octodex.github.com//images/jetpacktocat.png" width="100" /></a> | He might miss you but you can't miss him | 
-| Bernhard Shuld | bernhardschuld@gmail.com | <a href="https://github.com/BernhardSchuld"><img src="https://octodex.github.com/images/bear-cavalry.jpg" width="100" /></a> | A modern day viking | 
+| Bernhard Schuld | bernhardschuld@gmail.com | <a href="https://github.com/BernhardSchuld"><img src="https://octodex.github.com/images/bear-cavalry.jpg" width="100" /></a> | A modern day viking | 
+
+<h2 align="center"> Our Documentation and Links</h2>
+<ul>
+  <li> A single download <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project/raw/master/Documentation/Main.pdf"> link </a> for all our documentation that contains the Application designs, Architectural designs, Testing and Reporting, User Manual, and Project Management </li>
+  <li> Our <a href="https://valknut-software-eng.slack.com"> Slack </a> </li>
+</ul>
