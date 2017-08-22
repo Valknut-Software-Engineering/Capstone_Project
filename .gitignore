@@ -8,8 +8,12 @@ Documentation/*.toc
 Documentation/*.synctex.gz
 
 
-#Library Folder
-VR_Presentation/Library/
+### Unity ###
+VR_Presentation/[Ll]ibrary/
+VR_Presentation/[Tt]emp/
+VR_Presentation/[Oo]bj/
+VR_Presentation/[Bb]uild/
+VR_Presentation/[Bb]uilds/
 
 #Resources Folder
 VR_Presentation/Assets/Resources/Audio/
