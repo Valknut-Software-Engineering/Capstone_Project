@@ -388,7 +388,7 @@ public class PickUpObject : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 signal = 0;
-                applyImage(signal);              
+                applyImage(signal);
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
@@ -409,7 +409,7 @@ public class PickUpObject : MonoBehaviour
             {
                 signal = 4;
                 applyImage(signal);
-            }            
+            }
         }
         if (flagAudio)
         {
@@ -501,7 +501,7 @@ public class PickUpObject : MonoBehaviour
             }
         }
 
-        if(flagImages && Input.GetKeyDown(KeyCode.B))
+        if (flagImages && Input.GetKeyDown(KeyCode.B))
         {
             Debug.Log("TESTA!");
             disableContentAll();
@@ -554,24 +554,24 @@ public class PickUpObject : MonoBehaviour
             Ray myRay = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
             spawnCube();
         }
-		
-		//Toggle snap to grid
-		if(Input.GetKeyDown(KeyCode.G)) {
-			if(snapToGrid)
-				snapToGrid = false;
-			else
-				snapToGrid = true;
-		}
-		
-		//Toggle player rotation offset
-		if(Input.GetKeyDown(KeyCode.Q))
-		{
-			if(useRotationOffset)
-				useRotationOffset = false;
-			else
-				useRotationOffset = true;
-		}
-		
+
+        //Toggle snap to grid
+        if (Input.GetKeyDown(KeyCode.G)) {
+            if (snapToGrid)
+                snapToGrid = false;
+            else
+                snapToGrid = true;
+        }
+
+        //Toggle player rotation offset
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (useRotationOffset)
+                useRotationOffset = false;
+            else
+                useRotationOffset = true;
+        }
+
         if (isCarrying)
         {
             carry(pickedUpObject);
@@ -586,7 +586,7 @@ public class PickUpObject : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha4) && !flagImages && !flagVideo && !flagSkybox && !flagAudio)
         {
             if (flagSkybox)
-            {                
+            {
                 disableContentAll();
                 findAll();
                 flagSkybox = false;
@@ -601,20 +601,20 @@ public class PickUpObject : MonoBehaviour
                 flagVideo = true;
             }
 
-            
+
         }
 
         // Check for keybind click in order to add image to objecT as a texture 
         if (Input.GetKeyDown(KeyCode.Alpha1) && !flagImages && !flagVideo && !flagSkybox && !flagAudio)
-        {           
-                Debug.Log("TESTB!");
-                disableContentAll();
-                findAll();
-                flagMain = false;
-                contentImages.SetActive(true);
-                flagImages = true; 
+        {
+            Debug.Log("TESTB!");
+            disableContentAll();
+            findAll();
+            flagMain = false;
+            contentImages.SetActive(true);
+            flagImages = true;
         }
-         
+
 
         // Check for keybind click in order to play audio  
         if (Input.GetKeyDown(KeyCode.Alpha2) && !flagImages && !flagVideo && !flagSkybox && !flagAudio)
@@ -637,10 +637,58 @@ public class PickUpObject : MonoBehaviour
             flagMain = false;
             contentVideos.SetActive(true);
             flagVideo = true;
-
-           
         }
-    }    
+
+        // Check for keybind click in order to add pickup script 
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            add_Pickupable_Script();
+        }
+    }
+
+    // Apply script function 
+    void add_Pickupable_Script()
+    {
+        int x = Screen.width / 2;
+        int y = Screen.height / 2;
+
+        Ray myRay = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
+        RaycastHit hit;
+
+        if (Physics.Raycast(myRay, out hit))
+        {
+            Pickupable isPickUpable = hit.collider.GetComponent<Pickupable>();
+            GameObject gameObj = hit.collider.gameObject;
+
+            if (gameObject.GetComponent<TerrainCollider>() == null)
+            {
+                gameObj.AddComponent<Pickupable>();
+
+                if (gameObj.GetComponent<Rigidbody>() == null)
+                {
+                    gameObj.AddComponent<Rigidbody>();
+                }
+
+                if (gameObj.GetComponent<BoxCollider>() == null)
+                {
+                    gameObj.AddComponent<BoxCollider>();
+                }
+
+                if (gameObj.GetComponent<MeshCollider>() == null)
+                {
+                    gameObj.AddComponent<MeshCollider>();
+                }
+                
+                //if the object the RayCast hit has the canPickup script:
+                if (isPickUpable != null)
+                {
+                    Destroy(isPickUpable.gameObject.GetComponent<Pickupable>());
+                    Destroy(gameObj.GetComponent<Rigidbody>());
+                    Destroy(gameObj.GetComponent<BoxCollider>());
+                }
+            }
+        }
+    }
 
     void carry(GameObject obj)
     {
