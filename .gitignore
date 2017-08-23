@@ -14,6 +14,8 @@ VR_Presentation/[Tt]emp/
 VR_Presentation/[Oo]bj/
 VR_Presentation/[Bb]uild/
 VR_Presentation/[Bb]uilds/
+VR_Presentation/VR_Presentation_Toolkit_Data/
+
 
 ### csproj files ###
 VR_Presentation/*.csproj
