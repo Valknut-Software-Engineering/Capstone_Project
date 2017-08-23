@@ -38,6 +38,8 @@ public class PickUpObject : MonoBehaviour
     public float distance;
     public float smooth;
 
+    public string currentDir = Directory.GetCurrentDirectory();
+
     //Array for the skybox materials  
     public List<Material> skyboxes;
     //String array of all of the skybox materials
@@ -106,7 +108,7 @@ public class PickUpObject : MonoBehaviour
     IEnumerator load_Skybox()
     {
         //Get the path of the skybox materials
-        path_Skybox_Materials = Directory.GetFiles("C:\\Users\\Claude\\Documents\\Valknut_Software_Engineering\\Github\\Capstone_Project\\VR_Presentation\\Assets\\Resources", "*.mat");
+        path_Skybox_Materials = Directory.GetFiles(currentDir + "\\Assets\\Resources", "*.mat");
 
         //Assign the size variable
         size_Sky = path_Skybox_Materials.Length;
@@ -132,7 +134,7 @@ public class PickUpObject : MonoBehaviour
     {
         
         //Get the path of the image files
-        path_Image_Files = Directory.GetFiles("C:\\Users\\Claude\\Documents\\Valknut_Software_Engineering\\Github\\Capstone_Project\\VR_Presentation\\Assets\\Resources\\Images", "*.jpg");
+        path_Image_Files = Directory.GetFiles(currentDir + "\\Assets\\Resources\\Images", "*.jpg");
 
         //Assign the size variable
         size_Imgs = path_Image_Files.Length;
@@ -159,7 +161,7 @@ public class PickUpObject : MonoBehaviour
     IEnumerator load_Audio()
     {
         //Get the path of the audio files
-        path_Audio_Files = Directory.GetFiles("C:\\Users\\Claude\\Documents\\Valknut_Software_Engineering\\Github\\Capstone_Project\\VR_Presentation\\Assets\\Resources\\Audio", "*.ogg");
+        path_Audio_Files = Directory.GetFiles(currentDir + "\\Assets\\Resources\\Audio", "*.ogg");
 
         //Loop through each of the file paths inside if the directory 
         for (int i = 0; i < path_Audio_Files.Length; i++)
@@ -183,10 +185,10 @@ public class PickUpObject : MonoBehaviour
     IEnumerator load_Videos()
     {
         //Get the path of the video files
-        path_Video_Files = Directory.GetFiles("C:\\Users\\Claude\\Documents\\Valknut_Software_Engineering\\Github\\Capstone_Project\\VR_Presentation\\Assets\\Resources\\Videos", "*.ogv");
+        path_Video_Files = Directory.GetFiles(currentDir + "\\Assets\\Resources\\Videos", "*.ogv");
 
         //Get the path of the audio files for the video
-        path_Audio_Vid_Files = Directory.GetFiles("C:\\Users\\Claude\\Documents\\Valknut_Software_Engineering\\Github\\Capstone_Project\\VR_Presentation\\Assets\\Resources\\Videos", "*.ogg");
+        path_Audio_Vid_Files = Directory.GetFiles(currentDir + "\\Assets\\Resources\\Videos", "*.ogg");
 
         //Loop through each of the file paths inside if the directory 
         for (int i = 0; i < path_Video_Files.Length; i++)
