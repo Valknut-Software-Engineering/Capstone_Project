@@ -477,27 +477,42 @@ public class PickUpObject : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 signal = 0;
-                applyAudio(signal);
+                applySkybox(signal);
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 signal = 1;
-                applyAudio(signal);
+                applySkybox(signal);
             }
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 signal = 2;
-                applyAudio(signal);
+                applySkybox(signal);
             }
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
                 signal = 3;
-                applyAudio(signal);
+                applySkybox(signal);
             }
             if (Input.GetKeyDown(KeyCode.Alpha5))
             {
                 signal = 4;
-                applyAudio(signal);
+                applySkybox(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                signal = 5;
+                applySkybox(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                signal = 6;
+                applySkybox(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                signal = 7;
+                applySkybox(signal);
             }
         }
 
@@ -598,7 +613,7 @@ public class PickUpObject : MonoBehaviour
                 findAll();
                 flagMain = false;
                 contentSkybox.SetActive(true);
-                flagVideo = true;
+                flagSkybox = true;
             }
 
 
