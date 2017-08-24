@@ -18,6 +18,5 @@ public class Buttons : MonoBehaviour {
     public void Button_Click()
     {
         ScrollView.ButtonClicked(Name);
-
     }
 }
