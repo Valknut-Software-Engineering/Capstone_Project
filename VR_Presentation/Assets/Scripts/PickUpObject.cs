@@ -16,9 +16,9 @@ public static class Globals
 public class PickUpObject : MonoBehaviour
 {
     public GameObject thecamera;
-    public GameObject SteamVRCamera;
+    public GameObject SteamVRCam;
     public GameObject mainCam;
-    public GameObject pickedUpObject, fpscontroller;
+    public GameObject pickedUpObject;
 
     public GameObject contentImages;
     public GameObject contentAudio;
@@ -29,13 +29,13 @@ public class PickUpObject : MonoBehaviour
     public bool flagImages = false;
     public bool flagAudio = false;
     public bool flagVideo = false;
-    public bool flagSkybox= false;
+    public bool flagSkybox = false;
     public bool flagMain = false;
 
     public bool isCarrying = false;
-	public bool snapToGrid = false;
-	public bool useRotationOffset = false;
-	
+    public bool snapToGrid = false;
+    public bool useRotationOffset = false;
+
     public float distance;
     public float smooth;
 
@@ -83,18 +83,16 @@ public class PickUpObject : MonoBehaviour
         Globals.skyBoxCount = 0;
 
         mainCam = GameObject.FindWithTag("MainCamera");
-        fpscontroller = GameObject.Find("FPSController");
         thecamera = GameObject.Find("360Capture");
-        SteamVRCamera = GameObject.Find("VRCam");
-
+        SteamVRCam = GameObject.Find("VRCam");
         flagImages = false;
         flagAudio = false;
         flagVideo = false;
         flagSkybox = false;
-        
+
 
         //Call load image function 
-        StartCoroutine(load_Images());        
+        StartCoroutine(load_Images());
 
         //Call load audio function 
         StartCoroutine(load_Audio());
@@ -103,9 +101,9 @@ public class PickUpObject : MonoBehaviour
         StartCoroutine(load_Videos());
 
         StartCoroutine(load_Skybox());
-       
+
         contentMain = GameObject.Find("Canvas").transform.Find("ContentMain").gameObject;
-         
+
     }
 
     IEnumerator load_Skybox()
@@ -131,11 +129,11 @@ public class PickUpObject : MonoBehaviour
         Globals.skyBoxCount = skyboxes.Count;
         yield return 0;
     }
-     
-        //Load videos from folder function
+
+    //Load videos from folder function
     IEnumerator load_Images()
     {
-        
+
         //Get the path of the image files
         path_Image_Files = Directory.GetFiles(currentDir + "\\Assets\\Resources\\Images", "*.jpg");
 
@@ -156,8 +154,8 @@ public class PickUpObject : MonoBehaviour
 
             //Add files to array of images
             image_Files.Add(images_On_Disk.texture);
-        }       
-        Globals.imageCount = image_Files.Count;        
+        }
+        Globals.imageCount = image_Files.Count;
     }
 
     //Load audio off files from folder
@@ -230,7 +228,7 @@ public class PickUpObject : MonoBehaviour
         contentAudio = GameObject.Find("Canvas").transform.Find("ContentAudio").gameObject;
         contentVideos = GameObject.Find("Canvas").transform.Find("ContentVideos").gameObject;
         contentSkybox = GameObject.Find("Canvas").transform.Find("ContentSkybox").gameObject;
-        contentMain= GameObject.Find("Canvas").transform.Find("ContentMain").gameObject;
+        contentMain = GameObject.Find("Canvas").transform.Find("ContentMain").gameObject;
     }
 
     void disableContentAll()
@@ -242,11 +240,11 @@ public class PickUpObject : MonoBehaviour
         contentVideos.SetActive(false);
         contentSkybox.SetActive(false);
         contentMain.SetActive(false);
-    }    
-    
+    }
+
     void applyImage(int signal)
     {
-        if(signal >= Globals.imageCount)
+        if (signal >= Globals.imageCount)
         {
             signal = 0;
         }
@@ -269,13 +267,13 @@ public class PickUpObject : MonoBehaviour
             object_Source = hit_Image.transform.gameObject.GetComponent<Renderer>();
             //Assign the image to the object as a material 
             object_Source.material.mainTexture = image_Files[signal];
-                        
+
             //Reset counter if it is over the arrays size 
             if (counter_Imgs >= size_Imgs)
             {
                 counter_Imgs = 0;
             }
-        }        
+        }
     }
 
     void applyAudio(int signal)
@@ -289,7 +287,7 @@ public class PickUpObject : MonoBehaviour
         int x = Screen.width / 2;
         int y = Screen.height / 2;
 
-        //Get the line-of-sight for the object
+        //Get the line of sight for the object
         Ray myRay_Audio = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
         RaycastHit hit_Audio;
 
@@ -376,16 +374,15 @@ public class PickUpObject : MonoBehaviour
             signal = 0;
         }
 
-        RenderSettings.skybox = skyboxes[signal];        
+        RenderSettings.skybox = skyboxes[signal];
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        thecamera.transform.position = fpscontroller.transform.position;
-        SteamVRCamera.transform.position = fpscontroller.transform.position;
-
+        thecamera.transform.position = mainCam.transform.position;
+        SteamVRCam.transform.position = mainCam.transform.position;
         if (flagImages)
         {
             int signal = 0;
@@ -481,27 +478,42 @@ public class PickUpObject : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 signal = 0;
-                applyAudio(signal);
+                applySkybox(signal);
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 signal = 1;
-                applyAudio(signal);
+                applySkybox(signal);
             }
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 signal = 2;
-                applyAudio(signal);
+                applySkybox(signal);
             }
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
                 signal = 3;
-                applyAudio(signal);
+                applySkybox(signal);
             }
             if (Input.GetKeyDown(KeyCode.Alpha5))
             {
                 signal = 4;
-                applyAudio(signal);
+                applySkybox(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                signal = 5;
+                applySkybox(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                signal = 6;
+                applySkybox(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                signal = 7;
+                applySkybox(signal);
             }
         }
 
@@ -560,7 +572,8 @@ public class PickUpObject : MonoBehaviour
         }
 
         //Toggle snap to grid
-        if (Input.GetKeyDown(KeyCode.G)) {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
             if (snapToGrid)
                 snapToGrid = false;
             else
@@ -602,7 +615,7 @@ public class PickUpObject : MonoBehaviour
                 findAll();
                 flagMain = false;
                 contentSkybox.SetActive(true);
-                flagVideo = true;
+                flagSkybox = true;
             }
 
 
@@ -682,7 +695,7 @@ public class PickUpObject : MonoBehaviour
                 {
                     gameObj.AddComponent<MeshCollider>();
                 }
-                
+
                 //if the object the RayCast hit has the canPickup script:
                 if (isPickUpable != null)
                 {
@@ -696,24 +709,26 @@ public class PickUpObject : MonoBehaviour
 
     void carry(GameObject obj)
     {
-        if(!snapToGrid) {
-			obj.transform.position = Vector3.Lerp(obj.transform.position, mainCam.transform.position + mainCam.transform.forward * distance, Time.deltaTime * smooth);
-		}
-		else //snap object to grid when moving
-		{
-			Vector3 curPosInGrid = mainCam.transform.position + mainCam.transform.forward * distance;
-			Vector3 newPosInGrid = new Vector3(Mathf.Round(curPosInGrid.x), Mathf.Round(curPosInGrid.y), Mathf.Round(curPosInGrid.z));
-			
-			//obj.transform.position = Vector3.Lerp(obj.transform.position, newPosInGrid, Time.deltaTime * smooth);
-			obj.transform.position = newPosInGrid;
-		}
-		
-		//Rotate object as player rotates
-		obj.transform.parent = this.transform; // Make the object that collided with the player a child of the player
-		if(useRotationOffset) {
-			obj.transform.localRotation = Quaternion.Euler(Vector3.forward); // Not exactly sure what this does but if I leave it out it becomes random
-			obj.transform.localRotation = Quaternion.Euler(90,0,90); // offset the rotation to stay in relation to player
-		}
+        if (!snapToGrid)
+        {
+            obj.transform.position = Vector3.Lerp(obj.transform.position, mainCam.transform.position + mainCam.transform.forward * distance, Time.deltaTime * smooth);
+        }
+        else //snap object to grid when moving
+        {
+            Vector3 curPosInGrid = mainCam.transform.position + mainCam.transform.forward * distance;
+            Vector3 newPosInGrid = new Vector3(Mathf.Round(curPosInGrid.x), Mathf.Round(curPosInGrid.y), Mathf.Round(curPosInGrid.z));
+
+            //obj.transform.position = Vector3.Lerp(obj.transform.position, newPosInGrid, Time.deltaTime * smooth);
+            obj.transform.position = newPosInGrid;
+        }
+
+        //Rotate object as player rotates
+        obj.transform.parent = this.transform; // Make the object that collided with the player a child of the player
+        if (useRotationOffset)
+        {
+            obj.transform.localRotation = Quaternion.Euler(Vector3.forward); // Not exactly sure what this does but if I leave it out it becomes random
+            obj.transform.localRotation = Quaternion.Euler(90, 0, 90); // offset the rotation to stay in relation to player
+        }
 
         //ALL AXIS MAKE LARGER
         if (Input.GetKey(KeyCode.KeypadPlus))
@@ -792,12 +807,12 @@ public class PickUpObject : MonoBehaviour
                 //if the object the RayCast hit has the canPickup script:
                 if (isPickUpable != null)
                 {
-                  
+
                     GameObject sourceObj = isPickUpable.gameObject;
                     GameObject cloneObj;
-                  
+
                     cloneObj = Instantiate(sourceObj, new Vector3(1F, 1F, 1F), Quaternion.identity);
-                    cloneObj.transform.localScale = sourceObj.transform.localScale*3;
+                    cloneObj.transform.localScale = sourceObj.transform.localScale * 3;
                     isCarrying = true;
                     if (cloneObj.gameObject.GetComponent<Rigidbody>() == null)
                         cloneObj.gameObject.AddComponent<Rigidbody>();
@@ -824,59 +839,59 @@ public class PickUpObject : MonoBehaviour
 
         cube.AddComponent<Rigidbody>(); // Add the rigidbody.
         cube.AddComponent<Pickupable>(); // Add the canPickup script.
-		
+
         if (pickedUpObject) { dropObject(); }
-        
+
         isCarrying = true;
         cube.GetComponent<Rigidbody>().useGravity = false;
         cube.GetComponent<Rigidbody>().isKinematic = true;
-		pickedUpObject = cube;
+        pickedUpObject = cube;
     }
 
     //// Spawn other primitive objects \\\\
     void spawnSphere()
     {
-		GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        
-		sphere.AddComponent<Rigidbody>(); // Add the rigidbody.
+        GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+
+        sphere.AddComponent<Rigidbody>(); // Add the rigidbody.
         sphere.AddComponent<Pickupable>(); // Add the canPickup script.
-		
+
         if (pickedUpObject) { dropObject(); }
-        
+
         isCarrying = true;
         sphere.GetComponent<Rigidbody>().useGravity = false;
         sphere.GetComponent<Rigidbody>().isKinematic = true;
-		pickedUpObject = sphere;
+        pickedUpObject = sphere;
     }
 
     void spawnCapsule()
     {
-		GameObject capsule = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-        
-		capsule.AddComponent<Rigidbody>(); // Add the rigidbody.
+        GameObject capsule = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+
+        capsule.AddComponent<Rigidbody>(); // Add the rigidbody.
         capsule.AddComponent<Pickupable>(); // Add the canPickup script.
-		
+
         if (pickedUpObject) { dropObject(); }
-        
-		isCarrying = true;
+
+        isCarrying = true;
         capsule.GetComponent<Rigidbody>().useGravity = false;
-		capsule.GetComponent<Rigidbody>().isKinematic = true;
+        capsule.GetComponent<Rigidbody>().isKinematic = true;
         pickedUpObject = capsule;
     }
 
     void spawnCylinder()
     {
-		GameObject cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        
-		cylinder.AddComponent<Rigidbody>(); // Add the rigidbody.
+        GameObject cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+
+        cylinder.AddComponent<Rigidbody>(); // Add the rigidbody.
         cylinder.AddComponent<Pickupable>(); // Add the canPickup script.
 
         if (pickedUpObject) { dropObject(); }
-        
-		isCarrying = true;
+
+        isCarrying = true;
         cylinder.GetComponent<Rigidbody>().useGravity = false;
         cylinder.GetComponent<Rigidbody>().isKinematic = true;
-		pickedUpObject = cylinder;
+        pickedUpObject = cylinder;
     }
 
     void interact()
@@ -891,67 +906,74 @@ public class PickUpObject : MonoBehaviour
 
             if (Physics.Raycast(myRay, out hit))
             {
-               Pickupable isPickUpable = hit.collider.GetComponent<Pickupable>();
+                Pickupable isPickUpable = hit.collider.GetComponent<Pickupable>();
 
                 //if the object the RayCast hit has the canPickup script:
                 if (isPickUpable != null)
                 {
                     isCarrying = true;
-					if(isPickUpable.gameObject.GetComponent<Rigidbody>() == null)
-						isPickUpable.gameObject.AddComponent<Rigidbody>();
-					
-					isPickUpable.gameObject.GetComponent<Rigidbody>().useGravity = false;
-					isPickUpable.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-					pickedUpObject = isPickUpable.gameObject;
+                    if (isPickUpable.gameObject.GetComponent<Rigidbody>() == null)
+                        isPickUpable.gameObject.AddComponent<Rigidbody>();
+
+                    isPickUpable.gameObject.GetComponent<Rigidbody>().useGravity = false;
+                    isPickUpable.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                    pickedUpObject = isPickUpable.gameObject;
                 }
             }
         }
-		
-		//Delete object
-		if(Input.GetKey(KeyCode.Delete)) {
-			int x = Screen.width /2;
-			int y = Screen.height /2;
-			
-			Ray myRay = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
-			RaycastHit hit;
-			
-			if(Physics.Raycast(myRay, out hit)) {
-				Pickupable isPickUpable = hit.collider.GetComponent<Pickupable>();
-				
-				//if the object the RayCast hit has the canPickup script:
-				if(isPickUpable != null) {
-					Destroy(isPickUpable.gameObject);
-				}
-			}
-		}
 
-    
+        //Delete object
+        if (Input.GetKey(KeyCode.Delete))
+        {
+            int x = Screen.width / 2;
+            int y = Screen.height / 2;
+
+            Ray myRay = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
+            RaycastHit hit;
+
+            if (Physics.Raycast(myRay, out hit))
+            {
+                Pickupable isPickUpable = hit.collider.GetComponent<Pickupable>();
+
+                //if the object the RayCast hit has the canPickup script:
+                if (isPickUpable != null)
+                {
+                    Destroy(isPickUpable.gameObject);
+                }
+            }
+        }
+
+
     }
 
     void checkDrop()
     {
-        if (Input.GetKeyDown(KeyCode.E)) {
-			dropObject();
-		}
-		if (Input.GetKeyDown(KeyCode.F)) {
-			floatObject();
-		}
-		
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            dropObject();
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            floatObject();
+        }
+
     }
 
     //Drop the object being held by the user
-	void dropObject() {
-		isCarrying = false;
-		pickedUpObject.transform.parent = null;
-		pickedUpObject.gameObject.GetComponent<Rigidbody>().useGravity = true;
-		pickedUpObject.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-		pickedUpObject = null;
-	}
-	void floatObject() {
-		isCarrying = false;
-		pickedUpObject.transform.parent = null;
-		
-		Destroy(pickedUpObject.gameObject.GetComponent<Rigidbody>());
-		pickedUpObject = null;
-	}
+    void dropObject()
+    {
+        isCarrying = false;
+        pickedUpObject.transform.parent = null;
+        pickedUpObject.gameObject.GetComponent<Rigidbody>().useGravity = true;
+        pickedUpObject.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        pickedUpObject = null;
+    }
+    void floatObject()
+    {
+        isCarrying = false;
+        pickedUpObject.transform.parent = null;
+
+        Destroy(pickedUpObject.gameObject.GetComponent<Rigidbody>());
+        pickedUpObject = null;
+    }
 }
