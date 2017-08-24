@@ -16,8 +16,9 @@ public static class Globals
 public class PickUpObject : MonoBehaviour
 {
     public GameObject thecamera;
+    public GameObject SteamVRCamera;
     public GameObject mainCam;
-    public GameObject pickedUpObject;
+    public GameObject pickedUpObject, fpscontroller;
 
     public GameObject contentImages;
     public GameObject contentAudio;
@@ -82,7 +83,9 @@ public class PickUpObject : MonoBehaviour
         Globals.skyBoxCount = 0;
 
         mainCam = GameObject.FindWithTag("MainCamera");
-        thecamera = GameObject.Find("360Capture"); 
+        fpscontroller = GameObject.Find("FPSController");
+        thecamera = GameObject.Find("360Capture");
+        SteamVRCamera = GameObject.Find("VRCam");
 
         flagImages = false;
         flagAudio = false;
@@ -286,7 +289,7 @@ public class PickUpObject : MonoBehaviour
         int x = Screen.width / 2;
         int y = Screen.height / 2;
 
-        //Get the line of sight for the object
+        //Get the line-of-sight for the object
         Ray myRay_Audio = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
         RaycastHit hit_Audio;
 
@@ -380,7 +383,8 @@ public class PickUpObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        thecamera.transform.position = mainCam.transform.position;
+        thecamera.transform.position = fpscontroller.transform.position;
+        SteamVRCamera.transform.position = fpscontroller.transform.position;
 
         if (flagImages)
         {
