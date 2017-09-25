@@ -23,6 +23,7 @@ public class Tutorial_ScrollView : MonoBehaviour
         NameListMain.Add("Add Audio");
         NameListMain.Add("Add Video");
         NameListMain.Add("Add Skybox");
+        NameListMain.Add("Add Object");
 
         foreach (string str in NameListMain)
         {
