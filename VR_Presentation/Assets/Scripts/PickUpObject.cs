@@ -119,7 +119,7 @@ public class PickUpObject : MonoBehaviour
     {
         //Get the path of the skybox materials
         path_Skybox_Materials = Directory.GetFiles(currentDir + "\\Assets\\Resources", "*.mat");
-
+        //Debug.Log(path_Skybox_Materials.ToString());
         //Assign the size variable
         size_Sky = path_Skybox_Materials.Length;
 
