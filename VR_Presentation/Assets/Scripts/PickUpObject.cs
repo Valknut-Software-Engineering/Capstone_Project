@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 //Make objects visible in inspector 
 [System.Serializable]
@@ -11,6 +12,7 @@ public static class Globals
     public static int audioCount;
     public static int videoCount;
     public static int skyBoxCount;
+    public static int objectCount;
 }
 
 public class PickUpObject : MonoBehaviour
@@ -23,12 +25,19 @@ public class PickUpObject : MonoBehaviour
     public GameObject contentAudio;
     public GameObject contentVideos;
     public GameObject contentSkybox;
+    public GameObject contentObjects;
     public GameObject contentMain;
+
+    public Button btnCube;
+    public Button btnSphere;
+    public Button btnCapsule;
+    public Button btnCylinder;
 
     public bool flagImages = false;
     public bool flagAudio = false;
     public bool flagVideo = false;
     public bool flagSkybox= false;
+    public bool flagObjects = false;
     public bool flagMain = false;
 
     public bool isCarrying = false;
@@ -80,6 +89,7 @@ public class PickUpObject : MonoBehaviour
         Globals.audioCount = 0;
         Globals.videoCount = 0;
         Globals.skyBoxCount = 0;
+        Globals.objectCount = 4;
 
         mainCam = GameObject.FindWithTag("MainCamera");
         thecamera = GameObject.Find("360Capture"); 
@@ -88,8 +98,8 @@ public class PickUpObject : MonoBehaviour
         flagAudio = false;
         flagVideo = false;
         flagSkybox = false;
-        
 
+        
         //Call load image function 
         StartCoroutine(load_Images());        
 
@@ -227,7 +237,8 @@ public class PickUpObject : MonoBehaviour
         contentAudio = GameObject.Find("Canvas").transform.Find("ContentAudio").gameObject;
         contentVideos = GameObject.Find("Canvas").transform.Find("ContentVideos").gameObject;
         contentSkybox = GameObject.Find("Canvas").transform.Find("ContentSkybox").gameObject;
-        contentMain= GameObject.Find("Canvas").transform.Find("ContentMain").gameObject;
+        contentObjects = GameObject.Find("Canvas").transform.Find("ContentSpawnObjects").gameObject;
+        contentMain = GameObject.Find("Canvas").transform.Find("ContentMain").gameObject;
     }
 
     void disableContentAll()
@@ -238,6 +249,7 @@ public class PickUpObject : MonoBehaviour
         contentAudio.SetActive(false);
         contentVideos.SetActive(false);
         contentSkybox.SetActive(false);
+        contentObjects.SetActive(false);
         contentMain.SetActive(false);
     }    
     
@@ -515,6 +527,25 @@ public class PickUpObject : MonoBehaviour
                 applySkybox(signal);
             }
         }
+        if (flagObjects)
+        {            
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {               
+                spawnCube();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {               
+                spawnSphere();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {                
+                spawnCapsule();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {                
+                spawnCylinder();
+            } 
+        }
 
         if (flagImages && Input.GetKeyDown(KeyCode.B))
         {
@@ -560,14 +591,58 @@ public class PickUpObject : MonoBehaviour
             contentMain.SetActive(true);
         }
 
+        if (flagObjects && Input.GetKeyDown(KeyCode.B))
+        {
+            Debug.Log("TESTA!");
+            disableContentAll();
+            findAll();
+            flagMain = true;
+            contentObjects.SetActive(false);
+            flagObjects = false;
+            contentMain.SetActive(true);
+        }
+
         //Spawn new object and place in hand
         if (Input.GetKeyDown(KeyCode.Keypad0))
         {
+            btnCube = GameObject.Find("CubeBtn").GetComponent<Button>();
+            btnCube.image.color = Color.red;
             int x = Screen.width / 2;
             int y = Screen.height / 2;
 
             Ray myRay = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
             spawnCube();
+
+            btnCube.image.color = Color.black;
+        }
+
+        //Spawn new object and place in hand
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            int x = Screen.width / 2;
+            int y = Screen.height / 2;
+
+            Ray myRay = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
+            spawnSphere();
+        }
+        //Spawn new object and place in hand
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            int x = Screen.width / 2;
+            int y = Screen.height / 2;
+
+            Ray myRay = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
+            spawnCapsule();
+        }
+
+        //Spawn new object and place in hand
+        if (Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            int x = Screen.width / 2;
+            int y = Screen.height / 2;
+
+            Ray myRay = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
+            spawnCylinder();
         }
 
         //Toggle snap to grid
@@ -598,7 +673,7 @@ public class PickUpObject : MonoBehaviour
         }
 
         // Check for skybox keybing to change it 
-        if (Input.GetKeyDown(KeyCode.Alpha4) && !flagImages && !flagVideo && !flagSkybox && !flagAudio)
+        if (Input.GetKeyDown(KeyCode.Alpha4) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects)
         {
             if (flagSkybox)
             {
@@ -620,7 +695,7 @@ public class PickUpObject : MonoBehaviour
         }
 
         // Check for keybind click in order to add image to objecT as a texture 
-        if (Input.GetKeyDown(KeyCode.Alpha1) && !flagImages && !flagVideo && !flagSkybox && !flagAudio)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects)
         {
             Debug.Log("TESTB!");
             disableContentAll();
@@ -632,7 +707,7 @@ public class PickUpObject : MonoBehaviour
 
 
         // Check for keybind click in order to play audio  
-        if (Input.GetKeyDown(KeyCode.Alpha2) && !flagImages && !flagVideo && !flagSkybox && !flagAudio)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects)
         {
             Debug.Log("TESTB!");
             disableContentAll();
@@ -643,15 +718,25 @@ public class PickUpObject : MonoBehaviour
         }
 
         // Check for keybind click in order to add movie texture 
-        if (Input.GetKeyDown(KeyCode.Alpha3) && !flagImages && !flagVideo && !flagSkybox && !flagAudio)
+        if (Input.GetKeyDown(KeyCode.Alpha3) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects)
         {
-
             Debug.Log("TESTB!");
             disableContentAll();
             findAll();
             flagMain = false;
             contentVideos.SetActive(true);
             flagVideo = true;
+        }
+
+        // Check for keybind click in order to add movie texture 
+        if (Input.GetKeyDown(KeyCode.Alpha5) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects)
+        {
+            Debug.Log("TESTB!");
+            disableContentAll();
+            findAll();
+            flagObjects = false;
+            contentObjects.SetActive(true);
+            flagObjects = true;
         }
 
         // Check for keybind click in order to add pickup script 
