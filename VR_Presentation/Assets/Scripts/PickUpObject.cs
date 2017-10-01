@@ -742,7 +742,26 @@ public class PickUpObject : MonoBehaviour
         // Check for keybind click in order to add pickup script 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            add_Pickupable_Script();
+            int x = Screen.width / 2;
+            int y = Screen.height / 2;
+
+            Ray myRay = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
+            RaycastHit hit;
+
+            if (Physics.Raycast(myRay, out hit))
+            {
+                GameObject gameObj = hit.collider.gameObject;
+                Debug.Log(hit.collider.gameObject.name);
+
+                if (hit.collider.gameObject.name == "Ground" || hit.collider.gameObject.name == "Backdrop" || hit.collider.gameObject.name == "Floor_1")
+                {
+                    return;
+                }
+                else
+                {
+                    add_Pickupable_Script();
+                }   
+            }
         }
     }
 
@@ -757,10 +776,21 @@ public class PickUpObject : MonoBehaviour
 
         if (Physics.Raycast(myRay, out hit))
         {
-            Pickupable isPickUpable = hit.collider.GetComponent<Pickupable>();
             GameObject gameObj = hit.collider.gameObject;
+            Pickupable isPickUpable = hit.collider.gameObject.GetComponent<Pickupable>();
 
-            if (gameObject.GetComponent<TerrainCollider>() == null)
+            //if the object the RayCast hit has the canPickup script:
+            if (isPickUpable != null)
+            {
+                if (gameObj.GetComponent<Rigidbody>() != null)
+                {
+                    Rigidbody rig = gameObj.GetComponent<Rigidbody>();
+                    Destroy(rig);
+                }
+
+                Destroy(isPickUpable);
+            }
+            else
             {
                 gameObj.AddComponent<Pickupable>();
 
@@ -776,15 +806,12 @@ public class PickUpObject : MonoBehaviour
 
                 if (gameObj.GetComponent<MeshCollider>() == null)
                 {
-                    gameObj.AddComponent<MeshCollider>();
+                    gameObj.AddComponent<MeshCollider>().convex = true;
                 }
-                
-                //if the object the RayCast hit has the canPickup script:
-                if (isPickUpable != null)
+                else
                 {
-                    Destroy(isPickUpable.gameObject.GetComponent<Pickupable>());
-                    Destroy(gameObj.GetComponent<Rigidbody>());
-                    Destroy(gameObj.GetComponent<BoxCollider>());
+                    Destroy(gameObj.GetComponent<MeshCollider>());
+                    gameObj.AddComponent<MeshCollider>().convex = true;
                 }
             }
         }
@@ -990,7 +1017,7 @@ public class PickUpObject : MonoBehaviour
                Pickupable isPickUpable = hit.collider.GetComponent<Pickupable>();
 
                 //if the object the RayCast hit has the canPickup script:
-                if (isPickUpable != null)
+                if (isPickUpable != null && gameObject.GetComponent<Rigidbody>() != null)
                 {
                     isCarrying = true;
 					if(isPickUpable.gameObject.GetComponent<Rigidbody>() == null)
