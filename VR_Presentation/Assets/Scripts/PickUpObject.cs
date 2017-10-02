@@ -13,6 +13,7 @@ public static class Globals
     public static int videoCount;
     public static int skyBoxCount;
     public static int objectCount;
+    public static int prefabCount;
 }
 
 public class PickUpObject : MonoBehaviour
@@ -81,14 +82,23 @@ public class PickUpObject : MonoBehaviour
     //Variable to store the file path  
     string[] path_Audio_Vid_Files;
 
+    //List to store prefabs
+    public List<GameObject> prefab_Files;
+    //Variable to store the file path  
+    string[] path_Prefabs_Files;
+    //Variable for the size of the materials array
+    int size_Prefabs = 0;
+    //Variable to cycle through the skybox array
+    int counter_Prefabs = 0;
+
     // Use this for initialization
     void Start()
     {
-
         Globals.imageCount = 0;
         Globals.audioCount = 0;
         Globals.videoCount = 0;
         Globals.skyBoxCount = 0;
+        Globals.prefabCount = 0;
         Globals.objectCount = 4;
 
         mainCam = GameObject.FindWithTag("MainCamera");
@@ -109,12 +119,16 @@ public class PickUpObject : MonoBehaviour
         //Call load video function 
         StartCoroutine(load_Videos());
 
+        //Call load skybox function 
         StartCoroutine(load_Skybox());
-       
+
+        //Call load prefabs function 
+        StartCoroutine(load_Prefabs());
+
         contentMain = GameObject.Find("Canvas").transform.Find("ContentMain").gameObject;
-         
     }
 
+    //Load skybox materials from resource folder
     IEnumerator load_Skybox()
     {
         //Get the path of the skybox materials
@@ -139,7 +153,7 @@ public class PickUpObject : MonoBehaviour
         yield return 0;
     }
      
-        //Load videos from folder function
+    //Load videos from folder function
     IEnumerator load_Images()
     {
         
@@ -229,6 +243,53 @@ public class PickUpObject : MonoBehaviour
             ogg_Files.Add(audio_On_Disk.GetAudioClip());
         }
         Globals.videoCount = ogg_Files.Count;
+    }
+
+    //Load prefabs from resources folder 
+    IEnumerator load_Prefabs()
+    {
+        //Get the path of the skybox materials
+        path_Prefabs_Files = Directory.GetFiles(currentDir + "\\Assets\\Resources", "*.prefab");
+        //Assign the size variable
+        size_Prefabs = path_Prefabs_Files.Length;
+
+        //Load all of the materials in the resource folder and perform string handling 
+        for (int i = 0; i < path_Prefabs_Files.Length; i++)
+        {
+            //Perform string handling 
+            string temp = path_Prefabs_Files[i];
+            string[] split_String = temp.Split('\\');
+            temp = split_String[split_String.Length - 1];
+            string[] prefab_Split = temp.Split('.');
+
+            //Add material to material array 
+            prefab_Files.Add(Resources.Load(prefab_Split[0]) as GameObject);
+
+            //Add pickupable script
+            prefab_Files[i].AddComponent<Pickupable>();
+            //Add rigidbody
+            if (prefab_Files[i].GetComponent<Rigidbody>() == null)
+            {
+                prefab_Files[i].AddComponent<Rigidbody>();
+            }
+            //Add box collider
+            if (prefab_Files[i].GetComponent<BoxCollider>() == null)
+            {
+                prefab_Files[i].AddComponent<BoxCollider>();
+            }
+            //Add convex mesh collider or destroy standard one if it has one 
+            if (prefab_Files[i].GetComponent<MeshCollider>() == null)
+            {
+                prefab_Files[i].AddComponent<MeshCollider>().convex = true;
+            }
+            else
+            {
+                DestroyImmediate(prefab_Files[i].GetComponent<MeshCollider>(), true);
+                prefab_Files[i].AddComponent<MeshCollider>().convex = true;
+            }
+        }
+        Globals.prefabCount = prefab_Files.Count;
+        yield return 0;
     }
 
     void findAll()
@@ -393,6 +454,25 @@ public class PickUpObject : MonoBehaviour
     void Update()
     {
         thecamera.transform.position = mainCam.transform.position;
+
+        //Check for object spawning click 
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            //Display name of prefab in console
+            Debug.Log(prefab_Files[counter_Prefabs].name);
+            //Spawn in the prefab object
+            GameObject spawn = prefab_Files[counter_Prefabs];
+            //Spawn in the object
+            Instantiate(spawn, mainCam.transform.position, Quaternion.identity);
+
+            //Incriment counter to loop through prefab array
+            counter_Prefabs++;
+            //Reset counter if it is too big
+            if (counter_Prefabs >= size_Prefabs)
+            {
+                counter_Prefabs = 0;
+            }
+        }
 
         if (flagImages)
         {
@@ -753,7 +833,7 @@ public class PickUpObject : MonoBehaviour
                 GameObject gameObj = hit.collider.gameObject;
                 Debug.Log(hit.collider.gameObject.name);
 
-                if (hit.collider.gameObject.name == "Ground" || hit.collider.gameObject.name == "Backdrop" || hit.collider.gameObject.name == "Floor_1")
+                if (hit.collider.gameObject.GetComponent<TerrainCollider>() == true)
                 {
                     return;
                 }
@@ -1073,8 +1153,7 @@ public class PickUpObject : MonoBehaviour
 	void floatObject() {
 		isCarrying = false;
 		pickedUpObject.transform.parent = null;
-		
-		Destroy(pickedUpObject.gameObject.GetComponent<Rigidbody>());
+        Destroy(pickedUpObject.gameObject.GetComponent<Rigidbody>());
 		pickedUpObject = null;
 	}
 }
