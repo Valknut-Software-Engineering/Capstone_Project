@@ -28,7 +28,7 @@ To view the code scripts that we have created click <a href="https://github.com/
 | Members  | Contact Details  | Github Profiles | Description |
 | :-:      |:-:               | :-:             | :-:         |
 | Peter Boxall | u14056136@tuks.co.za | <a href="https://github.com/PeteElite" target="_blank"> <img src="http://cameronmcefee.com/img/work/the-octocat/ironcat.jpg" width="100"/> </a> | An unhealthy obsession with drones |
-| Claude Greef | greeff.claude@gmail.com | <a href="https://github.com/MasterJetson" target="_blank"> <img src="https://tctechcrunch2011.files.wordpress.com/2012/02/coderdojo-octocat3.jpg" width="100" /> </a> | Silent but deadly |
+| Claude Greeff | greeff.claude@gmail.com | <a href="https://github.com/MasterJetson" target="_blank"> <img src="https://tctechcrunch2011.files.wordpress.com/2012/02/coderdojo-octocat3.jpg" width="100" /> </a> | Silent but deadly |
 | Marin Peroski | mperoski@outlook.com | <a href="https://github.com/Mazzl3s" target="_blank"> <img src="https://octodex.github.com/images/daftpunktocat-thomas.gif" width="100"/> </a> | They call him the "tin man" |
 | Johan du Plooy | sjohandup@gmail.com | <a href="https://github.com/sjohandup" target="_blank"> <img src="https://octodex.github.com//images/jetpacktocat.png" width="100" /> </a> | He might miss you but you can&#39;t miss him |
 | Bernhard Schuld | bernhardschuld@gmail.com | <a href="https://github.com/BernhardSchuld" target="_blank"> <img src="https://octodex.github.com/images/bear-cavalry.jpg" width="100" /> </a> | A modern day viking |
