@@ -1,0 +1,247 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+ \geometry{
+ a4paper,
+ left=30mm,
+ right=30mm,
+ top=30mm,
+ }
+
+\graphicspath{ {./../Images/} }
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\newcommand*{\titleGP}{\begingroup
+		\begin{figure}[t]
+			\centering
+			\includegraphics[width=350px]{UP_Logo.png}
+		\end{figure}
+\centering
+
+{\Large COS 301 Capstone Project 2017}
+
+\vspace*{\baselineskip}
+
+\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt}
+\rule{\textwidth}{0.4pt}\\[\baselineskip]
+
+{\Huge Vulknut Software Engineering } \\ [0.2\baselineskip]
+
+\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace*{2pt}
+\rule{\textwidth}{0.4pt}\\[\baselineskip]
+
+{\Large User Manual } \\ [0.2\baselineskip]
+
+\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt}
+\rule{\textwidth}{1.6pt}\\[\baselineskip] %
+
+% \scshape %
+% A concise specification on the functional requirements  \\
+% and use cases of NavUP \\[\baselineskip]
+
+% \vspace*{2\baselineskip}
+
+\bigskip
+
+Compiled By \\[\baselineskip]
+
+\bigskip
+
+{\Large Peter Boxall - u14056136 \\ Claude Greeff - u13153740 \\ Marin Peroski -  u13242475 \\ Johan du Plooy - u12070794 \\ Bernhard Schuld - u10297902 \\\par}
+
+\bigskip
+\bigskip
+
+	\begin{figure}[H]
+			\centering
+			\includegraphics[width=200px,height=125px]{epiUse.png}
+	\end{figure}
+
+\bigskip
+\bigskip
+
+ {\Huge 3D VR Presentations}
+
+\vfill
+
+ 	{\large GitHub Repository:
+ 	\href{https://github.com/Valknut-Software-Engineering/Capstone_Project}{Valknut Software Engineering}\par}
+
+\endgroup}
+
+
+\begin{document}
+
+\titleGP
+\newpage
+\tableofcontents
+\newpage
+
+
+\section{User Manual}
+
+	\subsection{Introduction}
+
+	Welcome to the 3D VR presentation User Manual.  This document aims to familiarise users to the included software package, as well as providing a quick start guide for those users who simply cannot wait to create.
+
+	What is 3D VR presentation?  Imagine taking the art of digital representation to a whole new level.  This software enables the user to create and edit a 3D environment that can then be presented to stakeholders as an example, to convay an idea in a much more powerful and intimit way.
+
+	Be sure to visit the GitHub repository at
+	\href{https://github.com/Valknut-Software-Engineering/Capstone_Project}{Valknut Software Engineering}
+	for the latest news and updates on the software.
+
+	\subsection{Quick Start}
+
+	\begin{itemize}
+
+		\item To launch the program, find the VR Presentation executable in the project root folder and double click to run.
+
+		\item The program should then start and immediately enter full-screen mode.
+
+		\item You will then be presented with a Main Menu interface that allows the choice of Two initial scenes, an Office scene, and a nature scene.
+
+			The office scene will present you with an example of what the application is capable of in terms of objects in the world, lighting, etc.
+
+			The nature scene has been designed as hands-on tutorial of the type of interactions you as the user can expect, such as spawning, modifying, and cloning objects to name a few.
+
+		\item Select the nature scene to start with the tutorial.
+
+		\item You can then use the W A D and S keys to navigate in the world in a first-person perspective.
+
+	\end{itemize}
+
+
+	\subsection{Main Scenarios of Use}
+
+		\subsubsection{Features You Can Expect}
+
+			\paragraph{Object manipulation during pickup}
+
+			Virtually any object visible in the 3D world can be manipulated in terms of scale, texture, etc.
+
+			To interact with a nearby object, start by aligning it to the center of the screen, and press the E key to pick up the object and hold it in front of the camera.
+
+			You can also drop an object in hand by hitting the E key again.
+
+			Whilst the object is picked up, you can interact with it as follows:
+
+			\begin{itemize}
+
+				\item In crease and decrease the object's scale on all axis by using the plus(+) and minus(-) keys found on the numpad.
+
+				\item Use keypad 1, 2, and 3 to increase the X, Y, and Z axis respectively.
+
+				\item Use keypad 4, 5, and 6 to decrease the X, Y, and Z axis respectively.
+
+				\item Use keypad 7, 8, and 9 to rotate the X, Y, and Z axis respectively.
+
+				\item You can use the R key to Reset the object rotation to 0 x 0 x 0 on its X, Y, and Z axis.
+
+				\item Press the C key to make a carbon copy of the object currently in your hand.
+
+				Note that the cloned object will retain all of the modifications you made to the original.
+
+				\item Hitting the G key will enable/disable SnapToGrid to help with accurate alignment.
+
+				Note the object no longer moves smoothly when you move the mouse.
+
+				\item By pressing the Q key, you can lock the object's orientation to match you precisely, however leaving this disabled will leave the orientation of the object when you first picked it up in relation to your own rotation.
+
+			\end{itemize}
+
+			\paragraph{Object manipulation without needing to pickup}
+
+			You can also interact with objects in the world without picking them up:
+
+			\begin{itemize}
+
+				\item You can destroy an object by looking at it and hitting the DELETE key on the keyboard.
+
+				\item By pressing the Z key, you can apply an image texture to the object in range.
+
+				Note: Pressing Z repeatedly will cycle through a series of images available in the resources directory.
+
+				\item You can also add an audio file to the object in range by pressing the Z key, which will also by default play the clip to show that it works.
+
+				\item Feel like adding a video texture to a nearby wall?  Walk up to it and press the V key.  This will also start playing by default to show that it is working.
+
+			\end{itemize}
+
+			\paragraph{World manipulation}
+
+			There is also a feature to completely change the skybox used in the scene.
+
+			By pressing the B key, you can cycle through a number of skyboxes, such as a night mode instead of a day skybox.
+
+
+			\paragraph{360 Video capture}
+
+			When you feel you are ready, you can start recording your 360 video and navigate through the world you have created, that can then be exported and viewed in virtually any 360 video supported device, such as an HTC VIVE, VR Gear, etc.
+
+			Use the following commands to control video recording:
+
+			\begin{itemize}
+
+				\item Press I on the keyboard to start the 360 recording.
+
+				\item You can then press O to stop the recording when you are done.
+
+				\item Pressing P will then open the containing folder of your newly created 360 video.
+
+			\end{itemize}
+
+
+		\subsubsection{Examples of Use}
+
+			\paragraph{Rally Sport Hall of Fame}
+
+				Let's say you want to create a virtual tour of all the greatest moments in Rally sport history.
+
+				you could create a virtual hall of fame and have videos showing clips of highlights lined up against the wall in chronological order with a tour guide taking you through this hall and presenting noteworthy facts about each moment in time.
+				
+				By using this software, you can create such a virtual tour to comemorate the Rally sports and the many drivers who made it what it is today.
+
+
+
+
+	\subsection{FAQs}
+
+		\subsubsection{Q: How can I insert my own materials for images, audio, and video?}
+
+			\begin{itemize}
+
+				\item Navigate to the folder containing the application executable.
+
+				\item Look for the Resources folder.
+
+				\item In that folder, you will find an Images, Audio, and Videos folder to add your own content.
+
+				Note: Currently the application only supports Audio files with a .ogg file format, and videos with a .ogv format.
+
+			\end{itemize}
+
+
+\end{document}
