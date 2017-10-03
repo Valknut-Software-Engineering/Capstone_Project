@@ -1,4 +1,4 @@
-# center> Valknut Software Engineering #
+# Valknut Software Engineering #
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Valknut.svg/1200px-Valknut.svg.png" width = "125"/>
 
