@@ -1,29 +1,19 @@
-# <center> Valknut Software Engineering </center> #
+# center> Valknut Software Engineering #
 
-<center><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Valknut.svg/1200px-Valknut.svg.png" width = "125"/></center>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Valknut.svg/1200px-Valknut.svg.png" width = "125"/>
 
-## <center> Who Are We? </center> ##
-
-<center> 
+## Who Are We? ##
 
 An enthusiastic group of individuals who bring their own skillsets, passions and interests from the diverse field of computer science together to deliver nothing but the best. We love a challenge and we do not plan on going down without a fight. 
 
-</center>  
 
-
-## <center> Our Project </center> ##
-
-<center> 
+## Our Project ##
 
 Our team was tasked to create an innovative way to allow a user to be able to make their own presentations with the utilisation of virtual reality. To do this, we have used the Unity game engine to create 3D environments that also allow users to interact with any object in it. To provide as much creative freedom as possible users can spawn in their own objects, both primitive and pre-fabricated, manipulate those objects by changing their scale and position, as well as importing their own media (images, videos and audio) into the scene. Once the user is satisfied with their presentation they can proceed to record the scene which then gets exported into a 360 degree video viewable on any device (mobile included) that has a VR player installed onto it.
 
-To view the code scripts that we have created click <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project/tree/master/VR_Presentation/Assets/Scripts" target="_blank"> here</a>.
+To view the code scripts that we have created click <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project/tree/master/VR_Presentation/Assets/Scripts" target="_blank"> here</a>. 
 
-</center>  
-
-## <center> Meet The Team </center> ##
-
-<center>
+## Meet The Team ##
 
 | Members  | Contact Details  | Github Profiles | Description |
 | :-:      |:-:               | :-:             | :-:         |
@@ -33,11 +23,7 @@ To view the code scripts that we have created click <a href="https://github.com/
 | Johan du Plooy | sjohandup@gmail.com | <a href="https://github.com/sjohandup" target="_blank"> <img src="https://octodex.github.com//images/jetpacktocat.png" width="100" /> </a> | He might miss you but you can&#39;t miss him |
 | Bernhard Schuld | bernhardschuld@gmail.com | <a href="https://github.com/BernhardSchuld" target="_blank"> <img src="https://octodex.github.com/images/bear-cavalry.jpg" width="100" /> </a> | A modern day viking |
 
-</center>
-
-## <center> Documentation and Links </center> ##
-
-<left>
+## Documentation and Links ##
 
 The documentation to our project:
 * * *
@@ -49,5 +35,3 @@ The documentation to our project:
 Links to our productivity:
 * Our <a href="https://valknut-software-eng.slack.com/messages/C59Q3SSGL/" target="_blank"> Slack </a> channel
 * Our <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project#reports?report=velocity" target="_blank"> scrum board </a> (requires <a href="https://www.zenhub.com" target="_blank"> Zenhub </a> browser extension)
-
-</left>
