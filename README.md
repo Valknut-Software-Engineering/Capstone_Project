@@ -48,6 +48,6 @@ The documentation to our project:
 * * *
 Links to our productivity:
 * Our <a href="https://valknut-software-eng.slack.com/messages/C59Q3SSGL/" target="_blank"> Slack </a> channel
-* Our <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project#reports?report=velocity" target="_blank"> scrum board </a> (requires <a href="https://www.zenhub.com" target="_blank"> Zenhub </a> borwser extension)
+* Our <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project#reports?report=velocity" target="_blank"> scrum board </a> (requires <a href="https://www.zenhub.com" target="_blank"> Zenhub </a> browser extension)
 
 </left>
