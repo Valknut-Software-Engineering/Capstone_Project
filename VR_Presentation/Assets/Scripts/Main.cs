@@ -27,7 +27,7 @@ public static class Globals
     public static float distance;
     public static float smooth;
 	
-	public static objectInHand carriedObj;
+	public static GenericObject genericObj;
 }
 
 public class PickUpObject : MonoBehaviour
@@ -147,10 +147,10 @@ public class PickUpObject : MonoBehaviour
         contentMain = GameObject.Find("Canvas").transform.Find("ContentMain").gameObject;
 		
 		//Initialize generic carried object handler
-		Globals.carriedObj = new objectInHand();
+		Globals.genericObj = new GenericObject();
 		
 		//Add secondary scripts
-		gameObject.AddComponent<objectManipulation>();
+		gameObject.AddComponent<ObjectManipulation>();
     }
 
     //Load skybox materials from resource folder
