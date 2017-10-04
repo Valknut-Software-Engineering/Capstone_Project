@@ -39,7 +39,7 @@ public class ObjectManipulation : MonoBehaviour {
     }
 	
 	private void carry() {
-        Globals.genericObj.updateObjPosition(this);
+        Globals.genericObj.updateObjPosition(gameObject);
 		checkKeyPressOnCarry();
 		checkDrop();
     }

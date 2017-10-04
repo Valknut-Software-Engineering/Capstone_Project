@@ -18,19 +18,17 @@ public static class Globals
 	public static string currentDir = Application.dataPath + "/../";
 	
 	public static GameObject mainCam;
-    public static GameObject pickedUpObject;
-	
-	public static bool isCarrying;
-	public static bool snapToGrid;
-	public static bool useRotationOffset;
-	
-    public static float distance;
-    public static float smooth;
+    
+	//public static GameObject pickedUpObject;
+	//public static bool snapToGrid;
+	//public static bool useRotationOffset;
+    //public static float distance;
+    //public static float smooth;
 	
 	public static GenericObject genericObj;
 }
 
-public class PickUpObject : MonoBehaviour
+public class Main : MonoBehaviour
 {
     public GameObject thecamera;
 
@@ -53,14 +51,10 @@ public class PickUpObject : MonoBehaviour
     public bool flagObjects = false;
     public bool flagMain = false;
 
-    public bool initialIsCarrying = false;
-	public bool initialSnapToGrid = false;
+    public bool initialSnapToGrid = false;
 	public bool initialUseRotationOffset = false;
-	
     public float initialDistance = 6;
     public float initialSmooth = 10;
-	
-	
 	
     //Array for the skybox materials  
     public List<Material> skyboxes;
@@ -106,13 +100,6 @@ public class PickUpObject : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Globals.isCarrying = initialIsCarrying;
-		Globals.snapToGrid = initialSnapToGrid;
-		Globals.useRotationOffset = initialUseRotationOffset;
-		
-		Globals.distance = initialDistance;
-		Globals.smooth = initialSmooth;
-		
 		Globals.imageCount = 0;
         Globals.audioCount = 0;
         Globals.videoCount = 0;
@@ -147,7 +134,7 @@ public class PickUpObject : MonoBehaviour
         contentMain = GameObject.Find("Canvas").transform.Find("ContentMain").gameObject;
 		
 		//Initialize generic carried object handler
-		Globals.genericObj = new GenericObject();
+		Globals.genericObj = new GenericObject(initialSnapToGrid, initialUseRotationOffset, initialDistance, initialSmooth);
 		
 		//Add secondary scripts
 		gameObject.AddComponent<ObjectManipulation>();
@@ -634,21 +621,14 @@ public class PickUpObject : MonoBehaviour
         }
         if (flagObjects)
         {            
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {               
-                spawnCube();
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {               
-                spawnSphere();
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {                
-                spawnCapsule();
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha4))
-            {                
-                spawnCylinder();
+            if (Input.GetKeyDown(KeyCode.Alpha1)) {               
+                Globals.genericObj.spawnCube();
+            } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+				Globals.genericObj.spawnSphere();
+            } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
+                Globals.genericObj.spawnCapsule();
+            } else if (Input.GetKeyDown(KeyCode.Alpha4)) {
+                Globals.genericObj.spawnCylinder();
             } 
         }
 
@@ -706,51 +686,6 @@ public class PickUpObject : MonoBehaviour
             flagObjects = false;
             contentMain.SetActive(true);
         }
-
-        /*
-		//Spawn new object and place in hand
-        if (Input.GetKeyDown(KeyCode.Keypad0))
-        {
-            btnCube = GameObject.Find("CubeBtn").GetComponent<Button>();
-            btnCube.image.color = Color.red;
-            int x = Screen.width / 2;
-            int y = Screen.height / 2;
-
-            Ray myRay = Globals.mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
-            spawnCube();
-
-            btnCube.image.color = Color.black;
-        }
-
-        //Spawn new object and place in hand
-        if (Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            int x = Screen.width / 2;
-            int y = Screen.height / 2;
-
-            Ray myRay = Globals.mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
-            spawnSphere();
-        }
-        //Spawn new object and place in hand
-        if (Input.GetKeyDown(KeyCode.Keypad2))
-        {
-            int x = Screen.width / 2;
-            int y = Screen.height / 2;
-
-            Ray myRay = Globals.mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
-            spawnCapsule();
-        }
-
-        //Spawn new object and place in hand
-        if (Input.GetKeyDown(KeyCode.Keypad3))
-        {
-            int x = Screen.width / 2;
-            int y = Screen.height / 2;
-
-            Ray myRay = Globals.mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
-            spawnCylinder();
-        }
-		*/
 		
         // Check for skybox keybing to change it 
         if (Input.GetKeyDown(KeyCode.Alpha4) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects)
@@ -897,80 +832,4 @@ public class PickUpObject : MonoBehaviour
         }
     }
 	
-    void spawnCube()
-    {
-        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-
-        cube.AddComponent<Rigidbody>(); // Add the rigidbody.
-        cube.AddComponent<Pickupable>(); // Add the canPickup script.
-		
-        if (Globals.pickedUpObject) { dropObject(); }
-        
-        Globals.isCarrying = true;
-        cube.GetComponent<Rigidbody>().useGravity = false;
-        cube.GetComponent<Rigidbody>().isKinematic = true;
-		Globals.pickedUpObject = cube;
-    }
-
-    //// Spawn other primitive objects \\\\
-    void spawnSphere()
-    {
-		GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        
-		sphere.AddComponent<Rigidbody>(); // Add the rigidbody.
-        sphere.AddComponent<Pickupable>(); // Add the canPickup script.
-		
-        if (Globals.pickedUpObject) { dropObject(); }
-        
-        Globals.isCarrying = true;
-        sphere.GetComponent<Rigidbody>().useGravity = false;
-        sphere.GetComponent<Rigidbody>().isKinematic = true;
-		Globals.pickedUpObject = sphere;
-    }
-
-    void spawnCapsule()
-    {
-		GameObject capsule = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-        
-		capsule.AddComponent<Rigidbody>(); // Add the rigidbody.
-        capsule.AddComponent<Pickupable>(); // Add the canPickup script.
-		
-        if (Globals.pickedUpObject) { dropObject(); }
-        
-		Globals.isCarrying = true;
-        capsule.GetComponent<Rigidbody>().useGravity = false;
-		capsule.GetComponent<Rigidbody>().isKinematic = true;
-        Globals.pickedUpObject = capsule;
-    }
-
-    void spawnCylinder()
-    {
-		GameObject cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        
-		cylinder.AddComponent<Rigidbody>(); // Add the rigidbody.
-        cylinder.AddComponent<Pickupable>(); // Add the canPickup script.
-
-        if (Globals.pickedUpObject) { dropObject(); }
-        
-		Globals.isCarrying = true;
-        cylinder.GetComponent<Rigidbody>().useGravity = false;
-        cylinder.GetComponent<Rigidbody>().isKinematic = true;
-		Globals.pickedUpObject = cylinder;
-    }
-	
-	
-    //Drop the object being held by the user
-	void dropObject() {
-		Globals.isCarrying = false;
-		Globals.pickedUpObject.transform.parent = null;
-		Globals.pickedUpObject.gameObject.GetComponent<Rigidbody>().useGravity = true;
-		Globals.pickedUpObject.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-		Globals.pickedUpObject = null;
-	}
-	void floatObject() {
-		Globals.isCarrying = false;
-		Globals.pickedUpObject.transform.parent = null;
-        Destroy(Globals.pickedUpObject.gameObject.GetComponent<Rigidbody>());
-		Globals.pickedUpObject = null;
-	}
 }

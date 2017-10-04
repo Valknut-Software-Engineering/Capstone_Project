@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.IO;
 
 public class GenericObject {
 	
@@ -20,6 +21,15 @@ public class GenericObject {
 		useRotationOffset = false;
 		distance = 6;
 		smooth = 10;
+	}
+	
+	public GenericObject(bool stg, bool uro, float d, float s) {
+		mainCam = GameObject.FindWithTag("MainCamera");
+		
+		snapToGrid = stg;
+		useRotationOffset = uro;
+		distance = d;
+		smooth = s;
 	}
 	
 	public bool isCarrying() {
@@ -48,7 +58,8 @@ public class GenericObject {
 	public void updateObjPosition(GameObject player) {
 		if(!snapToGrid) {
 			myObject.transform.position = Vector3.Lerp(myObject.transform.position, mainCam.transform.position + mainCam.transform.forward * distance, Time.deltaTime * smooth);
-		} else //snap object to grid when moving {
+		} else {
+			//snap object to grid when moving
 			Vector3 curPosInGrid = mainCam.transform.position + mainCam.transform.forward * distance;
 			Vector3 newPosInGrid = new Vector3(Mathf.Round(curPosInGrid.x), Mathf.Round(curPosInGrid.y), Mathf.Round(curPosInGrid.z));
 			myObject.transform.position = newPosInGrid;
@@ -115,8 +126,9 @@ public class GenericObject {
 		if (Physics.Raycast(myRay, out hit)) {
 			Pickupable isPickUpable = hit.collider.GetComponent<Pickupable>();
 			
-			//if the object the RayCast hit has the canPickup script:
-			if (isPickUpable != null && gameObject.GetComponent<Rigidbody>() != null) {
+			//if the object the RayCast hit has the Pickupable script:
+			//if (isPickUpable != null && gameObject.GetComponent<Rigidbody>() != null) {
+			if (isPickUpable != null) {
 				if(isPickUpable.gameObject.GetComponent<Rigidbody>() == null)
 					isPickUpable.gameObject.AddComponent<Rigidbody>();
 				
@@ -135,7 +147,7 @@ public class GenericObject {
 		int x = Screen.width /2;
 		int y = Screen.height /2;
 		
-		Ray myRay = Globals.mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
+		Ray myRay = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
 		RaycastHit hit;
 		
 		if(Physics.Raycast(myRay, out hit)) {
@@ -143,7 +155,7 @@ public class GenericObject {
 			
 			//if the object the RayCast hit has the canPickup script:
 			if(isPickUpable != null) {
-				Destroy(isPickUpable.gameObject);
+				MonoBehaviour.Destroy(isPickUpable.gameObject);
 			}
 		} else {
 			return false;
@@ -167,7 +179,7 @@ public class GenericObject {
 				GameObject sourceObj = isPickUpable.gameObject;
 				GameObject cloneObj;
 				
-				cloneObj = Instantiate(sourceObj, new Vector3(1F, 1F, 1F), Quaternion.identity);
+				cloneObj = MonoBehaviour.Instantiate(sourceObj, new Vector3(1F, 1F, 1F), Quaternion.identity);
 				cloneObj.transform.localScale = sourceObj.transform.localScale*3;
 				//isCarrying = true;
 				if (cloneObj.gameObject.GetComponent<Rigidbody>() == null)
@@ -200,9 +212,67 @@ public class GenericObject {
 	//Float the object being held by the user
 	public void floatObject() {
 		myObject.transform.parent = null;
-        Destroy(myObject.gameObject.GetComponent<Rigidbody>());
+        MonoBehaviour.Destroy(myObject.gameObject.GetComponent<Rigidbody>());
 		myObject = null;
 	}
+	
+	
+	
+	//// Spawn new objects and place in hand \\\\
+	public void spawnCube() {
+		GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+        cube.AddComponent<Rigidbody>(); // Add the rigidbody.
+        cube.AddComponent<Pickupable>(); // Add the canPickup script.
+		cube.GetComponent<Rigidbody>().useGravity = false;
+        cube.GetComponent<Rigidbody>().isKinematic = true;
+		
+        if (myObject) { dropObject(); }
+        
+        myObject = cube;
+	}
+	
+	public void spawnSphere()
+    {
+		GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        
+		sphere.AddComponent<Rigidbody>(); // Add the rigidbody.
+        sphere.AddComponent<Pickupable>(); // Add the canPickup script.
+		sphere.GetComponent<Rigidbody>().useGravity = false;
+        sphere.GetComponent<Rigidbody>().isKinematic = true;
+		
+        if (myObject) { dropObject(); }
+        
+        myObject = sphere;
+    }
+
+    public void spawnCapsule()
+    {
+		GameObject capsule = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+        
+		capsule.AddComponent<Rigidbody>(); // Add the rigidbody.
+        capsule.AddComponent<Pickupable>(); // Add the canPickup script.
+		capsule.GetComponent<Rigidbody>().useGravity = false;
+		capsule.GetComponent<Rigidbody>().isKinematic = true;
+		
+        if (myObject) { dropObject(); }
+        
+		myObject = capsule;
+    }
+
+    public void spawnCylinder()
+    {
+		GameObject cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+        
+		cylinder.AddComponent<Rigidbody>(); // Add the rigidbody.
+        cylinder.AddComponent<Pickupable>(); // Add the canPickup script.
+		cylinder.GetComponent<Rigidbody>().useGravity = false;
+        cylinder.GetComponent<Rigidbody>().isKinematic = true;
+		
+        if (myObject) { dropObject(); }
+        
+		myObject = cylinder;
+    }
 	
 }
 
