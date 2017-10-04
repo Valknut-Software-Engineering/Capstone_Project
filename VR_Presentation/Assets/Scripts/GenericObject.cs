@@ -33,7 +33,7 @@ public class GenericObject {
 	}
 	
 	public bool isCarrying() {
-		return (myObject == null);
+		return (myObject != null);
 	}
 	
 	public GameObject getObject() {
