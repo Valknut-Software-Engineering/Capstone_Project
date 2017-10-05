@@ -9,7 +9,17 @@ An enthusiastic group of individuals who bring their own skillsets, passions and
 
 ## Our Project ##
 
-Our team was tasked to create an innovative way to allow a user to be able to make their own presentations with the utilisation of virtual reality. To do this, we have used the Unity game engine to create 3D environments that also allow users to interact with any object in it. To provide as much creative freedom as possible users can spawn in their own objects, both primitive and pre-fabricated, manipulate those objects by changing their scale and position, as well as importing their own media (images, videos and audio) into the scene. Once the user is satisfied with their presentation they can proceed to record the scene which then gets exported into a 360 degree video viewable on any device (mobile included) that has a VR player installed onto it.
+The current common means to create a presentation is through the use of a power point style set of slides that feature short descriptions or illustrations of the subject matter. Utilising this method may be easier than others, however, if not crafted with care they can easily loose the audience’s attention and fail to get the point across.
+
+Valknut Software Engineering have created an innovative way to allow a user to be able to make their own presentations inside of a 3D environment with the utilisation of virtual reality. In contrast to the standard presentation slides, this aims to provide a much more immersive way to view a presentation while also making the creation process of one enjoyable. 
+
+To do this, we have used the Unity game engine to create 3D environments that also allow users to interact with any object in it. To provide as much creative freedom as possible, users can spawn in their own primitive or pre-fabricated objects. They can also manipulate those objects by changing their scale, position, as well as duplicating and deleting the object. This will allow a user to be able to modify the environment as they see fit.
+
+ Another fundamental feature that the application supports is allowing a user to import their own media (images, videos and audio) into the scene. These media files can be placed onto any object in the scene.  
+ 
+Once the user is satisfied with their presentation, they can proceed to record the scene. The recording gets exported as 360 degree video that is viewable on any device (mobile included) that has a virtual reality player installed onto it. In addition, we have ensured that the application supports VR headsets, such as the HTC Vive, so that a user can edit and explore their environment in VR itself. 
+
+
 
 To view the code scripts that we have created click <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project/tree/master/VR_Presentation/Assets/Scripts" target="_blank"> here</a>. 
 
