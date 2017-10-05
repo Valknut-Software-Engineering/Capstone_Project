@@ -6,6 +6,7 @@
 
 An enthusiastic group of individuals who bring their own skillsets, passions and interests from the diverse field of computer science together to deliver nothing but the best. We love a challenge and we do not plan on going down without a fight. 
 
+This is [a link](https://github.com/PeteElite){:target="_blank"} that opens in a new window.
 
 ## Our Project ##
 
