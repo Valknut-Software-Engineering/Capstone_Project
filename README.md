@@ -16,7 +16,7 @@ To do this, we have used the Unity game engine to create 3D environments that al
 
  Another fundamental feature that the application supports is allowing a user to import their own media (images, videos and audio) into the scene. These media files can be placed onto any object in the scene.  
  
-Once the user is satisfied with their presentation, they can proceed to record the scene. The recording gets exported as 360 degree video that is viewable on any device (mobile included) that has a virtual reality player installed onto it. In addition, we have ensured that the application supports VR headsets, such as the HTC Vive, so that a user can edit and explore their environment in VR itself. 
+Once the user is satisfied with their presentation, they can proceed to record the scene. The recording gets exported as 360 degree video that is viewable on any device (mobile included) assuming it has a virtual reality player installed. In addition, we have ensured that the application supports VR headsets, such as the HTC Vive, so that a user can edit and explore their environment in VR. 
 
 ## Meet The Team ##
 
