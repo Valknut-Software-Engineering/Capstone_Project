@@ -19,10 +19,6 @@ To do this, we have used the Unity game engine to create 3D environments that al
  
 Once the user is satisfied with their presentation, they can proceed to record the scene. The recording gets exported as 360 degree video that is viewable on any device (mobile included) that has a virtual reality player installed onto it. In addition, we have ensured that the application supports VR headsets, such as the HTC Vive, so that a user can edit and explore their environment in VR itself. 
 
-
-
-To view the code scripts that we have created click <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project/tree/master/VR_Presentation/Assets/Scripts" target="_blank"> here</a>. 
-
 ## Meet The Team ##
 
 | Members  | Contact Details  | Github Profiles | Description |
@@ -43,5 +39,6 @@ The documentation to our project:
 * <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project/tree/dev/Documentation/Test%20Report" target="_blank"> Test Report </a>
 * * *
 Links to our productivity:
+* Our <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project/tree/master/VR_Presentation/Assets/Scripts" target="_blank"> code scripts</a>. 
 * Our <a href="https://valknut-software-eng.slack.com/messages/C59Q3SSGL/" target="_blank"> Slack </a> channel
 * Our <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project#reports?report=velocity" target="_blank"> scrum board </a> (requires <a href="https://www.zenhub.com" target="_blank"> Zenhub </a> browser extension)
