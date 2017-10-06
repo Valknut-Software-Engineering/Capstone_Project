@@ -16,18 +16,12 @@ public class Tutorial_ScrollView_SpawnObjects : MonoBehaviour
     
     IEnumerator addObjects()
     {
-        yield return new WaitForSeconds(0.2f);
-        Debug.Log("SKYBOX COUNTER = " + Globals.objectCount);
+        yield return new WaitForSeconds(0.2f);     
 
-        //for (int z = 1; z < Globals.objectCount + 1; z++)
-        //{
-        //    NameListObjects.Add("Object " + z);
-        //}
-
-        NameListObjects.Add("Cube");
-        NameListObjects.Add("Sphere");
-        NameListObjects.Add("Capsule");
-        NameListObjects.Add("Cylinder");
+        NameListObjects.Add(" 1.\tCube");
+        NameListObjects.Add(" 2.\tSphere");
+        NameListObjects.Add(" 3.\tCapsule");
+        NameListObjects.Add(" 4.\tCylinder");
 
         foreach (string str in NameListObjects)
         {

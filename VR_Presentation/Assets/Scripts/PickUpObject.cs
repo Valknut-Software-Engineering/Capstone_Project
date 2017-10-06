@@ -29,11 +29,6 @@ public class PickUpObject : MonoBehaviour
     public GameObject contentObjects;
     public GameObject contentMain;
 
-    public Button btnCube;
-    public Button btnSphere;
-    public Button btnCapsule;
-    public Button btnCylinder;
-
     public bool flagImages = false;
     public bool flagAudio = false;
     public bool flagVideo = false;
@@ -48,7 +43,7 @@ public class PickUpObject : MonoBehaviour
     public float distance;
     public float smooth;
 
-    public string currentDir = Directory.GetCurrentDirectory();
+	public string currentDir;
 
     //Array for the skybox materials  
     public List<Material> skyboxes;
@@ -94,6 +89,8 @@ public class PickUpObject : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		currentDir = Application.dataPath + "/../";
+
         Globals.imageCount = 0;
         Globals.audioCount = 0;
         Globals.videoCount = 0;
@@ -133,7 +130,7 @@ public class PickUpObject : MonoBehaviour
     {
         //Get the path of the skybox materials
         path_Skybox_Materials = Directory.GetFiles(currentDir + "\\Assets\\Resources", "*.mat");
-        //Debug.Log(path_Skybox_Materials.ToString());
+        
         //Assign the size variable
         size_Sky = path_Skybox_Materials.Length;
 
@@ -628,8 +625,7 @@ public class PickUpObject : MonoBehaviour
         }
 
         if (flagImages && Input.GetKeyDown(KeyCode.B))
-        {
-            Debug.Log("TESTA!");
+        {            
             disableContentAll();
             findAll();
             flagMain = true;
@@ -639,8 +635,7 @@ public class PickUpObject : MonoBehaviour
         }
 
         if (flagAudio && Input.GetKeyDown(KeyCode.B))
-        {
-            Debug.Log("TESTA!");
+        {           
             disableContentAll();
             findAll();
             flagMain = true;
@@ -650,8 +645,7 @@ public class PickUpObject : MonoBehaviour
         }
 
         if (flagVideo && Input.GetKeyDown(KeyCode.B))
-        {
-            Debug.Log("TESTA!");
+        {           
             disableContentAll();
             findAll();
             flagMain = true;
@@ -661,8 +655,7 @@ public class PickUpObject : MonoBehaviour
         }
 
         if (flagSkybox && Input.GetKeyDown(KeyCode.B))
-        {
-            Debug.Log("TESTA!");
+        {           
             disableContentAll();
             findAll();
             flagMain = true;
@@ -672,8 +665,7 @@ public class PickUpObject : MonoBehaviour
         }
 
         if (flagObjects && Input.GetKeyDown(KeyCode.B))
-        {
-            Debug.Log("TESTA!");
+        {           
             disableContentAll();
             findAll();
             flagMain = true;
@@ -682,48 +674,6 @@ public class PickUpObject : MonoBehaviour
             contentMain.SetActive(true);
         }
 
-        //Spawn new object and place in hand
-        if (Input.GetKeyDown(KeyCode.Keypad0))
-        {
-            btnCube = GameObject.Find("CubeBtn").GetComponent<Button>();
-            btnCube.image.color = Color.red;
-            int x = Screen.width / 2;
-            int y = Screen.height / 2;
-
-            Ray myRay = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
-            spawnCube();
-
-            btnCube.image.color = Color.black;
-        }
-
-        //Spawn new object and place in hand
-        if (Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            int x = Screen.width / 2;
-            int y = Screen.height / 2;
-
-            Ray myRay = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
-            spawnSphere();
-        }
-        //Spawn new object and place in hand
-        if (Input.GetKeyDown(KeyCode.Keypad2))
-        {
-            int x = Screen.width / 2;
-            int y = Screen.height / 2;
-
-            Ray myRay = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
-            spawnCapsule();
-        }
-
-        //Spawn new object and place in hand
-        if (Input.GetKeyDown(KeyCode.Keypad3))
-        {
-            int x = Screen.width / 2;
-            int y = Screen.height / 2;
-
-            Ray myRay = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
-            spawnCylinder();
-        }
 
         //Toggle snap to grid
         if (Input.GetKeyDown(KeyCode.G)) {
@@ -776,8 +726,7 @@ public class PickUpObject : MonoBehaviour
 
         // Check for keybind click in order to add image to objecT as a texture 
         if (Input.GetKeyDown(KeyCode.Alpha1) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects)
-        {
-            Debug.Log("TESTB!");
+        {            
             disableContentAll();
             findAll();
             flagMain = false;
@@ -788,8 +737,7 @@ public class PickUpObject : MonoBehaviour
 
         // Check for keybind click in order to play audio  
         if (Input.GetKeyDown(KeyCode.Alpha2) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects)
-        {
-            Debug.Log("TESTB!");
+        {            
             disableContentAll();
             findAll();
             flagMain = false;
@@ -799,8 +747,7 @@ public class PickUpObject : MonoBehaviour
 
         // Check for keybind click in order to add movie texture 
         if (Input.GetKeyDown(KeyCode.Alpha3) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects)
-        {
-            Debug.Log("TESTB!");
+        {            
             disableContentAll();
             findAll();
             flagMain = false;
@@ -810,8 +757,7 @@ public class PickUpObject : MonoBehaviour
 
         // Check for keybind click in order to add movie texture 
         if (Input.GetKeyDown(KeyCode.Alpha5) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects)
-        {
-            Debug.Log("TESTB!");
+        {            
             disableContentAll();
             findAll();
             flagObjects = false;

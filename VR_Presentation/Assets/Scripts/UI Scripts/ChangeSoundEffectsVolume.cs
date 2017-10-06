@@ -15,5 +15,6 @@ public class ChangeSoundEffectsVolume : MonoBehaviour {
         soundEffectHighlight.volume = slider.value;
         soundEffectClose.volume = slider.value;
         soundEffectLoad.volume = slider.value;
+		AudioListener.volume = slider.value;
 	}
 }

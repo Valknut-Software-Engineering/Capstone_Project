@@ -19,11 +19,11 @@ public class Tutorial_ScrollView : MonoBehaviour
     {
         yield return new WaitForSeconds(0f);        
 
-        NameListMain.Add("Add Image");
-        NameListMain.Add("Add Audio");
-        NameListMain.Add("Add Video");
-        NameListMain.Add("Add Skybox");
-        NameListMain.Add("Add Object");
+        NameListMain.Add(" 1.\tAdd Image");
+        NameListMain.Add(" 2.\tAdd Audio");
+        NameListMain.Add(" 3.\tAdd Video");
+        NameListMain.Add(" 4.\tChange Skybox");
+        NameListMain.Add(" 5.\tAdd Object");
 
         foreach (string str in NameListMain)
         {

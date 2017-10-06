@@ -6,6 +6,7 @@ public class Tutorial_ScrollView_Images : MonoBehaviour
 {
 
     public GameObject Button_Template_Images;
+	public char letter = 'A';
    
     private List<string> NameListImages = new List<string>();
 
@@ -18,11 +19,11 @@ public class Tutorial_ScrollView_Images : MonoBehaviour
     IEnumerator addImages()
     {
         yield return new WaitForSeconds(0.2f);
-        Debug.Log("IMAGE COUNTER = " + Globals.imageCount);
-
+        
         for (int z = 1; z < Globals.imageCount + 1; z++)
         {
-            NameListImages.Add("Image " + z);
+			NameListImages.Add(" " + z + ".\t" + "Image" + letter);
+			letter++;
         }
 
         foreach (string str in NameListImages)
