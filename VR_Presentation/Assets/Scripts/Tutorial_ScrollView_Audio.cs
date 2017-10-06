@@ -6,6 +6,7 @@ public class Tutorial_ScrollView_Audio : MonoBehaviour
 {
     
     public GameObject Button_Template_Audio;
+	public char letter = 'A';
     
     private List<string> NameListAudio = new List<string>();    
 
@@ -19,11 +20,11 @@ public class Tutorial_ScrollView_Audio : MonoBehaviour
     IEnumerator addAudio()
     {
         yield return new WaitForSeconds(0.2f);
-        Debug.Log("AUDIO COUNTER = " + Globals.audioCount);
-
+        
         for (int z = 1; z < Globals.audioCount + 1; z++)
         {
-            NameListAudio.Add("Audio " + z);
+			NameListAudio.Add(" " + z + ".\t" + "Audio" + letter);
+			letter++;
         }
 
         foreach (string str in NameListAudio)

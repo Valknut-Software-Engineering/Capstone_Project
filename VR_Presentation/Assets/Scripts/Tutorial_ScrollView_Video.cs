@@ -6,6 +6,7 @@ public class Tutorial_ScrollView_Video : MonoBehaviour
 {
    
     public GameObject Button_Template_Videos;
+	public char letter = 'A';
     
     private List<string> NameListVideos = new List<string>();
    
@@ -18,12 +19,12 @@ public class Tutorial_ScrollView_Video : MonoBehaviour
     
     IEnumerator addVideos()
     {
-        yield return new WaitForSeconds(0.2f);
-        Debug.Log("VIDEOS COUNTER = " + Globals.videoCount);
+        yield return new WaitForSeconds(0.2f);        
 
         for (int z = 1; z < Globals.videoCount + 1; z++)
         {
-            NameListVideos.Add("Video " + z);
+			NameListVideos.Add(" " + z + ".\t" + "Video" + letter);
+			letter++;
         }
 
         foreach (string str in NameListVideos)

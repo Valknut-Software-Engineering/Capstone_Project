@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class Tutorial_ScrollView_Skybox : MonoBehaviour
 {
-    public GameObject Button_Template_Skybox;     
+    public GameObject Button_Template_Skybox; 
+	public char letter = 'A';
    
     private List<string> NameListSkybox = new List<string>();
 
@@ -17,11 +18,11 @@ public class Tutorial_ScrollView_Skybox : MonoBehaviour
     IEnumerator addSkybox()
     {
         yield return new WaitForSeconds(0.2f);
-        Debug.Log("SKYBOX COUNTER = " + Globals.skyBoxCount);
-
+        
         for (int z = 1; z < Globals.skyBoxCount + 1; z++)
         {
-            NameListSkybox.Add("Skybox " + z);
+			NameListSkybox.Add(" " + z + ".\t" + "Skybox" + letter);
+			letter++;
         }
 
         foreach (string str in NameListSkybox)
