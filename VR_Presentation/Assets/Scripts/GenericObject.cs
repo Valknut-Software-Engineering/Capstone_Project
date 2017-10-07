@@ -202,6 +202,50 @@ public class GenericObject {
 		return true;
 	}
 	
+	public bool toggleCanInteract() {
+		int x = Screen.width / 2;
+		int y = Screen.height / 2;
+		
+		Ray myRay = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
+		RaycastHit hit;
+		
+		if (Physics.Raycast(myRay, out hit))
+		{
+			GameObject gameObj = hit.collider.gameObject;
+			Pickupable isPickUpable = gameObj.GetComponent<Pickupable>();
+			Debug.Log(hit.collider.gameObject.name);
+			
+			if (hit.collider.gameObject.GetComponent<TerrainCollider>() == true)
+			{
+				return false;
+			} else if(isPickUpable != null) {
+				if (gameObj.GetComponent<Rigidbody>() != null) {
+					MonoBehaviour.Destroy(gameObj.GetComponent<Rigidbody>());
+				}
+				MonoBehaviour.Destroy(isPickUpable);
+			} else {
+				
+				gameObj.AddComponent<Pickupable>();
+				
+				/*if (gameObj.GetComponent<Rigidbody>() == null) {
+					gameObj.AddComponent<Rigidbody>();
+				}*/
+				if (gameObj.GetComponent<BoxCollider>() == null) {
+					gameObj.AddComponent<BoxCollider>();
+				}
+				if (gameObj.GetComponent<MeshCollider>() == null) {
+					gameObj.AddComponent<MeshCollider>().convex = true;
+				} else {
+					MonoBehaviour.Destroy(gameObj.GetComponent<MeshCollider>());
+					gameObj.AddComponent<MeshCollider>().convex = true;
+				}
+			}
+		} else {
+			return false;
+		}
+		return true;
+	}
+	
 	//Drop the object being held by the user
 	public void dropObject() {
 		myObject.transform.parent = null;
@@ -215,8 +259,6 @@ public class GenericObject {
         MonoBehaviour.Destroy(myObject.gameObject.GetComponent<Rigidbody>());
 		myObject = null;
 	}
-	
-	
 	
 	//// Spawn new objects and place in hand \\\\
 	public void spawnCube() {

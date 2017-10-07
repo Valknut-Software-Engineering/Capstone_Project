@@ -480,8 +480,7 @@ public class Main : MonoBehaviour
             //Incriment counter to loop through prefab array
             counter_Prefabs++;
             //Reset counter if it is too big
-            if (counter_Prefabs >= size_Prefabs)
-            {
+            if (counter_Prefabs >= size_Prefabs) {
                 counter_Prefabs = 0;
             }
         }
@@ -753,30 +752,11 @@ public class Main : MonoBehaviour
             contentObjects.SetActive(true);
             flagObjects = true;
         }
-
-        // Check for keybind click in order to add pickup script 
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            int x = Screen.width / 2;
-            int y = Screen.height / 2;
-
-            Ray myRay = Globals.mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
-            RaycastHit hit;
-
-            if (Physics.Raycast(myRay, out hit))
-            {
-                GameObject gameObj = hit.collider.gameObject;
-                Debug.Log(hit.collider.gameObject.name);
-
-                if (hit.collider.gameObject.GetComponent<TerrainCollider>() == true)
-                {
-                    return;
-                }
-                else
-                {
-                    add_Pickupable_Script();
-                }   
-            }
+		
+		// Check for keybind click in order to add pickup script 
+		if (Input.GetKeyDown(KeyCode.Tab)) {
+			//Toggle Object interaction
+			Globals.genericObj.toggleCanInteract();
         }
     }
 
