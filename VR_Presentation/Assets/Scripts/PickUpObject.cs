@@ -27,6 +27,7 @@ public class PickUpObject : MonoBehaviour
     public GameObject contentVideos;
     public GameObject contentSkybox;
     public GameObject contentObjects;
+	public GameObject contentComplexObjects;
     public GameObject contentMain;
 
     public bool flagImages = false;
@@ -35,6 +36,7 @@ public class PickUpObject : MonoBehaviour
     public bool flagSkybox= false;
     public bool flagObjects = false;
     public bool flagMain = false;
+	public bool flagComplexObjects;
 
     public bool isCarrying = false;
 	public bool snapToGrid = false;
@@ -296,6 +298,7 @@ public class PickUpObject : MonoBehaviour
         contentVideos = GameObject.Find("Canvas").transform.Find("ContentVideos").gameObject;
         contentSkybox = GameObject.Find("Canvas").transform.Find("ContentSkybox").gameObject;
         contentObjects = GameObject.Find("Canvas").transform.Find("ContentSpawnObjects").gameObject;
+		contentObjects = GameObject.Find("Canvas").transform.Find("ContentSpawnComplexObjects").gameObject;
         contentMain = GameObject.Find("Canvas").transform.Find("ContentMain").gameObject;
     }
 
@@ -308,6 +311,7 @@ public class PickUpObject : MonoBehaviour
         contentVideos.SetActive(false);
         contentSkybox.SetActive(false);
         contentObjects.SetActive(false);
+		contentComplexObjects.SetActive(false);
         contentMain.SetActive(false);
     }    
     
@@ -624,6 +628,26 @@ public class PickUpObject : MonoBehaviour
             } 
         }
 
+		if (flagComplexObjects)
+		{            
+			if (Input.GetKeyDown(KeyCode.Alpha1))
+			{               
+				spawnCube();
+			}
+			if (Input.GetKeyDown(KeyCode.Alpha2))
+			{               
+				spawnSphere();
+			}
+			if (Input.GetKeyDown(KeyCode.Alpha3))
+			{                
+				spawnCapsule();
+			}
+			if (Input.GetKeyDown(KeyCode.Alpha4))
+			{                
+				spawnCylinder();
+			} 
+		}
+
         if (flagImages && Input.GetKeyDown(KeyCode.B))
         {            
             disableContentAll();
@@ -673,6 +697,16 @@ public class PickUpObject : MonoBehaviour
             flagObjects = false;
             contentMain.SetActive(true);
         }
+
+		if (flagComplexObjects && Input.GetKeyDown(KeyCode.B))
+		{           
+			disableContentAll();
+			findAll();
+			flagMain = true;
+			contentComplexObjects.SetActive(false);
+			flagComplexObjects = false;
+			contentMain.SetActive(true);
+		}
 
 
         //Toggle snap to grid
@@ -725,7 +759,7 @@ public class PickUpObject : MonoBehaviour
         }
 
         // Check for keybind click in order to add image to objecT as a texture 
-        if (Input.GetKeyDown(KeyCode.Alpha1) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects)
+		if (Input.GetKeyDown(KeyCode.Alpha1) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects && !flagComplexObjects)
         {            
             disableContentAll();
             findAll();
@@ -736,7 +770,7 @@ public class PickUpObject : MonoBehaviour
 
 
         // Check for keybind click in order to play audio  
-        if (Input.GetKeyDown(KeyCode.Alpha2) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects)
+		if (Input.GetKeyDown(KeyCode.Alpha2) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects && !flagComplexObjects)
         {            
             disableContentAll();
             findAll();
@@ -746,7 +780,7 @@ public class PickUpObject : MonoBehaviour
         }
 
         // Check for keybind click in order to add movie texture 
-        if (Input.GetKeyDown(KeyCode.Alpha3) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects)
+		if (Input.GetKeyDown(KeyCode.Alpha3) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects && !flagComplexObjects)
         {            
             disableContentAll();
             findAll();
@@ -756,7 +790,7 @@ public class PickUpObject : MonoBehaviour
         }
 
         // Check for keybind click in order to add movie texture 
-        if (Input.GetKeyDown(KeyCode.Alpha5) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects)
+		if (Input.GetKeyDown(KeyCode.Alpha5) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects && !flagComplexObjects)
         {            
             disableContentAll();
             findAll();
@@ -764,6 +798,16 @@ public class PickUpObject : MonoBehaviour
             contentObjects.SetActive(true);
             flagObjects = true;
         }
+
+		// Check for keybind click in order to add movie texture 
+		if (Input.GetKeyDown(KeyCode.Alpha6) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects && !flagComplexObjects)
+		{            
+			disableContentAll();
+			findAll();
+			flagComplexObjects = false;
+			contentComplexObjects.SetActive(true);
+			flagComplexObjects = true;
+		}
 
         // Check for keybind click in order to add pickup script 
         if (Input.GetKeyDown(KeyCode.Tab))
