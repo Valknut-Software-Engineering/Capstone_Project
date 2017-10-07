@@ -262,16 +262,17 @@ public class GenericObject {
 	
 	//// Spawn new objects and place in hand \\\\
 	public void spawnCube() {
-		GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-
-        cube.AddComponent<Rigidbody>(); // Add the rigidbody.
+		//GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+		PrimitiveObject myCube = new CubeObject();
+		/*
+		cube.AddComponent<Rigidbody>(); // Add the rigidbody.
         cube.AddComponent<Pickupable>(); // Add the canPickup script.
 		cube.GetComponent<Rigidbody>().useGravity = false;
         cube.GetComponent<Rigidbody>().isKinematic = true;
-		
+		*/
         if (myObject) { dropObject(); }
         
-        myObject = cube;
+        myObject = myCube.getPrimitiveObj();
 	}
 	
 	public void spawnSphere()
