@@ -298,7 +298,7 @@ public class PickUpObject : MonoBehaviour
         contentVideos = GameObject.Find("Canvas").transform.Find("ContentVideos").gameObject;
         contentSkybox = GameObject.Find("Canvas").transform.Find("ContentSkybox").gameObject;
         contentObjects = GameObject.Find("Canvas").transform.Find("ContentSpawnObjects").gameObject;
-		contentObjects = GameObject.Find("Canvas").transform.Find("ContentSpawnComplexObjects").gameObject;
+		contentComplexObjects = GameObject.Find("Canvas").transform.Find("ContentSpawnComplexObjects").gameObject;
         contentMain = GameObject.Find("Canvas").transform.Find("ContentMain").gameObject;
     }
 
