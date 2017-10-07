@@ -203,6 +203,8 @@ public class GenericObject {
 	}
 	
 	public bool toggleCanInteract() {
+		if(myObject) { floatObject(); }
+		
 		int x = Screen.width / 2;
 		int y = Screen.height / 2;
 		
@@ -260,62 +262,31 @@ public class GenericObject {
 		myObject = null;
 	}
 	
-	//// Spawn new objects and place in hand \\\\
+	//// Spawn new primitive objects with preset properties and place in hand \\\\
 	public void spawnCube() {
-		//GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 		PrimitiveObject myCube = new CubeObject();
-		/*
-		cube.AddComponent<Rigidbody>(); // Add the rigidbody.
-        cube.AddComponent<Pickupable>(); // Add the canPickup script.
-		cube.GetComponent<Rigidbody>().useGravity = false;
-        cube.GetComponent<Rigidbody>().isKinematic = true;
-		*/
-        if (myObject) { dropObject(); }
-        
+		if (myObject) { dropObject(); }
         myObject = myCube.getPrimitiveObj();
 	}
-	
 	public void spawnSphere()
     {
-		GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        
-		sphere.AddComponent<Rigidbody>(); // Add the rigidbody.
-        sphere.AddComponent<Pickupable>(); // Add the canPickup script.
-		sphere.GetComponent<Rigidbody>().useGravity = false;
-        sphere.GetComponent<Rigidbody>().isKinematic = true;
-		
+		PrimitiveObject mySphere = new SphereObject();
         if (myObject) { dropObject(); }
-        
-        myObject = sphere;
+        myObject = mySphere.getPrimitiveObj();
     }
-
-    public void spawnCapsule()
+	public void spawnCapsule()
     {
-		GameObject capsule = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-        
-		capsule.AddComponent<Rigidbody>(); // Add the rigidbody.
-        capsule.AddComponent<Pickupable>(); // Add the canPickup script.
-		capsule.GetComponent<Rigidbody>().useGravity = false;
-		capsule.GetComponent<Rigidbody>().isKinematic = true;
-		
+		PrimitiveObject myCapsule = new CapsuleObject();
         if (myObject) { dropObject(); }
-        
-		myObject = capsule;
+		myObject = myCapsule.getPrimitiveObj();
     }
-
-    public void spawnCylinder()
+	public void spawnCylinder()
     {
-		GameObject cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        
-		cylinder.AddComponent<Rigidbody>(); // Add the rigidbody.
-        cylinder.AddComponent<Pickupable>(); // Add the canPickup script.
-		cylinder.GetComponent<Rigidbody>().useGravity = false;
-        cylinder.GetComponent<Rigidbody>().isKinematic = true;
-		
+		PrimitiveObject myCylinder = new CylinderObject();
         if (myObject) { dropObject(); }
-        
-		myObject = cylinder;
+		myObject = myCylinder.getPrimitiveObj();
     }
+	//// End of spawn methods \\\\
 	
 }
 
