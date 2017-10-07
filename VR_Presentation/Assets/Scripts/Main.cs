@@ -759,57 +759,5 @@ public class Main : MonoBehaviour
 			Globals.genericObj.toggleCanInteract();
         }
     }
-
-    // Apply script function 
-    void add_Pickupable_Script()
-    {
-        int x = Screen.width / 2;
-        int y = Screen.height / 2;
-
-        Ray myRay = Globals.mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
-        RaycastHit hit;
-
-        if (Physics.Raycast(myRay, out hit))
-        {
-            GameObject gameObj = hit.collider.gameObject;
-            Pickupable isPickUpable = hit.collider.gameObject.GetComponent<Pickupable>();
-
-            //if the object the RayCast hit has the canPickup script:
-            if (isPickUpable != null)
-            {
-                if (gameObj.GetComponent<Rigidbody>() != null)
-                {
-                    Rigidbody rig = gameObj.GetComponent<Rigidbody>();
-                    Destroy(rig);
-                }
-
-                Destroy(isPickUpable);
-            }
-            else
-            {
-                gameObj.AddComponent<Pickupable>();
-
-                if (gameObj.GetComponent<Rigidbody>() == null)
-                {
-                    gameObj.AddComponent<Rigidbody>();
-                }
-
-                if (gameObj.GetComponent<BoxCollider>() == null)
-                {
-                    gameObj.AddComponent<BoxCollider>();
-                }
-
-                if (gameObj.GetComponent<MeshCollider>() == null)
-                {
-                    gameObj.AddComponent<MeshCollider>().convex = true;
-                }
-                else
-                {
-                    Destroy(gameObj.GetComponent<MeshCollider>());
-                    gameObj.AddComponent<MeshCollider>().convex = true;
-                }
-            }
-        }
-    }
 	
 }
