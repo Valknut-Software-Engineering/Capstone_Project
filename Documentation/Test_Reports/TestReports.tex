@@ -1,0 +1,170 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+ \geometry{
+ a4paper,
+ left=30mm,
+ right=30mm,
+ top=30mm,
+ }
+
+\graphicspath{ {./../Images/} }
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\newcommand*{\titleGP}{\begingroup
+		\begin{figure}[t]
+			\centering
+			\includegraphics[width=350px]{UP_Logo.png}
+		\end{figure}
+\centering
+
+{\Large COS 301 Capstone Project 2017}
+
+\vspace*{\baselineskip}
+
+\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt}
+\rule{\textwidth}{0.4pt}\\[\baselineskip]
+
+{\Huge Vulknut Software Engineering } \\ [0.2\baselineskip]
+
+\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace*{2pt}
+\rule{\textwidth}{0.4pt}\\[\baselineskip]
+
+{\Large Test Reports } \\ [0.2\baselineskip]
+
+\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt}
+\rule{\textwidth}{1.6pt}\\[\baselineskip] %
+
+% \scshape %
+% A concise specification on the functional requirements  \\
+% and use cases of NavUP \\[\baselineskip]
+
+% \vspace*{2\baselineskip}
+
+\bigskip
+
+Compiled By \\[\baselineskip]
+
+\bigskip
+
+{\Large Peter Boxall - u14056136 \\ Claude Greeff - u13153740 \\ Marin Peroski -  u13242475 \\ Johan du Plooy - u12070794 \\ Bernhard Schuld - u10297902 \\\par}
+
+\bigskip
+\bigskip
+
+	\begin{figure}[H]
+			\centering
+			\includegraphics[width=200px,height=125px]{epiUse.png}
+	\end{figure}
+
+\bigskip
+\bigskip
+
+ {\Huge 3D VR Presentations}
+
+\vfill
+
+ 	{\large GitHub Repository:
+ 	\href{https://github.com/Valknut-Software-Engineering/Capstone_Project}{Valknut Software Engineering}\par}
+
+\endgroup}
+
+
+\begin{document}
+
+\titleGP
+\newpage
+\tableofcontents
+\newpage
+
+\section{Test Reports}
+
+This project posed a few challenges with regards to a suitable testing environment. The best methodology that we found in order to properly test everything
+we were working on was to use the standard white box and black box approach, while maintaining Unity as the software that will house all of the testing. Usability
+testing is also another method that will be employed in the project as development progresses. Unit testing will be incorporated where possible.
+
+	\subsection{Internal: Testing With Team Members}
+
+	The following describes the various methods employed in order to thoroughly test the virtual presentation software.
+
+	\subsubsection{White Box Testing}
+
+	When testing occurred with members the black box and white box methods were employed at this stage. Team members would first white box test their own work in the
+	Unity engine in order to determine if everything was running as expected. Considering that the majority of the projects code has some form of visual impact,
+	the team member testing their own work will first have to set an outcome that they would expect once their code has been implemented into the project. They would
+	then run the Unity engine and test whether their code behaves the way that they expected or intended. The code produced by each team member was uploaded to their
+	GitHub branch only if it was working in their environment.
+
+	\subsubsection{Black Box Testing}
+
+	Once the team member's code is uploaded, they would inform the rest of the team and at least one other member would perform a pull request from their branch. That
+	member will be told what the expected outcome is, thus they would test their code without knowing the inner workings of it. That individual will then run the Unity
+	engine on their local machine in order to test the code thoroughly. After all checks have been passed (does it work as intended, is the functionality indeed
+	correct and does the program behave as expected) they would approve the pull request to master.
+
+	\subsection{Usability Testing}
+
+	Usability testing will involve gathering members with various backgrounds with regards to their computer knowledge. This will allow for a thoroughly test that both
+	advanced and simple features are adequately covered. The testing pool of users will range from roughly five to ten users. They will be asked to perform a set amount of
+	tasks and the time taken for each individual to complete their task will be recorded. They will also be allowed to ask questions if they get stuck. These questions will
+	also get recorded in order to help improve the software’s usability (with the individuals consent). After they have completed their task we will ask them for their
+	feedback and how they felt about the software experience overall. All of these results will be taken into consideration.
+
+	\subsection{Unit Testing}
+
+	Unit testing will be employed where possible, although this testing will be the least recurring one due to the nature of the project. It will be employed in code
+	where checks need to be, for example. where object checks need to occur (if the object is NULL or not); if the object has certain properties such as an audio
+	component attached to it; if images, audio, video, textures and materials are indeed detected and do fill up their corresponding data structures.
+
+	\subsection{Functionality Tested}
+
+	\begin{flushleft}
+		The list below specifies each feature that was tested up until the current development point.
+		\begin{enumerate}
+			\item Object manipulation: this entails all interaction that can occur with an object such as picking it up and moving to around. The issues encountered here
+			dealt with the way the object handled in the users hands. At first it rotated freely and it collided with other objects. These abnormalities were taken care of.
+			\item Object scaling: this code was implemented without any problem. The objects scaled correctly.
+			\item Object rotation: this code was implemented without any problem. The objects rotated correctly. The addition of axis resetting was added to make it easier
+			to return the object back to its original form.
+			\item Object creation: the objects had to be spawned from a central point on the map. The first problem encountered was that the objects would spawn into a stationary
+			point and remain there. Code was added to ensure that they were moved to the user's hands in their current position.
+			\item Object deletion: this code worked correctly on implementation
+		 	\item Image importing: this code was first implemented in a primitive form by being assigned to an object. This was then changed for versatile application by using the Unity
+			ray cast feature (line of sight) in order to apply the image to an object.
+			\item Audio importing: this code was first implemented in a primitive form by being assigned to an object. This was then changed for versatile application by using the Unity
+			ray cast feature (line of sight) in order to apply the audio to an object. This caused a problem at first as multiple audio components could be created and assigned to an
+			object, thus a check was made to ensure that only one would be created.
+			\item Video importing: this code was first implemented in a primitive form by being assigned to an object. This was then changed for versatile application by using the Unity
+			ray cast feature (line of sight) in order to apply the video and audio to an object. The same checks were made to the audio here as stated above. The video caused a few issues
+			as only the .ogv format could be used. Conversions had to be made first and then assigned as a texture to the object.
+			\item 360 video exporting: a Unity asset was taken to perform the recording for us however, it currently runs at a low framerate when recording takes place. The exported product
+			is of high quality and framerate. Tinkering with the default script may need to occur in order to optimise the recorder.
+			\item Skybox importing: the skyboxes needed to be placed into the resources folder first so that they could be loaded into the scene live. Once that was resolved they were working
+			properly.
+		\end{enumerate}
+	\end{flushleft}
+
+\end{document}

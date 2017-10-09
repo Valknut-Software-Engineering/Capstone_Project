@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class ChangeMusicVolume : MonoBehaviour {
 
     public Slider slider;
-    public AudioSource backgroundMusic;
+    //public AudioSource backgroundMusic;
 	
 	// Update is called once per frame
 	void Update () {
-        backgroundMusic.volume = slider.value;
+        //backgroundMusic.volume = slider.value;
 	}
 }

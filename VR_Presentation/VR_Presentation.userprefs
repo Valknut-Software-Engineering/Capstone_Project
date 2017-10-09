@@ -1,0 +1,19 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ControlText.cs">
+    <Files>
+      <File FileName="Assets\Scripts\UI Scripts\ChangeSoundEffectsVolume.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UI Scripts\QuitOnClick.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UI Scripts\LoadSceneOnClick.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UI Scripts\QuitToMainMenu.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\EscapeMenu.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ControlText.cs" Line="149" Column="45" />
+      <File FileName="Assets\Scripts\PickUpObject.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Tutorial_ScrollView.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

@@ -1,17 +1,26 @@
-#Texmaker Output
-Documentation/*.aux
-Documentation/*.lof
-Documentation/*.log
-Documentation/*.out
-Documentation/*.pdf
-Documentation/*.toc
-Documentation/*.synctex.gz
+### Texmaker Output ###
+Documentation/**/*.aux
+Documentation/**/*.lof
+Documentation/**/*.log
+Documentation/**/*.out
+Documentation/**/*.pdf
+Documentation/**/*.toc
+Documentation/**/*.synctex.gz
 
 
-#Library Folder
-VR_Presentation/Library/
+### Unity ###
+VR_Presentation/[Ll]ibrary/
+VR_Presentation/[Tt]emp/
+VR_Presentation/[Oo]bj/
+VR_Presentation/[Bb]uild/
+VR_Presentation/[Bb]uilds/
+VR_Presentation/VR_Presentation_Toolkit_Data/
 
-#Resources Folder
+
+### csproj files ###
+VR_Presentation/*.csproj
+
+### Resources Folder ###
 VR_Presentation/Assets/Resources/Audio/
 VR_Presentation/Assets/Resources/Images/
 VR_Presentation/Assets/Resources/Videos/
