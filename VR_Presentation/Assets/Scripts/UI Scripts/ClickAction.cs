@@ -11,6 +11,7 @@ public class ClickAction : MonoBehaviour, IPointerClickHandler
 {
     public Image currentImage;
     public AudioSource audio;
+
     //public Animation animation;
 
     public void OnPointerClick(PointerEventData eventData)
@@ -19,6 +20,7 @@ public class ClickAction : MonoBehaviour, IPointerClickHandler
         
         if(currentImage.sprite.name == "Office")
         {
+			
             audio.Play();
             Thread.Sleep(2000);
             //animation.Play();            
@@ -32,8 +34,7 @@ public class ClickAction : MonoBehaviour, IPointerClickHandler
             LoadByIndex(2);
         }
     }
-     
-
+	 
     public void LoadByIndex(int sceneIndex)
     {
         SceneManager.LoadScene(sceneIndex);
