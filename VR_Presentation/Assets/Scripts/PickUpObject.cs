@@ -51,19 +51,11 @@ public class PickUpObject : MonoBehaviour
     public List<Material> skyboxes;
     //String array of all of the skybox materials
     string[] path_Skybox_Materials;
-    //Variable for the size of the materials array
-    int size_Sky = 0;
-    //Variable to cycle through the skybox array
-    int counter_Sky = 0;
 
     //List to store image files 
     public List<Texture2D> image_Files;
     //Variable to store the file path  
     string[] path_Image_Files;
-    //Variable for the size of the images array
-    int size_Imgs = 0;
-    //Variable to cycle through the image array
-    int counter_Imgs = 0;
 
     //List to store ogg auido files 
     public List<AudioClip> audio_Files;
@@ -83,10 +75,6 @@ public class PickUpObject : MonoBehaviour
     public List<GameObject> prefab_Files;
     //Variable to store the file path  
     string[] path_Prefabs_Files;
-    //Variable for the size of the materials array
-    int size_Prefabs = 0;
-    //Variable to cycle through the skybox array
-    int counter_Prefabs = 0;
 
     // Use this for initialization
     void Start()
@@ -132,9 +120,6 @@ public class PickUpObject : MonoBehaviour
     {
         //Get the path of the skybox materials
         path_Skybox_Materials = Directory.GetFiles(currentDir + "\\Assets\\Resources", "*.mat");
-        
-        //Assign the size variable
-        size_Sky = path_Skybox_Materials.Length;
 
         //Load all of the materials in the resource folder and perform string handling 
         for (int i = 0; i < path_Skybox_Materials.Length; i++)
@@ -155,12 +140,8 @@ public class PickUpObject : MonoBehaviour
     //Load videos from folder function
     IEnumerator load_Images()
     {
-        
         //Get the path of the image files
         path_Image_Files = Directory.GetFiles(currentDir + "\\Assets\\Resources\\Images", "*.jpg");
-
-        //Assign the size variable
-        size_Imgs = path_Image_Files.Length;
 
         //Loop through each of the file paths inside if the directory 
         for (int i = 0; i < path_Image_Files.Length; i++)
@@ -249,8 +230,6 @@ public class PickUpObject : MonoBehaviour
     {
         //Get the path of the skybox materials
         path_Prefabs_Files = Directory.GetFiles(currentDir + "\\Assets\\Resources", "*.prefab");
-        //Assign the size variable
-        size_Prefabs = path_Prefabs_Files.Length;
 
         //Load all of the materials in the resource folder and perform string handling 
         for (int i = 0; i < path_Prefabs_Files.Length; i++)
@@ -317,161 +296,190 @@ public class PickUpObject : MonoBehaviour
     
     void applyImage(int signal)
     {
-        if(signal >= Globals.imageCount)
+        if(signal < Globals.imageCount)
         {
-            signal = 0;
-        }
+            //Rayscan box for hit
+            int x = Screen.width / 2;
+            int y = Screen.height / 2;
 
-        //Rayscan box for hit
-        int x = Screen.width / 2;
-        int y = Screen.height / 2;
+            //Get the line of sight for the object
+            Ray myRay_Image = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
+            RaycastHit hit_Image;
 
-        //Get the line of sight for the object
-        Ray myRay_Image = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
-        RaycastHit hit_Image;
+            //Assign image to an object (material gets created for it) 
+            Renderer object_Source;
 
-        //Assign image to an object (material gets created for it) 
-        Renderer object_Source;
-
-        //Check if the object is in line of sight
-        if (Physics.Raycast(myRay_Image, out hit_Image))
-        {
-            //Get the raycasted objects renderer properties 
-            object_Source = hit_Image.transform.gameObject.GetComponent<Renderer>();
-            //Assign the image to the object as a material 
-            object_Source.material.mainTexture = image_Files[signal];
-                        
-            //Reset counter if it is over the arrays size 
-            if (counter_Imgs >= size_Imgs)
+            //Check if the object is in line of sight
+            if (Physics.Raycast(myRay_Image, out hit_Image))
             {
-                counter_Imgs = 0;
+                //Check if it is not the terrain 
+                if (hit_Image.collider.gameObject.GetComponent<TerrainCollider>() == false)
+                {
+                    //Get the raycasted objects renderer properties 
+                    object_Source = hit_Image.transform.gameObject.GetComponent<Renderer>();
+                    //Assign the image to the object as a material 
+                    object_Source.material.mainTexture = image_Files[signal];
+                }
             }
         }        
     }
 
     void applyAudio(int signal)
     {
-        if (signal >= Globals.imageCount)
+        if (signal < Globals.audioCount)
         {
-            signal = 0;
-        }
+            //Rayscan box for hit
+            int x = Screen.width / 2;
+            int y = Screen.height / 2;
 
-        //Rayscan box for hit
-        int x = Screen.width / 2;
-        int y = Screen.height / 2;
+            //Get the line of sight for the object
+            Ray myRay_Audio = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
+            RaycastHit hit_Audio;
 
-        //Get the line of sight for the object
-        Ray myRay_Audio = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
-        RaycastHit hit_Audio;
+            //Variable for the audio source of the raycasted object 
+            AudioSource ray_Audio_Source;
 
-        //Variable for the audio source of the raycasted object 
-        AudioSource ray_Audio_Source;
-
-        //Check if the object is in line of sight
-        if (Physics.Raycast(myRay_Audio, out hit_Audio))
-        {
-            //Get he objects audio source 
-            ray_Audio_Source = hit_Audio.transform.gameObject.GetComponent<AudioSource>();
-
-            //Check if there is an audio component present
-            if (ray_Audio_Source == null)
+            //Check if the object is in line of sight
+            if (Physics.Raycast(myRay_Audio, out hit_Audio))
             {
-                //Add an audio source to the object 
-                ray_Audio_Source = hit_Audio.transform.gameObject.AddComponent<AudioSource>();
-                //Get he objects audio source 
-                ray_Audio_Source = hit_Audio.transform.gameObject.GetComponent<AudioSource>();
-            }
+                //Check if it is not the terrain 
+                if (hit_Audio.collider.gameObject.GetComponent<TerrainCollider>() == false)
+                {
+                    //Get he objects audio source 
+                    ray_Audio_Source = hit_Audio.transform.gameObject.GetComponent<AudioSource>();
 
-            //Assign the audio clip to the object and then play it 
-            ray_Audio_Source.clip = audio_Files[0];
-            ray_Audio_Source.Play();
+                    //Check if there is an audio component present
+                    if (ray_Audio_Source == null)
+                    {
+                        //Add an audio source to the object 
+                        ray_Audio_Source = hit_Audio.transform.gameObject.AddComponent<AudioSource>();
+                        //Get he objects audio source 
+                        ray_Audio_Source = hit_Audio.transform.gameObject.GetComponent<AudioSource>();
+                    }
+
+                    //Assign the audio clip to the object and then play it 
+                    ray_Audio_Source.clip = audio_Files[signal];
+                    ray_Audio_Source.Stop();
+                    ray_Audio_Source.Play();
+                }
+            }
         }
     }
 
     void applyVideo(int signal)
     {
-        if (signal >= Globals.imageCount)
+        if (signal < Globals.videoCount)
         {
-            signal = 0;
-        }
+            //Rayscan box for hit
+            int x = Screen.width / 2;
+            int y = Screen.height / 2;
 
-        //Rayscan box for hit
-        int x = Screen.width / 2;
-        int y = Screen.height / 2;
+            //Get the line of sight for the object
+            Ray myRay_Video = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
+            RaycastHit hit_Video;
 
-        //Get the line of sight for the object
-        Ray myRay_Video = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
-        RaycastHit hit_Video;
+            //Variable for the audio source of the raycasted object 
+            AudioSource ray_Audio_Source;
 
-        //Variable for the audio source of the raycasted object 
-        AudioSource ray_Audio_Source;
+            //Variable for the video source of the raycasted object 
+            Renderer ray_Video_Source;
 
-        //Variable for the video source of the raycasted object 
-        Renderer ray_Video_Source;
-
-        //Movietexture assigned to the object
-        MovieTexture objct;
-
-        //Check if the object is in line of sight
-        if (Physics.Raycast(myRay_Video, out hit_Video))
-        {
-            //Get he objects audio source 
-            ray_Audio_Source = hit_Video.transform.gameObject.GetComponent<AudioSource>();
-
-            //Check if there is an audio component present
-            if (ray_Audio_Source == null)
+            //Check if the object is in line of sight
+            if (Physics.Raycast(myRay_Video, out hit_Video))
             {
-                //Add an audio source to the object 
-                ray_Audio_Source = hit_Video.transform.gameObject.AddComponent<AudioSource>();
-                //Get he objects audio source 
-                ray_Audio_Source = hit_Video.transform.gameObject.GetComponent<AudioSource>();
+                //Check if it is not the terrain 
+                if (hit_Video.collider.gameObject.GetComponent<TerrainCollider>() == false)
+                {
+                    //Get he objects audio source 
+                    ray_Audio_Source = hit_Video.transform.gameObject.GetComponent<AudioSource>();
+
+                    //Check if there is an audio component present
+                    if (ray_Audio_Source == null)
+                    {
+                        //Add an audio source to the object 
+                        ray_Audio_Source = hit_Video.transform.gameObject.AddComponent<AudioSource>();
+                        //Get he objects audio source 
+                        ray_Audio_Source = hit_Video.transform.gameObject.GetComponent<AudioSource>();
+                    }
+
+                    //Get the renderer property of the object in the raycast view 
+                    ray_Video_Source = hit_Video.transform.gameObject.GetComponent<Renderer>();
+
+                    //Assign movie texture to the object along with its audio 
+                    ray_Video_Source.material.mainTexture = ogv_Files[signal];
+                    ray_Audio_Source.clip = ogg_Files[signal];
+
+                    //Play both audio and video 
+                    ogv_Files[signal].Stop();
+                    ray_Audio_Source.Stop();
+                    ray_Audio_Source.Play();
+                    ogv_Files[signal].Play();
+                }
             }
-
-            //Get the renderer property of the object in the raycast view 
-            ray_Video_Source = hit_Video.transform.gameObject.GetComponent<Renderer>();
-
-            //Assign movie texture to the object along with its audio 
-            ray_Video_Source.material.SetTexture("_MainTex", ogv_Files[0]);
-            ray_Audio_Source.clip = ogg_Files[0];
-            objct = hit_Video.transform.gameObject.GetComponent<MovieTexture>();
-            //Play both audio and video 
-            ray_Audio_Source.Play();
-            ogv_Files[signal].Play();
         }
     }
 
     void applySkybox(int signal)
     {
-        if (signal >= Globals.skyBoxCount)
+        if (signal < Globals.skyBoxCount)
         {
-            signal = 0;
+            RenderSettings.skybox = skyboxes[signal];
         }
-
-        RenderSettings.skybox = skyboxes[signal];        
     }
 
+    void spawnComplex(int signal)
+    {
+        // Check if the the signal is indeed smaller than the arrays size 
+        if (signal < Globals.prefabCount)
+        {
+            // Spawn in the prefab object
+            GameObject spawn = prefab_Files[signal];
+            // Spawn in the object
+            Instantiate(spawn, mainCam.transform.position, Quaternion.identity);
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
         thecamera.transform.position = mainCam.transform.position;
 
-        //Check for object spawning click 
-        if (Input.GetKeyDown(KeyCode.Z))
+        // Stop movie textures
+        if (Input.GetKeyDown(KeyCode.V))
         {
-            //Display name of prefab in console
-            Debug.Log(prefab_Files[counter_Prefabs].name);
-            //Spawn in the prefab object
-            GameObject spawn = prefab_Files[counter_Prefabs];
-            //Spawn in the object
-            Instantiate(spawn, mainCam.transform.position, Quaternion.identity);
+            //Rayscan box for hit
+            int x = Screen.width / 2;
+            int y = Screen.height / 2;
 
-            //Incriment counter to loop through prefab array
-            counter_Prefabs++;
-            //Reset counter if it is too big
-            if (counter_Prefabs >= size_Prefabs)
+            //Get the line of sight for the object
+            Ray myRay_Video = mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
+            RaycastHit hit_Video;
+
+            //Check if the object is in line of sight
+            if (Physics.Raycast(myRay_Video, out hit_Video))
             {
-                counter_Prefabs = 0;
+                //Check if it is not the terrain 
+                if (hit_Video.collider.gameObject.GetComponent<TerrainCollider>() == false)
+                {
+                    //Variable for the video source of the raycasted object 
+                    Renderer ray_Video_Source = hit_Video.transform.gameObject.GetComponent<Renderer>();
+                    //Get the name of the video file to stop 
+                    string vid_Name = ray_Video_Source.material.mainTexture.name;
+                    //Get he objects audio source 
+                    AudioSource ray_Audio_Source = hit_Video.transform.gameObject.GetComponent<AudioSource>();
+
+                    //Run through each video texture 
+                    for (int i = 0; i < Globals.videoCount; i++)
+                    {
+                        //If it is the same video texture 
+                        if (vid_Name == ogv_Files[i].name)
+                        {
+                            //Pause it
+                            ogv_Files[i].Stop();
+                            ray_Audio_Source.Stop();
+                        }
+                    }
+                }
             }
         }
 
@@ -503,6 +511,31 @@ public class PickUpObject : MonoBehaviour
                 signal = 4;
                 applyImage(signal);
             }
+            if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                signal = 5;
+                applyImage(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                signal = 6;
+                applyImage(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                signal = 7;
+                applyImage(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha9))
+            {
+                signal = 8;
+                applyImage(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha0))
+            {
+                signal = 9;
+                applyImage(signal);
+            }
         }
         if (flagAudio)
         {
@@ -532,7 +565,31 @@ public class PickUpObject : MonoBehaviour
                 signal = 4;
                 applyAudio(signal);
             }
-
+            if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                signal = 5;
+                applyAudio(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                signal = 6;
+                applyAudio(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                signal = 7;
+                applyAudio(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha9))
+            {
+                signal = 8;
+                applyAudio(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha0))
+            {
+                signal = 9;
+                applyAudio(signal);
+            }
         }
         if (flagVideo)
         {
@@ -562,7 +619,31 @@ public class PickUpObject : MonoBehaviour
                 signal = 4;
                 applyVideo(signal);
             }
-
+            if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                signal = 5;
+                applyVideo(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                signal = 6;
+                applyVideo(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                signal = 7;
+                applyVideo(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha9))
+            {
+                signal = 8;
+                applyVideo(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha0))
+            {
+                signal = 9;
+                applyVideo(signal);
+            }
         }
         if (flagSkybox)
         {
@@ -607,6 +688,16 @@ public class PickUpObject : MonoBehaviour
                 signal = 7;
                 applySkybox(signal);
             }
+            if (Input.GetKeyDown(KeyCode.Alpha9))
+            {
+                signal = 8;
+                applySkybox(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha0))
+            {
+                signal = 9;
+                applySkybox(signal);
+            }
         }
         if (flagObjects)
         {            
@@ -627,26 +718,60 @@ public class PickUpObject : MonoBehaviour
                 spawnCylinder();
             } 
         }
-
 		if (flagComplexObjects)
-		{            
-			if (Input.GetKeyDown(KeyCode.Alpha1))
-			{               
-				spawnCube();
+		{
+            int signal = 0;
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+			{
+                signal = 0;
+                spawnComplex(signal);
 			}
 			if (Input.GetKeyDown(KeyCode.Alpha2))
-			{               
-				spawnSphere();
-			}
+			{
+                signal = 1;
+                spawnComplex(signal);
+            }
 			if (Input.GetKeyDown(KeyCode.Alpha3))
-			{                
-				spawnCapsule();
-			}
+			{
+                signal = 2;
+                spawnComplex(signal);
+            }
 			if (Input.GetKeyDown(KeyCode.Alpha4))
-			{                
-				spawnCylinder();
-			} 
-		}
+			{
+                signal = 3;
+                spawnComplex(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                signal = 4;
+                spawnComplex(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                signal = 5;
+                spawnComplex(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                signal = 6;
+                spawnComplex(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                signal = 7;
+                spawnComplex(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha9))
+            {
+                signal = 8;
+                spawnComplex(signal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha0))
+            {
+                signal = 9;
+                spawnComplex(signal);
+            }
+        }
 
         if (flagImages && Input.GetKeyDown(KeyCode.B))
         {            
