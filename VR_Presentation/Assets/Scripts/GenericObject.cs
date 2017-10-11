@@ -19,7 +19,7 @@ public class GenericObject {
 		myObject = null;
 		snapToGrid = false;
 		useRotationOffset = false;
-		distance = 6;
+		distance = 10;
 		smooth = 10;
 	}
 	
@@ -39,9 +39,15 @@ public class GenericObject {
 	public GameObject getObject() {
 		return myObject;
 	}
-	
-	//Toggle snap to grid
-	public void toggleSTG() {
+
+    //Reset distance
+    public void reset_Distance()
+    {
+        distance = 10;
+    }
+
+    //Toggle snap to grid
+    public void toggleSTG() {
 		if (snapToGrid)
 			snapToGrid = false;
 		else
@@ -222,16 +228,16 @@ public class GenericObject {
 				return false;
 			} else if(isPickUpable != null) {
 				if (gameObj.GetComponent<Rigidbody>() != null) {
-					MonoBehaviour.Destroy(gameObj.GetComponent<Rigidbody>());
-				}
-				MonoBehaviour.Destroy(isPickUpable);
-			} else {
+                    MonoBehaviour.Destroy(gameObj.GetComponent<Rigidbody>());
+                }
+                MonoBehaviour.Destroy(gameObj.GetComponent<MeshCollider>());
+                MonoBehaviour.Destroy(isPickUpable);
+                gameObj.AddComponent<MeshCollider>();
+                gameObj.GetComponent<MeshCollider>().convex = false;
+            } else {
 				
 				gameObj.AddComponent<Pickupable>();
-				
-				/*if (gameObj.GetComponent<Rigidbody>() == null) {
-					gameObj.AddComponent<Rigidbody>();
-				}*/
+			
 				if (gameObj.GetComponent<BoxCollider>() == null) {
 					gameObj.AddComponent<BoxCollider>();
 				}
@@ -261,9 +267,29 @@ public class GenericObject {
         MonoBehaviour.Destroy(myObject.gameObject.GetComponent<Rigidbody>());
 		myObject = null;
 	}
-	
-	//// Spawn new primitive objects with preset properties and place in hand \\\\
-	public void spawnCube() {
+
+    //Increase the objects distance 
+    public void increase_Distance()
+    {
+        /*Vector3 pos =  myObject.transform.position;
+        pos.x += 1;
+        pos.z -= 1;
+        myObject.transform.position = pos;*/
+        distance += 1;
+    }
+
+    //Decrease the objects distance 
+    public void decrease_Distance()
+    {
+        /*Vector3 pos = myObject.transform.position;
+        pos.x -= 1;
+        pos.z += 1;
+        myObject.transform.position = pos;*/
+        distance -= 1;
+    }
+
+    //// Spawn new primitive objects with preset properties and place in hand \\\\
+    public void spawnCube() {
 		PrimitiveObject myCube = new CubeObject();
 		if (myObject) { dropObject(); }
         myObject = myCube.getPrimitiveObj();
@@ -287,6 +313,5 @@ public class GenericObject {
 		myObject = myCylinder.getPrimitiveObj();
     }
 	//// End of spawn methods \\\\
-	
 }
 

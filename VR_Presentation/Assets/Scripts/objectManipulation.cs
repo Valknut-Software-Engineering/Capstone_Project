@@ -23,8 +23,7 @@ public class ObjectManipulation : MonoBehaviour {
             carry();
         } else {
             interact();
-        }
-		
+        }	
 	}
 	
 	private void interact()
@@ -45,7 +44,9 @@ public class ObjectManipulation : MonoBehaviour {
     }
 	
 	private void checkKeyPressOnCarry() {
-		if (Input.GetKey(KeyCode.KeypadPlus)) {
+        //Variable to check mouse scroll  
+        var wheel = Input.GetAxis("Mouse ScrollWheel");
+        if (Input.GetKey(KeyCode.KeypadPlus)) {
             //ALL AXIS MAKE LARGER
 			Globals.genericObj.increaseOverallSize();
         } else if (Input.GetKey(KeyCode.KeypadMinus)) {
@@ -85,12 +86,23 @@ public class ObjectManipulation : MonoBehaviour {
             //Duplicate current object
 			Globals.genericObj.duplicateObject();
         }
+        //Scroll up
+        else if (wheel > 0f)
+        {
+            Globals.genericObj.increase_Distance();
+        }
+        //Scroll down 
+        else if (wheel < 0f)
+        {
+            Globals.genericObj.decrease_Distance();
+        }
 	}
 	
 	//Test if player is trying to drop of float object
 	void checkDrop() {
         if (Input.GetKeyDown(KeyCode.E)) {
 			Globals.genericObj.dropObject();
+            Globals.genericObj.reset_Distance();
 		} else if (Input.GetKeyDown(KeyCode.F)) {
 			Globals.genericObj.floatObject();
 		}
