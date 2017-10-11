@@ -351,16 +351,13 @@ public class Main : MonoBehaviour
     {
         if (signal < Globals.audioCount)
         {
-            signal = 0;
-        }
+            //Rayscan box for hit
+            int x = Screen.width / 2;
+            int y = Screen.height / 2;
 
-        //Rayscan box for hit
-        int x = Screen.width / 2;
-        int y = Screen.height / 2;
-
-        //Get the line of sight for the object
-        Ray myRay_Audio = Globals.mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
-        RaycastHit hit_Audio;
+            //Get the line of sight for the object
+            Ray myRay_Audio = Globals.mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
+            RaycastHit hit_Audio;
 
             //Variable for the audio source of the raycasted object
             AudioSource ray_Audio_Source;
@@ -389,25 +386,23 @@ public class Main : MonoBehaviour
                     ray_Audio_Source.Play();
                 }
             }
+        }
     }
 
     void applyVideo(int signal)
     {
         if (signal < Globals.videoCount)
         {
-            signal = 0;
-        }
+            //Rayscan box for hit
+            int x = Screen.width / 2;
+            int y = Screen.height / 2;
 
-        //Rayscan box for hit
-        int x = Screen.width / 2;
-        int y = Screen.height / 2;
+            //Get the line of sight for the object
+            Ray myRay_Video = Globals.mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
+            RaycastHit hit_Video;
 
-        //Get the line of sight for the object
-        Ray myRay_Video = Globals.mainCam.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
-        RaycastHit hit_Video;
-
-        //Variable for the audio source of the raycasted object
-        AudioSource ray_Audio_Source;
+            //Variable for the audio source of the raycasted object
+            AudioSource ray_Audio_Source;
 
             //Variable for the video source of the raycasted object
             Renderer ray_Video_Source;
@@ -444,6 +439,7 @@ public class Main : MonoBehaviour
                     ogv_Files[signal].Play();
                 }
             }
+        }
     }
 
     void applySkybox(int signal)
