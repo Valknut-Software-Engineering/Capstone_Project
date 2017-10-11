@@ -50,8 +50,8 @@ public class Main : MonoBehaviour
 
     public bool initialSnapToGrid = false;
 	public bool initialUseRotationOffset = false;
-    public float initialDistance = 6;
-    public float initialSmooth = 10;
+    public float initialDistance = 15;
+    public float initialSmooth = 15;
 
     //Array for the skybox materials
     public List<Material> skyboxes;
@@ -508,12 +508,23 @@ public class Main : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
+            //Get the position of the player 
+            Vector3 player_Position = Globals.mainCam.transform.position;
+            //Get direction of the player 
+            Vector3 player_Direction = Globals.mainCam.transform.forward;
+            //Get rotation of the player
+            Quaternion player_Rotation = Globals.mainCam.transform.rotation;
+            //Spawn distance from the player 
+            float spawnDistance = 12;
+            //Spawning position 
+            Vector3 spawn_Object = player_Position + player_Direction * spawnDistance;
+
             //Display name of prefab in console
             Debug.Log(prefab_Files[counter_Prefabs].name);
             //Spawn in the prefab object
             GameObject spawn = prefab_Files[counter_Prefabs];
             //Spawn in the object
-            Instantiate(spawn, Globals.mainCam.transform.position, Quaternion.identity);
+            Instantiate(spawn, spawn_Object, player_Rotation);
 
             //Incriment counter to loop through prefab array
             counter_Prefabs++;
