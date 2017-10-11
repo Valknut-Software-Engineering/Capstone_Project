@@ -230,10 +230,10 @@ public class GenericObject {
 				if (gameObj.GetComponent<Rigidbody>() != null) {
                     MonoBehaviour.Destroy(gameObj.GetComponent<Rigidbody>());
                 }
-                MonoBehaviour.Destroy(gameObj.GetComponent<MeshCollider>());
+                //MonoBehaviour.Destroy(gameObj.GetComponent<MeshCollider>());
                 MonoBehaviour.Destroy(isPickUpable);
-                gameObj.AddComponent<MeshCollider>();
-                gameObj.GetComponent<MeshCollider>().convex = false;
+                //gameObj.AddComponent<MeshCollider>();
+                //gameObj.GetComponent<MeshCollider>().convex = false;
             } else {
 				
 				gameObj.AddComponent<Pickupable>();

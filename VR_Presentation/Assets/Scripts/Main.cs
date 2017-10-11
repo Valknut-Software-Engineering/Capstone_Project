@@ -8,6 +8,8 @@ using UnityEngine.UI;
 [System.Serializable]
 public static class Globals
 {
+
+	//Count the number of files within the directories
     public static int imageCount;
     public static int audioCount;
     public static int videoCount;
@@ -18,13 +20,6 @@ public static class Globals
 	public static string currentDir = Application.dataPath + "/../";
 
 	public static GameObject mainCam;
-
-	//public static GameObject pickedUpObject;
-	//public static bool snapToGrid;
-	//public static bool useRotationOffset;
-    //public static float distance;
-    //public static float smooth;
-
 	public static GenericObject genericObj;
 }
 
@@ -32,6 +27,7 @@ public class Main : MonoBehaviour
 {
     public GameObject thecamera;
 
+	//References to each contextual menu within the Canvas
     public GameObject contentImages;
     public GameObject contentAudio;
     public GameObject contentVideos;
@@ -40,13 +36,15 @@ public class Main : MonoBehaviour
 	public GameObject contentComplexObjects;
     public GameObject contentMain;
 
+
+	//Contextual menu flags to open and close
     public bool flagImages = false;
     public bool flagAudio = false;
     public bool flagVideo = false;
     public bool flagSkybox= false;
     public bool flagObjects = false;
     public bool flagMain = false;
-	public bool flagComplexObjects;
+	public bool flagComplexObjects = false;
 
     public bool initialSnapToGrid = false;
 	public bool initialUseRotationOffset = false;
@@ -93,6 +91,7 @@ public class Main : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		//Initialize
 		Globals.imageCount = 0;
         Globals.audioCount = 0;
         Globals.videoCount = 0;
@@ -103,10 +102,14 @@ public class Main : MonoBehaviour
         Globals.mainCam = GameObject.FindWithTag("MainCamera");
         thecamera = GameObject.Find("360Capture");
 
+
+		//Initialize
         flagImages = false;
         flagAudio = false;
         flagVideo = false;
         flagSkybox = false;
+		flagComplexObjects = false;
+		flagObjects = false;
 
 
         //Call load image function
@@ -293,6 +296,7 @@ public class Main : MonoBehaviour
         yield return 0;
     }
 
+	//Finding all references to contextual UI's
     void findAll()
     {
         contentImages = GameObject.Find("Canvas").transform.Find("ContentImages").gameObject;
@@ -304,10 +308,14 @@ public class Main : MonoBehaviour
         contentMain = GameObject.Find("Canvas").transform.Find("ContentMain").gameObject;
     }
 
+
+	//Disabling and hiding all references to contextual UI's
     void disableContentAll()
     {
+		//First have to find all, reference is lost when disabled
         findAll();
 
+		//Disable all
         contentImages.SetActive(false);
         contentAudio.SetActive(false);
         contentVideos.SetActive(false);
@@ -442,6 +450,8 @@ public class Main : MonoBehaviour
         }
     }
 
+
+	//Apply skybox renderer
     void applySkybox(int signal)
     {
         if (signal < Globals.skyBoxCount)
@@ -534,6 +544,7 @@ public class Main : MonoBehaviour
             }
         }
 
+		//Within the images contextual UI, select specific image
         if (flagImages)
         {
             int signal = 0;
@@ -588,6 +599,8 @@ public class Main : MonoBehaviour
                 applyImage(signal);
             }
         }
+
+		//Within the images contextual UI, select specific audio
         if (flagAudio)
         {
             int signal = 0;
@@ -642,6 +655,8 @@ public class Main : MonoBehaviour
                 applyAudio(signal);
             }
         }
+
+		//Within the video contextual UI, select specific video
         if (flagVideo)
         {
             int signal = 0;
@@ -696,6 +711,8 @@ public class Main : MonoBehaviour
                 applyVideo(signal);
             }
         }
+
+		//Within the skybox contextual UI, select specific skybox
         if (flagSkybox)
         {
             int signal = 0;
@@ -750,6 +767,8 @@ public class Main : MonoBehaviour
                 applySkybox(signal);
             }
         }
+
+		//Within the primitive object contextual UI, select specific object
         if (flagObjects)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1)) {
@@ -762,6 +781,8 @@ public class Main : MonoBehaviour
                 Globals.genericObj.spawnCylinder();
             }
         }
+
+		//Within the complex object contextual UI, select specific object
 		if (flagComplexObjects)
 		{
             int signal = 0;
@@ -817,6 +838,7 @@ public class Main : MonoBehaviour
             }
         }
 
+		//If image contextual UI is active, 'B' goes back to main
         if (flagImages && Input.GetKeyDown(KeyCode.B))
         {
             disableContentAll();
@@ -827,6 +849,7 @@ public class Main : MonoBehaviour
             contentMain.SetActive(true);
         }
 
+		//If audio contextual UI is active, 'B' goes back to main
         if (flagAudio && Input.GetKeyDown(KeyCode.B))
         {
             disableContentAll();
@@ -837,6 +860,7 @@ public class Main : MonoBehaviour
             contentMain.SetActive(true);
         }
 
+		//If video contextual UI is active, 'B' goes back to main
         if (flagVideo && Input.GetKeyDown(KeyCode.B))
         {
             disableContentAll();
@@ -847,6 +871,7 @@ public class Main : MonoBehaviour
             contentMain.SetActive(true);
         }
 
+		//If skybox contextual UI is active, 'B' goes back to main
         if (flagSkybox && Input.GetKeyDown(KeyCode.B))
         {
             disableContentAll();
@@ -857,6 +882,7 @@ public class Main : MonoBehaviour
             contentMain.SetActive(true);
         }
 
+		//If primitive object contextual UI is active, 'B' goes back to main
         if (flagObjects && Input.GetKeyDown(KeyCode.B))
         {
             disableContentAll();
@@ -867,8 +893,19 @@ public class Main : MonoBehaviour
             contentMain.SetActive(true);
         }
 
+		//If complex object contextual UI is active, 'B' goes back to main
+		if (flagComplexObjects && Input.GetKeyDown(KeyCode.B))
+		{
+			disableContentAll();
+			findAll();
+			flagMain = true;
+			contentComplexObjects.SetActive(false);
+			flagComplexObjects = false;
+			contentMain.SetActive(true);
+		}
+
         // Check for skybox keybing to change it
-        if (Input.GetKeyDown(KeyCode.Alpha4) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects)
+		if (Input.GetKeyDown(KeyCode.Alpha4) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects && !flagComplexObjects)
         {
             if (flagSkybox)
             {
@@ -920,7 +957,7 @@ public class Main : MonoBehaviour
             flagVideo = true;
         }
 
-        // Check for keybind click in order to add movie texture
+        // Check for keybind click in order to add primitive
 		if (Input.GetKeyDown(KeyCode.Alpha5) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects && !flagComplexObjects)
         {
             disableContentAll();
@@ -929,6 +966,17 @@ public class Main : MonoBehaviour
             contentObjects.SetActive(true);
             flagObjects = true;
         }
+
+
+		// Check for keybind click in order to add prefab/complex
+		if (Input.GetKeyDown(KeyCode.Alpha6) && !flagImages && !flagVideo && !flagSkybox && !flagAudio && !flagObjects && !flagComplexObjects)
+		{
+			disableContentAll();
+			findAll();
+			flagComplexObjects = false;
+			contentComplexObjects.SetActive(true);
+			flagComplexObjects = true;
+		}
 
 		// Check for keybind click in order to add pickup script
 		if (Input.GetKeyDown(KeyCode.Tab)) {
