@@ -24,14 +24,14 @@ namespace RockVR.Video.Demo
                 if (Input.GetKeyDown(KeyCode.O))
                 {
                     VideoCaptureCtrl.instance.StopCapture();
-                }
+               }
             }
             else if (VideoCaptureCtrl.instance.status == VideoCaptureCtrl.StatusType.STOPPED)
             {
-                if (GUI.Button(new Rect(10, Screen.height - 60, 150, 50), "Processing"))
-                {
+              //  if (GUI.Button(new Rect(10, Screen.height - 60, 150, 50), "Processing"))
+              //  {
                     // Waiting processing end.
-                }
+              //  }
             }
             else if (VideoCaptureCtrl.instance.status == VideoCaptureCtrl.StatusType.FINISH)
             {
