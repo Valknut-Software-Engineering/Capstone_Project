@@ -83,10 +83,6 @@ public class Main : MonoBehaviour
     public List<GameObject> prefab_Files;
     //Variable to store the file path
     string[] path_Prefabs_Files;
-	//Variable for the size of the materials array
-	int size_Prefabs = 0;
-	//Variable to cycle through the skybox array
-	int counter_Prefabs = 0;
 
     // Use this for initialization
     void Start()
@@ -254,8 +250,6 @@ public class Main : MonoBehaviour
     {
         //Get the path of the skybox materials
         path_Prefabs_Files = Directory.GetFiles(Globals.currentDir + "\\Assets\\Resources", "*.prefab");
-        //Assign the size variable
-        size_Prefabs = path_Prefabs_Files.Length;
 
         //Load all of the materials in the resource folder and perform string handling
         for (int i = 0; i < path_Prefabs_Files.Length; i++)
@@ -465,10 +459,23 @@ public class Main : MonoBehaviour
         // Check if the the signal is indeed smaller than the arrays size
         if (signal < Globals.prefabCount)
         {
-            // Spawn in the prefab object
+            //Get the position of the player 
+            Vector3 player_Position = Globals.mainCam.transform.position;
+            //Get direction of the player 
+            Vector3 player_Direction = Globals.mainCam.transform.forward;
+            //Get rotation of the player
+            Quaternion player_Rotation = Globals.mainCam.transform.rotation;
+            //Spawn distance from the player 
+            float spawnDistance = 12;
+            //Spawning position 
+            Vector3 spawn_Object = player_Position + player_Direction * spawnDistance;
+
+            //Display name of prefab in console
+            Debug.Log(prefab_Files[signal].name);
+            //Spawn in the prefab object
             GameObject spawn = prefab_Files[signal];
-            // Spawn in the object
-            Instantiate(spawn, Globals.mainCam.transform.position, Quaternion.identity);
+            //Spawn in the object
+            Instantiate(spawn, spawn_Object, player_Rotation);
         }
     }
 
@@ -513,34 +520,6 @@ public class Main : MonoBehaviour
                         }
                     }
                 }
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            //Get the position of the player 
-            Vector3 player_Position = Globals.mainCam.transform.position;
-            //Get direction of the player 
-            Vector3 player_Direction = Globals.mainCam.transform.forward;
-            //Get rotation of the player
-            Quaternion player_Rotation = Globals.mainCam.transform.rotation;
-            //Spawn distance from the player 
-            float spawnDistance = 12;
-            //Spawning position 
-            Vector3 spawn_Object = player_Position + player_Direction * spawnDistance;
-
-            //Display name of prefab in console
-            Debug.Log(prefab_Files[counter_Prefabs].name);
-            //Spawn in the prefab object
-            GameObject spawn = prefab_Files[counter_Prefabs];
-            //Spawn in the object
-            Instantiate(spawn, spawn_Object, player_Rotation);
-
-            //Incriment counter to loop through prefab array
-            counter_Prefabs++;
-            //Reset counter if it is too big
-            if (counter_Prefabs >= size_Prefabs) {
-                counter_Prefabs = 0;
             }
         }
 

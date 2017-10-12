@@ -106,13 +106,13 @@ public class GenericObject {
 	}
 	
 	public void rotateX() {
-		myObject.transform.Rotate(0.5F, 0, 0);
+		myObject.transform.Rotate(1F, 0, 0);
 	}
 	public void rotateY() {
-		myObject.transform.Rotate(0, 0.5F, 0);
+		myObject.transform.Rotate(0, 1F, 0);
 	}
 	public void rotateZ() {
-		myObject.transform.Rotate(0, 0, 0.5F);
+		myObject.transform.Rotate(0, 0, 1F);
 	}
 	
 	public void rotateReset() {
