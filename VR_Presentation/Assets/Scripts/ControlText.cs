@@ -22,6 +22,8 @@ public class ControlText : MonoBehaviour {
 	public bool flagTab;
 	public bool numpadA;
 	public bool numpadB;
+	public bool flagV;
+	public bool flagMouseWheel;
 
 	// Use this for initialization
 	void Start () {
@@ -31,6 +33,8 @@ public class ControlText : MonoBehaviour {
 		flagG = false;
 		flagShift = false;
 		flagTab = false;
+		flagV = false;
+		flagMouseWheel = false;
 	}
 	
 	// Update is called once per frame
@@ -65,6 +69,8 @@ public class ControlText : MonoBehaviour {
 		flagTab = true;
 		numpadA = true;
 		numpadB = true;
+		flagV = true;
+		flagMouseWheel = true;
 	}
 
 	public void onClickF1(){		
@@ -111,6 +117,30 @@ public class ControlText : MonoBehaviour {
 			setAll ();
 			setFlags ();
 			realText.text = "The ' G ' key is used to toggle snap to grid on objects you are holding.";
+		}
+	}
+
+	public void onClickV(){
+		findAll ();
+		if (flagV) {
+			image.SetActive (false);
+			flagV = false;
+		} else {
+			setAll ();
+			setFlags ();
+			realText.text = "The ' V ' key is used to pause and restart videos.";
+		}
+	}
+
+	public void onClickMouseWheel(){
+		findAll ();
+		if (flagMouseWheel) {
+			image.SetActive (false);
+			flagMouseWheel = false;
+		} else {
+			setAll ();
+			setFlags ();
+			realText.text = "The ' Mouse Wheel ' is used to push or pull the object in hand.";
 		}
 	}
 
