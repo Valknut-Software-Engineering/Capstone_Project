@@ -24,3 +24,7 @@ VR_Presentation/*.csproj
 VR_Presentation/Assets/Resources/Audio/
 VR_Presentation/Assets/Resources/Images/
 VR_Presentation/Assets/Resources/Videos/
+
+### Prefabs ###
+VR_Presentation/Assets/Resources/*.prefab
+VR_Presentation/Assets/Resources/*.prefab.meta
