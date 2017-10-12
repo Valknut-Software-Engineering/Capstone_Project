@@ -222,15 +222,10 @@ The Virtual Reality presentation software will have various requirements that wi
 		Images the creator wants to display in the scene will need to be able to be imported into it.
 		The .jpg image format will be used for the images as it is the most commonly found image format.
 
-		\paragraph{Slideshows}
-
-		Imported images must be able to be incorporated into a slideshow or multiple slideshows.
-		These will allow the creator to describe a topic in detail through various images that relate to the subject matter.
-
 		\paragraph{Video Importing}
 
 		Videos allow for a rich and detailed explanation of the topics the user is trying to cover.
-		The .ogv video format will be used to incorporate videos into the presentation that can be viewable in the virtual reality space.
+		The .ogv video format will be used to incorporate videos into the presentation that can be viewable in the virtual reality space. ogg for audio part
 
 		\paragraph{Audio Importing}
 
@@ -239,7 +234,7 @@ The Virtual Reality presentation software will have various requirements that wi
 		Voice recordings will also fall part of the audio file requirement as they are an important asset that can be incorporated into the presentation.
 		This will allow the creator to direct a user's attention to a certain part of the scene.
 		It will also allow the creator to describe parts of the presentation to the viewer.
-		The software must be able to import voice recordings users make and save with third party applications.
+		The software must be able to import voice recordings users make and save with third party applications. voice must be ogg
 
 		\paragraph{Community Driven Content}
 
@@ -466,9 +461,9 @@ There are several constraints needed to be taken into consideration.
 \medskip
 \textsl{Other constraints that will be considered and in which further research will be conducted as implementation progresses include:}
 	\begin{itemize}
-		\item Possible VR device constraints with regards to environment editing.
-		\item Fixed set of templates.
-		\item Unity assets only for community driven content.
+		\item Possible VR device constraints with regards to environment editing. ****No controller support
+		\item Fixed set of templates. *REMOVE
+		\item Unity assets only for community driven content. *MUST BE PREFABS
 	\end{itemize}
 
 \newpage
@@ -487,10 +482,6 @@ There are several constraints needed to be taken into consideration.
 		In short, Usability Testing is a way to see how easy to use something is by testing it with real users.\\
 		At the end of each sprint we will test our product in its current state with real users and based on their feedback we will plan adjustments to our development.
 		We will be using knowledge that we have gained from IMY310 to that end.
-
-	\subsubsection{Agile UX Principles}
-		I have absolutely no idea what to say here. I can't find concensus on any online sources except for what I have already described above.\\
-		Could whomever reviews this please assist?
 
 \subsection{Technologies}
 	\subsubsection{Initial Technologies}
@@ -535,8 +526,6 @@ There are several constraints needed to be taken into consideration.
   	\subsection{Justification of Design pattern use:}
   	\subsubsection{Factory}
   	In the VR presentation software we have created an interface whereby the players/users are able to create and instantiate 3D objects. This creation is facilitated through our use of a factory design method. By providing the interface for the user to create these 3D objects they can then make use of a set of subclasses to determine the specifics of what objects is to be made.\\
-  	\subsubsection{Memento}
-  	We plan to utilize the memento design pattern in a manner that is seen across many different gaming environments. Due to users being able to create customized worlds and environments it became an imperative that they are able to save their work. The ability to capture the game environments internal state and then recall that from storage will be executed with the Memento design pattern to allow restoration to a specific point.\\
   	\subsubsection{Prototype}
   	In the 3D environment one of the essential functions was that after a user had finished scaling and rotation an object they should be able to create a duplicate of this object, using the pre-existing object as some form of prototype. This meant that through implementing the Prototype design pattern we were able to create a platform where they could achieve this cloning functionality.
     \subsection{Actvity Diagram}
