@@ -13,7 +13,7 @@ VideoClipImporter:
   startFrame: -1
   endFrame: -1
   frameCount: 366
-  frameRate: 30.000030517578125
+  frameRate: 30
   colorSpace: 0
   deinterlace: 0
   sourceFileSize: 1593290

@@ -26,13 +26,20 @@ public class ClickAction : MonoBehaviour, IPointerClickHandler
             //animation.Play();            
             LoadByIndex(1);
         }
-        else
+		else if(currentImage.sprite.name == "Forest")
         {
             audio.Play();
             Thread.Sleep(2000);
             //animation.Play();            
             LoadByIndex(2);
         }
+		else
+		{
+			audio.Play();
+			Thread.Sleep(2000);
+			//animation.Play();            
+			LoadByIndex(3);
+		}
     }
 	 
     public void LoadByIndex(int sceneIndex)
