@@ -32,10 +32,10 @@ Once the user is satisfied with their presentation, they can proceed to record t
 
 The documentation to our project:
 * * *
-* <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project/tree/dev/Documentation/SRS%20Documentation" target="blank"> SRS documentation </a> 
-* <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project/tree/dev/Documentation/User%20Manual" target="blank"> User Manual </a> 
-* <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project/tree/dev/Documentation/Guidlines%20and%20Rules" target="blank"> Guidlines and Rules </a>
-* <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project/tree/dev/Documentation/Test%20Report" target="blank"> Test Report </a>
+* <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project/tree/master/Documentation/SRS_Documentation" target="blank"> SRS documentation </a> 
+* <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project/tree/master/Documentation/User_Manual" target="blank"> User Manual </a> 
+* <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project/tree/master/Documentation/Guidelines_and_Rules" target="blank"> Guidlines and Rules </a>
+* <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project/tree/master/Documentation/Test_Reports" target="blank"> Test Report </a>
 * * *
 Links to our productivity:
 * Our <a href="https://github.com/Valknut-Software-Engineering/Capstone_Project/tree/master/VR_Presentation/Assets/Scripts" target="blank"> code scripts</a>. 
