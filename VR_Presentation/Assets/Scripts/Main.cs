@@ -191,7 +191,7 @@ public class Main : MonoBehaviour
         for (int i = 0; i < path_Audio_Files.Length; i++)
         {
             //Load files from disk
-            WWW audio_On_Disk = new WWW("file://" + path_Audio_Files[0]);
+            WWW audio_On_Disk = new WWW("file://" + path_Audio_Files[i]);
 
             //Wait until auido files are finished loading
             while (!audio_On_Disk.isDone)
@@ -218,7 +218,7 @@ public class Main : MonoBehaviour
         for (int i = 0; i < path_Video_Files.Length; i++)
         {
             //Load files from disk
-            WWW videos_On_Disk = new WWW("file://" + path_Video_Files[0]);
+            WWW videos_On_Disk = new WWW("file://" + path_Video_Files[i]);
 
             //Wait until videos are finished loading
             while (!videos_On_Disk.isDone)
@@ -227,7 +227,7 @@ public class Main : MonoBehaviour
             }
 
             //Load files from disk
-            WWW audio_On_Disk = new WWW("file://" + path_Audio_Vid_Files[0]);
+            WWW audio_On_Disk = new WWW("file://" + path_Audio_Vid_Files[i]);
 
             //Wait until auido files are finished loading
             while (!audio_On_Disk.isDone)
@@ -264,7 +264,7 @@ public class Main : MonoBehaviour
             prefab_Files.Add(Resources.Load(prefab_Split[0]) as GameObject);
 
             //Add pickupable script
-            prefab_Files[i].AddComponent<Pickupable>();
+            //prefab_Files[i].AddComponent<Pickupable>();
             //Add rigidbody
             if (prefab_Files[i].GetComponent<Rigidbody>() == null)
             {
@@ -381,6 +381,10 @@ public class Main : MonoBehaviour
                         //Get he objects audio source
                         ray_Audio_Source = hit_Audio.transform.gameObject.GetComponent<AudioSource>();
                     }
+                    else
+                    {
+                        Destroy(hit_Audio.transform.gameObject.GetComponent<AudioSource>());
+                    }
 
                     //Assign the audio clip to the object and then play it
                     ray_Audio_Source.clip = audio_Files[signal];
@@ -469,9 +473,6 @@ public class Main : MonoBehaviour
             float spawnDistance = 12;
             //Spawning position 
             Vector3 spawn_Object = player_Position + player_Direction * spawnDistance;
-
-            //Display name of prefab in console
-            Debug.Log(prefab_Files[signal].name);
             //Spawn in the prefab object
             GameObject spawn = prefab_Files[signal];
             //Spawn in the object

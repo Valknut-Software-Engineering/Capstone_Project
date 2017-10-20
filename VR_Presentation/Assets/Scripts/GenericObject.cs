@@ -234,10 +234,7 @@ public class GenericObject {
 				if (gameObj.GetComponent<Rigidbody>() != null) {
                     MonoBehaviour.Destroy(gameObj.GetComponent<Rigidbody>());
                 }
-                //MonoBehaviour.Destroy(gameObj.GetComponent<MeshCollider>());
                 MonoBehaviour.Destroy(isPickUpable);
-                //gameObj.AddComponent<MeshCollider>();
-                //gameObj.GetComponent<MeshCollider>().convex = false;
             } else {
 				
 				gameObj.AddComponent<Pickupable>();
@@ -275,20 +272,12 @@ public class GenericObject {
     //Increase the objects distance 
     public void increase_Distance()
     {
-        /*Vector3 pos =  myObject.transform.position;
-        pos.x += 1;
-        pos.z -= 1;
-        myObject.transform.position = pos;*/
         distance += 1;
     }
 
     //Decrease the objects distance 
     public void decrease_Distance()
     {
-        /*Vector3 pos = myObject.transform.position;
-        pos.x -= 1;
-        pos.z += 1;
-        myObject.transform.position = pos;*/
         distance -= 1;
     }
 
