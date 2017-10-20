@@ -2,6 +2,6 @@
 [LOG]: LibVideoCaptureAPI() - Frame height: 2160
 [LOG]: LibVideoCaptureAPI() - Frame rate: 30
 [LOG]: LibVideoCaptureAPI() - Projection: 1
-[LOG]: LibVideoCaptureAPI() - File path: C:\Users\Peter-PC\Documents/RockVR/Video/2017-10-11-16-22-53-0Y7SI.mp4
-[LOG]: LibVideoCaptureAPI() - FFmpeg path: C:/Users/Peter-PC/Documents/COS301/Github/Capstone_Project/VR_Presentation/Assets/StreamingAssets/RockVR/FFmpeg/Windows/ffmpeg.exe
+[LOG]: LibVideoCaptureAPI() - File path: D:\Documents/RockVR/Video/2017-10-13-11-26-15-PJ56N.mp4
+[LOG]: LibVideoCaptureAPI() - FFmpeg path: D:/Documents/Valknut_Software_Engineering/Github/Capstone_Project/VR_Presentation/Assets/StreamingAssets/RockVR/FFmpeg/Windows/ffmpeg.exe
 [LOG]: Close() - Success: Ture

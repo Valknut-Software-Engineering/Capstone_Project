@@ -30,10 +30,13 @@ public class ItemSelection : MonoBehaviour {
 				findAll ();
 				realText.text = "TUTORIAL SCENE";
 
-			} else {
+			} else if (index == 1) {
 				findAll ();
 				realText.text = "OFFICE SCENE";
-			}          
+			} else {
+				findAll ();
+				realText.text = "VR PRESENTATION";
+			}
         }
     }
 
@@ -49,10 +52,13 @@ public class ItemSelection : MonoBehaviour {
 				findAll ();
 				realText.text = "TUTORIAL SCENE";
 
-			} else {
+			} else if (index == 1) {
 				findAll ();
 				realText.text = "OFFICE SCENE";
-			}            
+			} else {
+				findAll ();
+				realText.text = "VR PRESENTATION";
+			}           
         }
     }
 

@@ -7,6 +7,8 @@ public class GenericObject {
 	private GameObject mainCam;
     private GameObject myObject;
 	
+	objectFactory myObjFactory;
+	
 	private bool snapToGrid;
 	private bool useRotationOffset;
 	
@@ -14,6 +16,7 @@ public class GenericObject {
     private float smooth;
 	
 	public GenericObject() {
+		myObjFactory = new objectFactory();
 		mainCam = GameObject.FindWithTag("MainCamera");
 		
 		myObject = null;
@@ -24,6 +27,7 @@ public class GenericObject {
 	}
 	
 	public GenericObject(bool stg, bool uro, float d, float s) {
+		myObjFactory = new objectFactory();
 		mainCam = GameObject.FindWithTag("MainCamera");
 		
 		snapToGrid = stg;
@@ -106,13 +110,13 @@ public class GenericObject {
 	}
 	
 	public void rotateX() {
-		myObject.transform.Rotate(0.5F, 0, 0);
+		myObject.transform.Rotate(1F, 0, 0);
 	}
 	public void rotateY() {
-		myObject.transform.Rotate(0, 0.5F, 0);
+		myObject.transform.Rotate(0, 1F, 0);
 	}
 	public void rotateZ() {
-		myObject.transform.Rotate(0, 0, 0.5F);
+		myObject.transform.Rotate(0, 0, 1F);
 	}
 	
 	public void rotateReset() {
@@ -230,10 +234,7 @@ public class GenericObject {
 				if (gameObj.GetComponent<Rigidbody>() != null) {
                     MonoBehaviour.Destroy(gameObj.GetComponent<Rigidbody>());
                 }
-                //MonoBehaviour.Destroy(gameObj.GetComponent<MeshCollider>());
                 MonoBehaviour.Destroy(isPickUpable);
-                //gameObj.AddComponent<MeshCollider>();
-                //gameObj.GetComponent<MeshCollider>().convex = false;
             } else {
 				
 				gameObj.AddComponent<Pickupable>();
@@ -271,44 +272,36 @@ public class GenericObject {
     //Increase the objects distance 
     public void increase_Distance()
     {
-        /*Vector3 pos =  myObject.transform.position;
-        pos.x += 1;
-        pos.z -= 1;
-        myObject.transform.position = pos;*/
         distance += 1;
     }
 
     //Decrease the objects distance 
     public void decrease_Distance()
     {
-        /*Vector3 pos = myObject.transform.position;
-        pos.x -= 1;
-        pos.z += 1;
-        myObject.transform.position = pos;*/
         distance -= 1;
     }
 
     //// Spawn new primitive objects with preset properties and place in hand \\\\
     public void spawnCube() {
-		PrimitiveObject myCube = new CubeObject();
+		PrimitiveObject myCube = myObjFactory.getObject("Cube");
 		if (myObject) { dropObject(); }
         myObject = myCube.getPrimitiveObj();
 	}
 	public void spawnSphere()
     {
-		PrimitiveObject mySphere = new SphereObject();
+		PrimitiveObject mySphere = myObjFactory.getObject("Sphere");
         if (myObject) { dropObject(); }
         myObject = mySphere.getPrimitiveObj();
     }
 	public void spawnCapsule()
     {
-		PrimitiveObject myCapsule = new CapsuleObject();
+		PrimitiveObject myCapsule = myObjFactory.getObject("Capsule");
         if (myObject) { dropObject(); }
 		myObject = myCapsule.getPrimitiveObj();
     }
 	public void spawnCylinder()
     {
-		PrimitiveObject myCylinder = new CylinderObject();
+		PrimitiveObject myCylinder = myObjFactory.getObject("Cylinder");
         if (myObject) { dropObject(); }
 		myObject = myCylinder.getPrimitiveObj();
     }
